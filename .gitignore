@@ -1,6 +1,8 @@
 # GIT Ignore
 node_modules
 vendor
-Public/client/**
+Public/upload/client/**
+Public/upload/admin/**
 # UPLOAD GIT
-!Public/client/index.html
+!Public/upload/client/index.html
+!Public/upload/admin/index.html
