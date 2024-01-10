@@ -59,7 +59,7 @@
             umask($Umask);
 
             // Copy index.html
-            copy("../../Public/upload/Client/index.html", "../../Public/upload/Client/". $email ."/index.html");
+            copy("../../Public/index.html", "../../Public/upload/Client/". $email ."/index.html");
 
             curl_close($curlInit);
             unset($data);
