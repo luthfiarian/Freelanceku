@@ -19,33 +19,23 @@
         }
     }
 
-    class Bank{
+    class ClientDB{
         private $ConnDB;
 
-        public function __construct(){ CallFileApp::RequireOnce('Config/Database.php'); return $this->ConnDB = CONN_DB; }
-        // Fetch Data Bank
-        public function BANK() { return mysqli_fetch_assoc(mysqli_query($this->ConnDB, "SELECT * FROM ". BANK_TABLE_DB)); }
-        // Fetch Data Bank by ID
-        public function BANKID($Data) { return mysqli_fetch_assoc(mysqli_query($this->ConnDB, "SELECT * FROM ". BANK_TABLE_DB . " WHERE id='$Data'")); }
-        // Check Data Bank
-        public function BANKROWS(){ return mysqli_num_rows(mysqli_query($this->ConnDB, "SELECT * FROM " . BANK_TABLE_DB )); }
-
-        // Add Data Bank
-        public function AddBank($Data, $ImageFile, $ImageFullFile){
-            $bank_name = $Data['bank_name']; $bank_username = $Data['bank_username']; $bank_account = $Data['bank_account'];
-            $Query = mysqli_query($this->ConnDB, "INSERT INTO " . BANK_TABLE_DB . " (bank_name, bank_username, bank_account, bank_image) VALUES ('$bank_name', '$bank_username', '$bank_account', '$ImageFullFile')");
-            move_uploaded_file($ImageFile, "Public/dist/image/" . $ImageFullFile);
-            if(!$Query){ echo "<script>alert('Terjadi galat pada server')</script>";}
-            unset($Data, $ImageFile, $ImageFullFile, $Query);
-            return header("Location: ". PROTOCOL_URL . "://" .BASE_URL . "admin/setting/");
+        public function __construct(){
+            CallFile::ReqireOnce('../Config/Database.php');
+            return $this->ConnDB = CONN_DB;
         }
-        // Delete Bank
-        public function DeleteBank($Data){
-            $Query = mysqli_query($this->ConnDB, "DELETE FROM ". BANK_TABLE_DB . " WHERE id='$Data'");
+
+        public function SignupDB($ApiKey, $email){
+            $Query = mysqli_query($this->ConnDB,  "INSERT INTO " . USER_TABLE_DB . " (user_email, user_apikey) VALUES ('$ApiKey', '$email')" );
             if(!$Query){ echo "<script>alert('Terjadi galat pada server')</script>";}
-            $Image = $this->BANKID($Data);
-            unlink(BASE_URI."Public/dist/image/".$Image['bank_image']);
-            unset($Data, $Query);
-            return header("Location: ". PROTOCOL_URL . "://" .BASE_URL . "admin/setting/");
+            return true;
+        }
+
+        public function SigninDB($email){
+            $Query = mysqli_query($this->ConnDB, "SELECT * FROM " . USER_TABLE_DB . " WHERE user_email = '$email'");
+            if(!$Query){ echo "<script>alert('Terjadi galat pada server')</script>";}
+            return mysqli_fetch_assoc($Query);
         }
     }

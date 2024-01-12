@@ -14,13 +14,12 @@
     */
     CallFile::ReqireOnce('Libs/Session.php');
     Session::Start();
-
     /* 
     *   Menonaktifkan Session Verify
     *   @Params 'Libs/Session.php'
     *   @Funct  CallFileApp::RequireOnce
     */
-    if(isset($_SESSION["verify_iterate"])){ $_SESSION["verify_iterate"]++; if(($_SESSION["verify_iterate"] === 3) || ($_SESSION["verify_iterate"]) >= 3){ session_unset(); } }
+    if(isset($_SESSION["register"])){ $_SESSION["register"]++; if(($_SESSION["register"] === 3) || ($_SESSION["register"]) >= 3){ session_unset(); } }
 
     /* 
     *   Operator Ternary
@@ -30,7 +29,7 @@
     */
     $GetCategory = isset($_GET['category']) ? BASE_URI."?category={$_GET['category']}" : BASE_URI;
 
-    $IndexVerify = ($_SERVER["REQUEST_URI"] === BASE_URI."verify/") ? BASE_URI."verify/" : BASE_URI."verify"; 
+    $IndexRegisterSuccess = ($_SERVER["REQUEST_URI"] === BASE_URI."register-success/") ? BASE_URI."register-success/" : BASE_URI."register-success"; 
 
     $IndexAdmin  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/") ? BASE_URI."admin/" : BASE_URI."admin"; 
     $IndexAdminDashboard  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/dashboard/") ? BASE_URI."admin/dashboard/" : BASE_URI."admin/dashboard"; 
@@ -57,9 +56,9 @@ switch ($_SERVER["REQUEST_URI"]) {
         break;
 
 
-    // Verify page
-    case $IndexVerify:
-        CallFileApp::RequireOnce('Controllers/Verify.php');
+    // Register Success page
+    case $IndexRegisterSuccess:
+        CallFileApp::RequireOnce('Controllers/RegisterSuccess.php');
         break;
         
 

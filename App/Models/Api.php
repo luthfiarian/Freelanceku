@@ -2,76 +2,58 @@
     /**
      * Class For Register New Freelancer
      */
-    class Client{
-        private $ConnAPI;
+    class ClientAPI{
+        private $ConnAPI, $KeyAPI, $CookieAPI;
 
         public function __construct(){
             CallFile::ReqireOnce('../Config/Api.php');
             CallFile::ReqireOnce('../Config/Host.php');
-            $this->ConnAPI = json_decode(file_get_contents(API_ROUTE_USER), true);
+            CallFile::ReqireOnce('../Models/Database.php');
             return true;
         }
         
-        private function ClientSigninRegister($fname, $lname, $email, $username, $phone, $address, $password){
+        private function SigninAPI($email, $password, $from){
             // Data Routes Users API
-            $user = array(
-                "email"     =>  "babang@mail.com",
-                "password"  =>  "babang213",
+            $userLogin = array(
+                "email"     =>  $email,
+                "password"  =>  $password,
             );
 
-            // Process of Add User Routes
-            $encodeData = json_encode($user);
-            $curlInit   = curl_init(API_ROUTE_SIGNIN);
-            curl_setopt($curlInit, CURLOPT_POST, true);
-            curl_setopt($curlInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($curlInit, CURLOPT_POSTFIELDS, $encodeData);
-            curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
-            $execData   = curl_exec($curlInit);
 
-            curl_close($curlInit);
-            unset($user);
+            // Process of Login to API
+            $encodeUserLogin = json_encode($userLogin);
+            $curlInitLogin   = curl_init(API_ROUTE_SIGNIN);
+            curl_setopt($curlInitLogin, CURLOPT_POST, true);
+            curl_setopt($curlInitLogin, CURLOPT_HEADER, true);
+            curl_setopt($curlInitLogin, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($curlInitLogin, CURLOPT_POSTFIELDS, $encodeUserLogin);
+            curl_setopt($curlInitLogin, CURLOPT_RETURNTRANSFER, true);
+            $execLogin   = curl_exec($curlInitLogin);
+            $logHeader = substr($execLogin, 0, curl_getinfo($curlInitLogin, CURLINFO_HEADER_SIZE));
+            preg_match('/Expires=(.*?);/', $logHeader, $exptime);
+            preg_match('/SessionTokenId=(.*?);/', $logHeader, $token);
+            // 
+            $this->CookieAPI = "SessionTokenId=" . $token[1];
+            
 
-            return $this->ClientRegisterData($fname, $lname, $email, $username, $phone, $address, $password);
+            if($from === "register"){
+                curl_close($curlInitLogin);
+                return true;
+            }else if($from === "login"){
+                setcookie("API-COOKIE", $this->CookieAPI, strtotime($exptime[1]), "/");
+                curl_close($curlInitLogin);
+                return true;
+            }else{
+                $_SESSION["STATUS-LOGIN"] = curl_getinfo($curlInitLogin, CURLINFO_HTTP_CODE);
+                curl_close($curlInitLogin);
+                return true;
+            }
         }
 
-        private function ClientRegisterData($fname, $lname, $email, $username, $phone, $address, $password){
-            // Data Routes freelancers API
-            $data = array(
-                "first_name"    => $fname,
-                "last_name"     => $lname,
-                "email"         => $email,
-                "phone"         => $phone,
-                "country"       => $address
-            );
-
-            // Process of Add Data Freelancer Routes
-            $encodeData = json_encode($data);
-            $curlInit   = curl_init(API_ROUTE_USER);
-            curl_setopt($curlInit, CURLOPT_POST, true);
-            curl_setopt($curlInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($curlInit, CURLOPT_POSTFIELDS, $encodeData);
-            curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
-            $execData   = curl_exec($curlInit);
-            
-            // Create Directory by Email
-            $Umask = umask(0);
-            mkdir("../../Public/upload/client/" . $email, 0755, true);
-            umask($Umask);
-
-            // Copy index.html
-            copy("../../Public/index.html", "../../Public/upload/Client/". $email ."/index.html");
-
-            curl_close($curlInit);
-            unset($data);
-
-            return header("Location: " . PROTOCOL_URL . "://" .BASE_URL . "verify");
-        }
-
-        // Register Freelancers
-        public function Register($fname, $lname, $email, $username, $phone, $address, $password){
-            
-            // Data Routes Users API
-            $user = array(
+        // Signup Freelancers
+        public function SignupAPI($fname, $lname, $email, $username, $phone, $address, $password){
+            // Create User API
+            $userSignup = array(
                 "username"  =>  $username,
                 "email"     =>  $email,
                 "password"  =>  $password,
@@ -79,41 +61,64 @@
             );
             
             // Process of Add User Routes
-            $encodeData = json_encode($user);
-            $curlInit   = curl_init(API_ROUTE_SIGNUP);
-            curl_setopt($curlInit, CURLOPT_POST, true);
-            curl_setopt($curlInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($curlInit, CURLOPT_POSTFIELDS, $encodeData);
-            curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
-            $execData   = curl_exec($curlInit);
-            
-            curl_close($curlInit);
-            unset($user);
+            $encodeUserSignup = json_encode($userSignup);
+            $curlInitSignup   = curl_init(API_ROUTE_SIGNUP);
+            curl_setopt($curlInitSignup, CURLOPT_POST, true);
+            curl_setopt($curlInitSignup, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($curlInitSignup, CURLOPT_POSTFIELDS, $encodeUserSignup);
+            curl_setopt($curlInitSignup, CURLOPT_RETURNTRANSFER, true);
+            $execSignup   = curl_exec($curlInitSignup);
 
-            return $this->ClientSigninRegister($fname, $lname, $email, $username, $phone, $address, $password);
+            // Check Data User API
+            $ResultSignup = json_decode($execSignup);
+            if($ResultSignup->status === "SUCCESS"){
+                curl_close($curlInitSignup);
+                // Inserting Values ​​Into Private Class Variables
+                $this->KeyAPI = $ResultSignup->data->apiKey;
+                // Add Email & API Key into DB
+                $ClientDB = new ClientDB; $ClientDB->SignupDB($email, $this->KeyAPI);
+                // Login to API by New Register
+                $this->SigninAPI($email, $password, "register");
+            }else{
+                $_SESSION['STATUS-SIGNUP'] = curl_getinfo($curlInitSignup, CURLINFO_HTTP_CODE);
+                curl_close($curlInitSignup);
+                return header("Location: " . PROTOCOL_URL . "://" . BASE_URL);
+            }
+
+            // Create User Freelancers API
+            $userFreelance = array(
+                "first_name"    => $fname,
+                "last_name"     => $lname,
+                "email"         => $email,
+                "phone"         => $phone,
+                "country"       => $address
+            );
+
+            // Process of Add Data Freelancers
+            $encodeFreelance    = json_encode($userFreelance);
+            $curlInitFreelance  = curl_init(API_ROUTE_FREELANCER);       
+            curl_setopt($curlInitFreelance, CURLOPT_POST, true);
+            curl_setopt($curlInitFreelance, CURLOPT_HEADER, true);
+            curl_setopt($curlInitFreelance, CURLOPT_HTTPHEADER, array('Authorization:  '. $this->KeyAPI, 'Cookie: '. $this->CookieAPI, 'Content-Type: application/json'));
+            curl_setopt($curlInitFreelance, CURLOPT_POSTFIELDS, $encodeFreelance);
+            curl_setopt($curlInitFreelance, CURLOPT_RETURNTRANSFER, true);
+            $execFreelance      = curl_exec($curlInitFreelance);
+            $infoCurl = curl_getinfo($curlInitFreelance, CURLINFO_HTTP_CODE);
+
+            // Create Directory by Email
+            $Umask = umask(0);
+            mkdir("../../Public/upload/client/" . $email, 0755, true);
+            umask($Umask);
+            
+            // Copy index.html
+            copy("../../Public/index.html", "../../Public/upload/Client/". $email ."/index.html");
+            $_SESSION['register']       = 0;
+            $_SESSION['register-email'] = $email;
+            
+            curl_close($curlInitFreelance);
+
+            return header("Location: " . PROTOCOL_URL . "://" .BASE_URL . "register-success");
         }
 
         
-    }
-
-    class AdminAPI{
-        private $ConnAPIUser, $ConnAPIAdmin;
-
-        public function __construct(){
-            CallFileApp::RequireOnce('Config/Api.php');
-            $this->ConnAPIUser = json_decode(file_get_contents(API_ROUTE_USER), true);
-            $this->ConnAPIAdmin = json_decode(file_get_contents(API_ROUTE_ADMIN), true);
-            return true;
-        }
-
-        public function Login($email, $password){
-            
-        }
-
-        // List of Function for dashboard page
-        // Function for count freelancers
-        public function CountUser(){return count($this->ConnAPIUser['data']);}
-        // Function for count admin
-        public function CountAdmin(){return count($this->ConnAPIAdmin['data']);}
-
     }

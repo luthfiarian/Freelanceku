@@ -26,3 +26,4 @@
     // Definition Tables of Databases
     define("SEO_TABLE_DB", "site_seo");
     define("BANK_TABLE_DB", "site_bank");
+    define("USER_TABLE_DB", "site_user");

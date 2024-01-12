@@ -15,7 +15,7 @@
         $password   = Security::XSS($_POST['password']);
     
         CallFile::ReqireOnce('../Models/Api.php');
-        $AddData = new Client;
-        $AddData->Register($first_name, $last_name,$username, $email, $phone, $address, $password);
+        $AddData = new ClientAPI;
+        $AddData->SignupAPI($first_name, $last_name, $email, $username, $phone, $address, $password);
     
     }
