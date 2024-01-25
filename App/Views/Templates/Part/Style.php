@@ -1,8 +1,8 @@
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= CallAny::File('Public/dist/image/favicon.png'); ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo CallAny::File('Public/dist/image/favicon.png'); ?>" type="image/x-icon">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<?= CallAny::File('Public/dist/css/style.css'); ?>"> 
+    <link rel="stylesheet" href="<?php echo CallAny::File('Public/dist/css/style.css'); ?>"> 
 
     <!-- Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />

@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html <?= $AMP = $Data['seo_amp'] ? "amp" : "";  ?> lang="<?= $Data['seo_lang'] ?>">
-
 <head>
-    <?php CallFileApp::RequireOnceData("Views/Templates/Part/Meta.php", $Data) ?>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="<?php echo $Data["seo_author"] ?>">
+    <meta name="keywords" content="<?php echo $Data["seo_keyword"] ?>">
+    <meta name="description" content="<?php echo $Data['seo_des'] ?>">
+    <!-- Title -->
     <title>Freelanceku </title>
 
-    <?php
-    CallFileApp::RequireOnceData("Views/Templates/Part/Opengraph.php", $Data);
-    CallFileApp::RequireOnce("Views/Templates/Part/Canonical.php");
-    CallFileApp::RequireOnce("Views/Templates/Part/Style.php");
-    ?>
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="<?= CURRENT_URL ?>" />
+    <meta property="og:title" content="<?= $Data['seo_name'] ?>" />
+    <meta property="og:type" content="<?= $Data['seo_type'] ?>" />
+    <meta property="og:locale" content="<?= $Data['seo_locale'] ?>"  />
+    <meta property="og:url" content="<?= CURRENT_URL ?>" />
+    <meta property="og:image" content="<?= CallAny::File('Public/dist/image/favicon.png'); ?>" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+    <meta property="og:description" content="<?= $Data['seo_des'] ?>" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="<?php echo CURRENT_URL ?>">
+    
+    <?php CallFileApp::RequireOnce("Views/Templates/Part/Style.php");?>
 
     <?php if($AMP): ?><script async src="https://cdn.ampproject.org/v0.js"><?php endif ?></script>
 </head>
 
 <body>
-
     <!-- Header -->
     <?php CallFileApp::RequireOnce('Views/Templates/Header.php') ?>
     <!-- End of Header -->
+    <?php CallFileApp::RequireOnce('Views/Templates/Part/Alert.php') ?>
 
     <!-- Main -->
     <main class="py-5">
@@ -128,6 +144,10 @@
 
     </main>
     <!-- End of Main -->
+
+    <?php
+    if(isset($_SESSION["fk-session"])){ CallFileApp::RequireOnce("Views/Client/Templates/NavbarBottom.php"); }
+    ?>
 
     <!-- Modal -->
     <?php 

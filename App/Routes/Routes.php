@@ -31,17 +31,13 @@
 
     $IndexRegisterSuccess = ($_SERVER["REQUEST_URI"] === BASE_URI."register-success/") ? BASE_URI."register-success/" : BASE_URI."register-success"; 
 
-    $IndexAdmin  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/") ? BASE_URI."admin/" : BASE_URI."admin"; 
-    $IndexAdminDashboard  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/dashboard/") ? BASE_URI."admin/dashboard/" : BASE_URI."admin/dashboard"; 
-    $IndexAdminClient  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/client/") ? BASE_URI."admin/client/" : BASE_URI."admin/client"; 
-    $IndexAdminUser  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/user/") ? BASE_URI."admin/user/" : BASE_URI."admin/user"; 
-    $IndexAdminFinance  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/finance/") ? BASE_URI."admin/finance/" : BASE_URI."admin/finance"; 
-    $IndexAdminFinanceBalance  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/finance/balance/") ? BASE_URI."admin/finance/balance/" : BASE_URI."admin/finance/balance"; 
-    $IndexAdminFinanceHistory  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/finance/history/") ? BASE_URI."admin/finance/history/" : BASE_URI."admin/finance/history"; 
-    $IndexAdminFinanceIncome  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/finance/income/") ? BASE_URI."admin/finance/income/" : BASE_URI."admin/finance/income"; 
-    $IndexAdminSetting  = ($_SERVER["REQUEST_URI"] === BASE_URI."admin/setting/") ? BASE_URI."admin/setting/" : BASE_URI."admin/setting"; 
+    $IndexUserSignout = ($_SERVER["REQUEST_URI"] === BASE_URI."signout/") ? BASE_URI."signout/" : BASE_URI."signout"; 
+
 
     $IndexClientDashboard  = ($_SERVER["REQUEST_URI"] === BASE_URI."dashboard/") ? BASE_URI."dashboard/" : BASE_URI."dashboard"; 
+    $IndexClientWork = ($_SERVER["REQUEST_URI"] === BASE_URI."work/") ? BASE_URI."work/" : BASE_URI."work"; 
+    $IndexClientPartner = ($_SERVER["REQUEST_URI"] === BASE_URI."partner/") ? BASE_URI."partner/" : BASE_URI."partner"; 
+    $IndexClientAccount = ($_SERVER["REQUEST_URI"] === BASE_URI."account/") ? BASE_URI."account/" : BASE_URI."account"; 
     /* 
     *   Membuat Routing
     */
@@ -60,42 +56,28 @@ switch ($_SERVER["REQUEST_URI"]) {
     case $IndexRegisterSuccess:
         CallFileApp::RequireOnce('Controllers/RegisterSuccess.php');
         break;
-        
-
-    // Admin Page
-    case $IndexAdmin: // Login to Admin Page
-        CallFileApp::RequireOnce('Controllers/Admin/Admin.php');
-        break;
-    case $IndexAdminDashboard: // Dashboard Admin
-        CallFileApp::RequireOnce('Controllers/Admin/Dashboard.php');
-        break;
-    case $IndexAdminClient: // List of Client
-        CallFileApp::RequireOnce('Controllers/Admin/Client.php');
-        break;
-    case $IndexAdminUser: // List of Admin
-        CallFileApp::RequireOnce('Controllers/Admin/User.php');
-        break;
-    case $IndexAdminFinance: // Confrim Top Up Client
-        CallFileApp::RequireOnce('Controllers/Admin/Finance.php');
-        break;
-    case $IndexAdminFinanceBalance: // Add Balance Client
-        CallFileApp::RequireOnce('Controllers/Admin/Finance.php');
-        break;
-    case $IndexAdminFinanceHistory: // History of Payment Client
-        CallFileApp::RequireOnce('Controllers/Admin/Finance.php');
-        break;
-    case $IndexAdminFinanceIncome: // Income
-        CallFileApp::RequireOnce('Controllers/Admin/Finance.php');
-        break;
-    case $IndexAdminSetting: // Setting of Website
-        CallFileApp::RequireOnce('Controllers/Admin/Setting.php');
-        break;
+    
     
 
     // Client Page
     case $IndexClientDashboard:
         CallFileApp::RequireOnce('Controllers/Client/Dashboard.php');
         break;
+    case $IndexClientWork:
+        CallFileApp::RequireOnce('Controllers/Client/Work.php');
+        break;
+    case $IndexClientPartner:
+        CallFileApp::RequireOnce('Controllers/Client/Partner.php');
+        break;
+    case $IndexClientAccount:
+        CallFileApp::RequireOnce('Controllers/Client/Account.php');
+        break;
+
+    // User Signout Route
+    case $IndexUserSignout:
+        CallFileApp::RequireOnce('Controllers/Signout.php');
+        break;
+
 
     // Error Page
     default:
