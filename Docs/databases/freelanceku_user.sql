@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2024 at 08:10 PM
+-- Generation Time: Jan 27, 2024 at 06:53 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,8 +33,33 @@ CREATE TABLE `user_data` (
   `data_username` varchar(255) NOT NULL,
   `data_apikey` varchar(255) NOT NULL,
   `data_interest` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data_interest`)),
-  `data_wallet` int(1) NOT NULL,
+  `data_paymentstatus` int(1) NOT NULL,
+  `data_paymentid` varchar(255) NOT NULL,
   `data_photo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_work`
+--
+
+CREATE TABLE `user_work` (
+  `id` int(11) NOT NULL,
+  `work_name` varchar(255) NOT NULL,
+  `work_host` varchar(255) NOT NULL,
+  `work_des` longtext DEFAULT NULL,
+  `work_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `work_salary` int(255) NOT NULL,
+  `work_status` int(1) NOT NULL,
+  `work_maxuser` int(10) NOT NULL,
+  `work_partner1` varchar(255) NOT NULL,
+  `work_partner2` varchar(255) NOT NULL,
+  `work_partner3` varchar(255) NOT NULL,
+  `work_startdate` varchar(255) NOT NULL,
+  `workfinishdate` varchar(255) NOT NULL,
+  `work_image` varchar(255) NOT NULL,
+  `work_files` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -48,6 +73,12 @@ ALTER TABLE `user_data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_work`
+--
+ALTER TABLE `user_work`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -55,6 +86,12 @@ ALTER TABLE `user_data`
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_work`
+--
+ALTER TABLE `user_work`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

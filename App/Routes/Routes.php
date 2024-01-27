@@ -12,7 +12,7 @@
     *   @Params 'Libs/Session.php'
     *   @Funct  CallFileApp::RequireOnce
     */
-    CallFile::ReqireOnce('Libs/Session.php');
+    CallFile::RequireOnce('Libs/Session.php');
     Session::Start();
     /* 
     *   Menonaktifkan Session Verify

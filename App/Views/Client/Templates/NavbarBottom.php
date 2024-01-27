@@ -1,4 +1,4 @@
-<nav id="bootom-nav" class="fixed w-full z-50 bottom-8">
+<nav id="bootom-nav" class="fixed w-full z-40 bottom-8">
     <div class="container flex">
         <div class="lg:w-2/3 md:w-1/2 py-2 px-4 border bg-primary rounded-lg shadow-md mx-auto flex flex-warp">
             <!-- Home -->

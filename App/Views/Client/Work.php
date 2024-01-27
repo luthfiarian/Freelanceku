@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php echo $AMP = $Data['seo_amp'] ? "amp" : "";  ?> lang="<?php echo $Data['seo_lang'] ?>">
+<html <?php echo $AMP = $Data1->seo_amp ? "amp" : "";  ?> lang="<?php echo $Data1->seo_lang ?>">
 <head>
     <title>Freelanceku | Pekerjaan</title>
 
@@ -10,7 +10,7 @@
 <body>
     <header>
         <!-- Navbar -->
-        <?php CallFileApp::RequireOnce('Views/Client/Templates/Navbar.php') ?>
+        <?php CallFileApp::RequireOnceData2('Views/Client/Templates/Navbar.php', $Data2, $Data3) ?>
         <!-- End of Navbar -->
     </header>
 
@@ -55,57 +55,48 @@
         </section>
         <!-- End of Work Section -->
 
-        <!-- List Section -->
-        <section id="list-work" class="mt-2">
+        <!-- History Work Section -->
+        <section id="history-work" class="mt-1">
             <div class="container">
                 <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
-                    <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Daftar Pekerjaan&nbsp;</p>
-                    <div class="relative w-full mt-1 overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Penerima
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Waktu
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Deskripsi
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Aksi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        Apple MacBook Pro 17"
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Silver
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Laptop
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Riwayat Pekerjaan&nbsp;</p>
+                    <div class="w-full <?php if(mysqli_num_rows($Data4) > 0){echo "grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4";} else {echo "flex flex-warp py-4";} ?>">
+                        <!-- Card Work -->
+                        <?php if(mysqli_num_rows($Data4) > 0){ CallFileApp::RequireOnceData("Views/Client/Templates/Part/CardWork.php", $Data4); } ?>
+                        <?php if(mysqli_num_rows($Data4) == 0): ?>
+                        <p class="py-4 w-full text-center font-semibold">Terlihat tidak ada pekerjaan 👀</p>
+                        <?php endif ?>
+                        <!-- End of Card Work -->
+                    </div>
+                    <div class="w-full flex flex-warp mt-5">
+                        <nav aria-label="Page navigation example" class="mx-auto">
+                            <ul class="flex items-center -space-x-px h-8 text-sm">
+                                <li>
+                                    <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="sr-only">Previous</span>
+                                        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="sr-only">Next</span>
+                                        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- End of List Section -->
+        <!-- End of History Work -->
     </main>
         
     <!-- Navbar Bottom -->

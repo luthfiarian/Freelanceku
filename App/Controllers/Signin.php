@@ -9,7 +9,7 @@
         $email      = Security::XSS($_POST["email"]);
         $password   = Security::XSS($_POST["password"]);
 
-        CallFile::ReqireOnce('../Models/Api.php');
+        CallFile::RequireOnce('../Models/Api.php');
         $Signin = new MasterAPI;
         $Signin->SigninAPI($email, $password);
     }

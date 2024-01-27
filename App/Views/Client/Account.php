@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php echo $AMP = $Data['seo_amp'] ? "amp" : "";  ?> lang="<?php echo $Data['seo_lang'] ?>">
+<html <?php echo $AMP = $Data1->seo_amp ? "amp" : "";  ?> lang="<?php echo $Data1->seo_lang ?>">
 <head>
     <title>Freelanceku | Akun</title>
 
@@ -10,7 +10,7 @@
 <body>
     <header>
         <!-- Navbar -->
-        <?php CallFileApp::RequireOnce('Views/Client/Templates/Navbar.php') ?>
+        <?php CallFileApp::RequireOnceData2('Views/Client/Templates/Navbar.php', $Data2, $Data3) ?>
         <!-- End of Navbar -->
     </header>
 
@@ -20,15 +20,23 @@
         <!-- End of Routes Page Section -->
         
         <!-- Account Section -->
-        <section id="create-work" class="mt-2">
+        <section id="accout-detail" class="mt-2">
             <div class="container">
-                <div class="w-1/2 mx-auto border rounded-lg py-4 px-5 text-center">
-                    <img src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Foto Profil" class="mx-auto !w-[75px] md:!w-[100px] rounded-full shadow-sm">
-                    <p class="mt-2">
-                        <span class="font-semibold">Andi</span><br>
-                        andi@gmail.com <br>
-                        081-1212-12312-32
-                    </p>
+                <div class="w-full flex flex-warp ">
+                    <div class="w-full md:w-1/3 h-auto mt-2 border rounded-lg py-4 px-5 text-center mr-0 md:mr-1">
+                        <img src="<?php echo $Data2->data_photo ?>" alt="Foto Profil" class="mx-auto !w-[75px] md:!w-[100px] rounded-full shadow-sm">
+                        <p class="mt-2">
+                            <span class="font-semibold"><?php echo $Data3->data->identity->first_name . " " . $Data3->data->identity->last_name ; ?></span><br>
+                            <?php echo $Data3->data->identity->email; ?> <br>
+                            <?php echo $Data3->data->identity->phone; ?>
+                        </p>
+                    </div>
+                    <div class="w-full md:w-2/3 h-auto mt-2 pb-2 pt-4 px-4 rounded-lg relative border">
+                        <p class="text-lg h-auto font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Tentang Akun&nbsp;</p>
+                        <div class="w-full">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

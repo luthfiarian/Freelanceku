@@ -3,9 +3,9 @@
         protected $ConnAPI, $KeyAPI, $CookieAPI;
 
         protected function initAPINonRoute(){
-            CallFile::ReqireOnce('../Config/Api.php');
-            CallFile::ReqireOnce('../Config/Host.php');
-            CallFile::ReqireOnce('../Models/Database.php');
+            CallFile::RequireOnce('../Config/Api.php');
+            CallFile::RequireOnce('../Config/Host.php');
+            CallFile::RequireOnce('../Models/Database.php');
             return true;
         }
         protected function initAPIRoute(){
@@ -127,10 +127,14 @@
             // Create Directory by Email
             $Umask = umask(0);
             mkdir("../../Public/upload/client/" . $email, 0755, true);
+            mkdir("../../Public/upload/client/" . $email . "work", 0755, true);
+            mkdir("../../Public/upload/client/" . $email . "transaction", 0755, true);
             umask($Umask);
             
             // Copy index.html
             copy("../../Public/index.html", "../../Public/upload/client/". $email ."/index.html");
+            copy("../../Public/index.html", "../../Public/upload/client/". $email ."/work/index.html");
+            copy("../../Public/index.html", "../../Public/upload/client/". $email ."/transaction/index.html");
             // Copy photo profile
             copy("../../Public/dist/image/user-photo.png", "../../Public/upload/client/". $email ."/photo.png");
             $_SESSION['register']       = 0;

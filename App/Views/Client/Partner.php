@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php echo $AMP = $Data['seo_amp'] ? "amp" : "";  ?> lang="<?php echo $Data['seo_lang'] ?>">
+<html <?php echo $AMP = $Data1->seo_amp ? "amp" : "";  ?> lang="<?php echo $Data1->seo_lang ?>">
 <head>
     <title>Freelanceku | Mitra</title>
 
@@ -10,7 +10,7 @@
 <body>
     <header>
         <!-- Navbar -->
-        <?php CallFileApp::RequireOnce('Views/Client/Templates/Navbar.php') ?>
+        <?php CallFileApp::RequireOnceData2('Views/Client/Templates/Navbar.php', $Data2, $Data3) ?>
         <!-- End of Navbar -->
     </header>
 

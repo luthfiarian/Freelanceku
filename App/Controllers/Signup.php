@@ -23,7 +23,7 @@
             }
         }
 
-        CallFile::ReqireOnce('../Models/Api.php');
+        CallFile::RequireOnce('../Models/Api.php');
         $Signup = new ClientAPI;
         $Signup->SignupAPI($first_name, $last_name, $email, $username, $phone, $interest, $password);
     

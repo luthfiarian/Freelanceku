@@ -25,6 +25,7 @@
 
     // Definition Tables of Databases
     define("SEO_SITE_DB", "site_seo");
+    define("BANK_SITE_DB", "site_bank");
     define("SET_SITE_DB", "site_setting");
 
     // Definition Information Data of Database User
@@ -35,3 +36,4 @@
     if(!CONN_DB_USER){die("Tidak dapat terhubung database : ".CONN_DB_USER->connect_error);}
     
     define("DATA_USER_DB", "user_data");
+    define("WORK_USER_DB", "user_work");
