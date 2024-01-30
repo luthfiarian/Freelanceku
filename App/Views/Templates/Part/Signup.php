@@ -57,32 +57,32 @@
                             <ul class="h-fit px-3 pb-3 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownSearchButton">
                                 <li>
                                     <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="design" type="checkbox" name="interest-1" value="design" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
+                                        <input id="design" type="checkbox" name="interest-1" value="Design" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
                                         <label for="design" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">Desain</label>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="website" type="checkbox" name="interest-2" value="website" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
+                                        <input id="website" type="checkbox" name="interest-2" value="Website" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
                                         <label for="website" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">Website</label>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="uiux" type="checkbox" name="interest-3" value="ui/ux" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
+                                        <input id="uiux" type="checkbox" name="interest-3" value="UI/UX" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
                                         <label for="uiux" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">UI/UX</label>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="data-analytic" type="checkbox" name="interest-4" value="Data Analytic" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
+                                        <input id="data-analytic" type="checkbox" name="interest-4" value="Data Analythic" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
                                         <label for="data-analytic" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">Data Analytic</label>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="data-analytic" type="checkbox" name="interest-4" value="Data Analytic" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
-                                        <label for="data-analytic" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">Data Analytic</label>
+                                        <input id="devops" type="checkbox" name="interest-4" value="DevOps" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
+                                        <label for="devops" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">DevOps</label>
                                     </div>
                                 </li>
                             </ul>

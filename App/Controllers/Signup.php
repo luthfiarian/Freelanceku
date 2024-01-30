@@ -3,7 +3,11 @@
         require_once '../../Libs/Call.php';
         require_once '../../Libs/Security.php';
         require_once '../../Libs/Session.php';
+        CallFile::RequireOnce("../Models/Database.php");
         Session::Start();
+
+        // Fetch Data Interest DB
+        $Site = new Site;
 
         // Init Varibel Post
         $first_name = Security::XSS($_POST['first_name']);
@@ -13,13 +17,14 @@
         $phone      = "62" . Security::XSS($_POST['phone']);
         $password   = Security::XSS($_POST['password']);
 
-        for ($i = 1; $i <= 5; $i++) {
+        $interval_interest = 0;
+        for ($i = 1; $i <= mysqli_num_rows($Site->InterestNonRoute()); $i++) {
             if (!empty($_POST["interest-{$i}"])) {
                 ++$interval_interest;
                 if ($interval_interest == 4) {
                     break;
                 }
-                $interest["interest-{$i}"] = Security::XSS($_POST["interest-{$i}"]);
+                $interest["interest_{$i}"] = Security::XSS($_POST["interest-{$i}"]);
             }
         }
 

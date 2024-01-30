@@ -27,6 +27,7 @@
     define("SEO_SITE_DB", "site_seo");
     define("BANK_SITE_DB", "site_bank");
     define("SET_SITE_DB", "site_setting");
+    define("INTEREST_SITE_DB", "site_interest");
 
     // Definition Information Data of Database User
     define("NAME_DB_USER", $Name_DB_User);
@@ -37,3 +38,4 @@
     
     define("DATA_USER_DB", "user_data");
     define("WORK_USER_DB", "user_work");
+    define("PORTO_USER_DB", "user_porto");

@@ -24,6 +24,7 @@
             <div class="container">
                 <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
                     <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Buat Pekerjaan&nbsp;</p>
+                    <?php if(($Data2->data_paymentstatus == 1) && !empty($Data3->data->address->street)): ?>
                     <form action="" method="post" class="w-full">
                         <div class="w-full flex flex-warp">
                             <div class="w-1/2 mr-1">
@@ -48,8 +49,19 @@
                         </div>
                         <label for="des-jsob">Deskripsi Pekerjaan</label>
                         <textarea name="des-job" id="des-job" cols="30" rows="1" class="px-4 rounded-lg mt-2 w-full border" required></textarea>
-                        <input type="submit" value="Buat Pekerjaan" class="w-full text-center bg-black text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-secondary">
+                        <input type="submit" value="Buat Pekerjaan" class="w-full mt-2 text-center bg-black text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-secondary">
                     </form>
+                    <?php else: ?>
+                    <p class="w-full text-center font-semibold my-2">Segera lengkapi data anda 🖐😄</p>
+                    <div class="w-full">
+                        <?php if($Data2->data_paymentstatus == 0): ?>
+                        <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "dashboard" ?>"><button class="text-sm md:text-base rounded-full text-center w-full border py-1 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Tambahkan Data Pembayaran Anda</button></a>
+                        <?php endif ?>
+                        <?php if(empty($Data3->data->address->street)): ?>
+                        <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "account" ?>"><button class="text-sm md:text-base rounded-full mt-2 text-center w-full border py-1 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Lengkapi Data Alamat Anda</button></a>
+                        <?php endif ?>
+                    </div>
+                    <?php endif ?>
                 </div>
             </div>
         </section>

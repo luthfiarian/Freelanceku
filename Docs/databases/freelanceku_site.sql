@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 06:52 AM
+-- Generation Time: Jan 30, 2024 at 08:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,7 +38,35 @@ CREATE TABLE `site_bank` (
 --
 
 INSERT INTO `site_bank` (`id`, `bank_name`, `bank_code`) VALUES
-(1, 'BANK REPUBLIK INDONESI (BRI)', '002');
+(1, 'BANK REPUBLIK INDONESI (BRI)', '002'),
+(2, 'BANK CENTRAL ASIA (BCA)', '014'),
+(3, 'BANK MANDIRI', '008'),
+(4, 'BANK NEGARA INDONESIA (BNI)', '009');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `site_interest`
+--
+
+CREATE TABLE `site_interest` (
+  `id` int(11) NOT NULL,
+  `interest_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `site_interest`
+--
+
+INSERT INTO `site_interest` (`id`, `interest_name`) VALUES
+(1, 'IU/UX'),
+(2, 'Design'),
+(3, 'Front-end'),
+(4, 'Back-end'),
+(5, 'DevOps'),
+(6, 'Mobile'),
+(7, 'Blockchain'),
+(8, 'Game Dev');
 
 -- --------------------------------------------------------
 
@@ -90,6 +118,12 @@ ALTER TABLE `site_bank`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `site_interest`
+--
+ALTER TABLE `site_interest`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `site_seo`
 --
 ALTER TABLE `site_seo`
@@ -109,7 +143,13 @@ ALTER TABLE `site_testimonial`
 -- AUTO_INCREMENT for table `site_bank`
 --
 ALTER TABLE `site_bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `site_interest`
+--
+ALTER TABLE `site_interest`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `site_seo`
