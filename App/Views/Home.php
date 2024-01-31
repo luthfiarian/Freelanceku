@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html <?= $AMP = $Data['seo_amp'] ? "amp" : "";  ?> lang="<?= $Data['seo_lang'] ?>">
+<html <?php echo $AMP = $Data1['seo_amp'] ? "amp" : "";  ?> lang="<?php echo $Data1['seo_lang'] ?>">
 <head>
     <!-- Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="<?php echo $Data["seo_author"] ?>">
-    <meta name="keywords" content="<?php echo $Data["seo_keyword"] ?>">
-    <meta name="description" content="<?php echo $Data['seo_des'] ?>">
+    <meta name="author" content="<?php echo $Data1["seo_author"] ?>">
+    <meta name="keywords" content="<?php echo $Data1["seo_keyword"] ?>">
+    <meta name="description" content="<?php echo $Data1['seo_des'] ?>">
     <!-- Title -->
     <title>Freelanceku </title>
 
     <!-- Open Graph -->
-    <meta property="og:site_name" content="<?= CURRENT_URL ?>" />
-    <meta property="og:title" content="<?= $Data['seo_name'] ?>" />
-    <meta property="og:type" content="<?= $Data['seo_type'] ?>" />
-    <meta property="og:locale" content="<?= $Data['seo_locale'] ?>"  />
-    <meta property="og:url" content="<?= CURRENT_URL ?>" />
-    <meta property="og:image" content="<?= CallAny::File('Public/dist/image/favicon.png'); ?>" />
+    <meta property="og:site_name" content="<?php echo CURRENT_URL ?>" />
+    <meta property="og:title" content="<?php echo $Data1['seo_name'] ?>" />
+    <meta property="og:type" content="<?php echo $Data1['seo_type'] ?>" />
+    <meta property="og:locale" content="<?php echo $Data1['seo_locale'] ?>"  />
+    <meta property="og:url" content="<?php echo CURRENT_URL ?>" />
+    <meta property="og:image" content="<?php echo CallAny::File('Public/dist/image/favicon.png'); ?>" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="300" />
     <meta property="og:image:height" content="300" />
-    <meta property="og:description" content="<?= $Data['seo_des'] ?>" />
+    <meta property="og:description" content="<?php echo $Data1['seo_des'] ?>" />
 
     <!-- Canonical -->
     <link rel="canonical" href="<?php echo CURRENT_URL ?>">
@@ -152,7 +152,7 @@
     <!-- Modal -->
     <?php 
     CallFileApp::RequireOnce('Views/Templates/Part/Signin.php');
-    CallFileApp::RequireOnce('Views/Templates/Part/Signup.php')
+    CallFileApp::RequireOnceData('Views/Templates/Part/Signup.php', $Data2)
     ?>
 
     <!-- Footer -->

@@ -86,38 +86,41 @@
             }
 
             // Check Interest Work
-            if($InterestData == 0){$_SESSION["STATUS_ERR_UPDATE"] = "Minat kerja kosong!"; header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");}
-
-            // Send Data to API
-            if($UserAPI->UpdateDataUserAPI($Data4->data_apikey, $Data4->data_username, $first_name, $last_name, $phone, $description, $street, $city, $province, $country)){
-                // Check Photo
-                if(isset($_FILES["file"]) && !empty($_FILES["file"]["name"])){
-                    $size = $_FILES['file']['size'];
-                    $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-                    if ($extension != "png") {
-                        $_SESSION["STATUS_ERR_UPDATE"] = "Format file yang diupload harus png!";
-                        header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-                    }
-                    if ($size > (150 * 1024)) {
-                        $_SESSION["STATUS_ERR_UPDATE"] = "Ukuran file yang diupload melebihi batas (150Kb)!";
-                        header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-                    }
-                    $file = uniqid() . "." . $extension;
-                    $file_tmp = $_FILES['file']['tmp_name'];
-                    if(unlink($Data4->data_photo) && move_uploaded_file($file_tmp, "Public/upload/client/$Data4->data_email/image/" . $file)){
-                        $UserDB->UpdateDataUserDB($Data4->data_email, $file, json_encode($interest));
-                        header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-                    }else{
-                        $_SESSION["STATUS_ERR_UPDATE"] = "Terjadi galat saat upload file 😥";
-                        header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-                    }
-                }else{
-                    $UserDB->UpdateDataUserDB($Data4->data_email, NULL, json_encode($interest));
-                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-                } 
+            if($InterestData == 0){
+                $_SESSION["STATUS_ERR_UPDATE"] = "Minat kerja kosong!"; header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
             }else{
-                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                // Send Data to API
+                if($UserAPI->UpdateDataUserAPI($Data4->data_apikey, $Data4->data_username, $first_name, $last_name, $phone, $description, $street, $city, $province, $country)){
+                    // Check Photo
+                    if(isset($_FILES["file"]) && !empty($_FILES["file"]["name"])){
+                        $size = $_FILES['file']['size'];
+                        $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+                        if ($extension != "png") {
+                            $_SESSION["STATUS_ERR_UPDATE"] = "Format file yang diupload harus png!";
+                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                        }
+                        if ($size > (100 * 1024)) {
+                            $_SESSION["STATUS_ERR_UPDATE"] = "Ukuran file yang diupload melebihi batas (100Kb)!";
+                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                        }
+                        $file = uniqid() . "." . $extension;
+                        $file_tmp = $_FILES['file']['tmp_name'];
+                        if(unlink($Data4->data_photo) && move_uploaded_file($file_tmp, "Public/upload/client/$Data4->data_email/image/" . $file)){
+                            $UserDB->UpdateDataUserDB($Data4->data_email, $file, json_encode($interest));
+                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                        }else{
+                            $_SESSION["STATUS_ERR_UPDATE"] = "Terjadi galat saat upload file 😥";
+                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                        }
+                    }else{
+                        $UserDB->UpdateDataUserDB($Data4->data_email, NULL, json_encode($interest));
+                        header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                    } 
+                }else{
+                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                }
             }
+
 
         }
         // Edit Bank

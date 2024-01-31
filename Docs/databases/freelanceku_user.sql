@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 08:14 PM
+-- Generation Time: Jan 31, 2024 at 07:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -65,7 +65,7 @@ CREATE TABLE `user_work` (
   `work_name` varchar(255) NOT NULL,
   `work_host` varchar(255) NOT NULL,
   `work_des` longtext DEFAULT NULL,
-  `work_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `work_field` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `work_salary` int(255) NOT NULL,
   `work_status` int(1) NOT NULL,
   `work_maxuser` int(10) NOT NULL,
@@ -114,7 +114,7 @@ ALTER TABLE `user_data`
 -- AUTO_INCREMENT for table `user_porto`
 --
 ALTER TABLE `user_porto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_work`

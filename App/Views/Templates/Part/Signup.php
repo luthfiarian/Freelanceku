@@ -55,36 +55,14 @@
                         </button>
                         <div id="dropdownSearch" class="z-10 hidden bg-white rounded-lg shadow w-60">
                             <ul class="h-fit px-3 pb-3 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownSearchButton">
+                                <?php while ($Interest = mysqli_fetch_assoc($Data)) : ?>
                                 <li>
                                     <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="design" type="checkbox" name="interest-1" value="Design" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
-                                        <label for="design" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">Desain</label>
+                                        <input id="<?php echo $Interest["interest_name"] ?>" type="checkbox" name="interest-<?php echo $Interest["id"] ?>" value="<?php echo $Interest["interest_name"] ?>" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
+                                        <label for="<?php echo $Interest["interest_name"] ?>" class="w-full ms-2 text-sm font-medium text-gray-900 rounded"><?php echo $Interest["interest_name"] ?></label>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="website" type="checkbox" name="interest-2" value="Website" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
-                                        <label for="website" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">Website</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="uiux" type="checkbox" name="interest-3" value="UI/UX" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
-                                        <label for="uiux" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">UI/UX</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="data-analytic" type="checkbox" name="interest-4" value="Data Analythic" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
-                                        <label for="data-analytic" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">Data Analytic</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                        <input id="devops" type="checkbox" name="interest-4" value="DevOps" class="w-4 h-4 text-third bg-primary border-secondary rounded focus:ring-secondary focus:ring-2">
-                                        <label for="devops" class="w-full ms-2 text-sm font-medium text-gray-900 rounded">DevOps</label>
-                                    </div>
-                                </li>
+                                <?php endwhile ?>
                             </ul>
                         </div>
                         <small class="text-red-500">*Minimal 1 dan maksimal 3</small>

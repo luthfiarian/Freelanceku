@@ -84,7 +84,38 @@
             }
         }
 
-        public function WorkHistory($email){
+        public function CreateWorkDB($id, $email, $name, $date,$photo, $salary, $fieldwork, $desc, $maxuser){
+            $id  = rand(56, 9999); $start = date("d-m-Y");
+
+            $Umask = umask(0);
+            mkdir("../../Public/upload/client/$email/work/work-$id", 0755, true);
+            umask($Umask);
+
+            copy("../../Public/index.html", "../../Public/upload/client/$email/work/work-$id/index.html");
+
+            if(!empty($photo)){
+                $this->initDBRoute();
+                $table = " (id, work_name, work_host, work_des, work_field, work_salary, work_status, work_maxuser, work_startdate, work_finishdate, work_image) ";
+                $value = " ('$id', '$name', '$email', '$desc', '$fieldwork', '$salary', '0', '$maxuser','$start', '$date', '$photo') ";
+                $Query = mysqli_query($this->ConnDB, "INSERT INTO " . WORK_USER_DB . $table ."VALUES" . $value);
+                if($Query){
+                    $_SESSION["STATUS_ADDWORK"] = "Berhasil menambahkan pekerjaan baru 🎉";
+                    return header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work");
+                }else{
+                    $_SESSION["STATUS_ERR_ADDWORK"] = "Terjadi galat pada upload file pada server 😥";
+                    return header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work");
+                }
+            }else{
+                $this->initDBRoute();
+                $table = " (id, work_name, work_host, work_des, work_field, work_salary, work_status, work_maxuser, work_startdate, work_finishdate, work_image) ";
+                $value = " ('$id', '$name', '$email', '$desc', '$fieldwork', '$salary', 0, '$maxuser','$start', '$date', '$photo') ";
+                $Query = mysqli_query($this->ConnDB, "INSERT INTO " . WORK_USER_DB . $table ."VALUES" . $value);
+                if(!$Query){ echo "<script>alert('Terjadi galat pada server')</script>";}
+                return header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work");
+            }
+        }
+
+        public function WorkHistoryDB($email){
             $this->initDBRoute();
             return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE work_host='$email'");
         }

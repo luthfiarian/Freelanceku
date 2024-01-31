@@ -28,6 +28,10 @@
         public static function RequireOnceData5($Call, $Data1, $Data2, $Data3, $Data4, $Data5){ $Data1 = $Data1; $Data2 = $Data2; $Data3 = $Data3; $Data4 = $Data4; $Data5 = $Data5; require_once("App/".$Call); return true; }
         // Method Require_Once With 6 Data
         public static function RequireOnceData6($Call, $Data1, $Data2, $Data3, $Data4, $Data5, $Data6){ $Data1 = $Data1; $Data2 = $Data2; $Data3 = $Data3; $Data4 = $Data4; $Data5 = $Data5; $Data6 = $Data6; require_once("App/".$Call); return true; }
+        // Method Require_Once With 7 Data
+        public static function RequireOnceData7($Call, $Data1, $Data2, $Data3, $Data4, $Data5, $Data6, $Data7){ $Data1 = $Data1; $Data2 = $Data2; $Data3 = $Data3; $Data4 = $Data4; $Data5 = $Data5; $Data6 = $Data6; $Data7 = $Data7; require_once("App/".$Call); return true; }
+        // Method Require_Once With 8 Data
+        public static function RequireOnceData8($Call, $Data1, $Data2, $Data3, $Data4, $Data5, $Data6, $Data7, $Data8){ $Data1 = $Data1; $Data2 = $Data2; $Data3 = $Data3; $Data4 = $Data4; $Data5 = $Data5; $Data6 = $Data6; $Data7 = $Data7; $Data8 = $Data8; require_once("App/".$Call); return true; }
         // Method Require_Once With Data Unset
         public static function RequireOnceDataUnset($Call, $Data){ $Data = $Data; require_once("App/".$Call); unset($Data); return true; }
         // Method Include

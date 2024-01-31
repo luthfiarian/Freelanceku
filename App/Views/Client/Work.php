@@ -14,6 +14,10 @@
         <!-- End of Navbar -->
     </header>
 
+    <!-- Alert -->
+    <?php CallFileApp::RequireOnce("Views/Client/Templates/Part/Alert.php") ?>
+    <!-- End of Alert -->
+
     <main class="mt-5">
         <!-- Routes Page Section -->
         <?php CallFileApp::RequireOnceData("Views/Client/Templates/RoutesPage.php", "Pekerjaan") ?>
@@ -25,31 +29,41 @@
                 <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
                     <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Buat Pekerjaan&nbsp;</p>
                     <?php if(($Data2->data_paymentstatus == 1) && !empty($Data3->data->address->street)): ?>
-                    <form action="" method="post" class="w-full">
+                    <form action="" method="post" class="w-full" enctype="multipart/form-data">
                         <div class="w-full flex flex-warp">
                             <div class="w-1/2 mr-1">
-                                <label for="name" class="text-sm block">Judul Pekerjaan</label>
-                                <input type="text" name="name" id="name" class="px-4 rounded-full mt-2 w-full" required>
+                                <label for="name" class="text-sm block">Nama Pekerjaan*</label>
+                                <input type="text" name="name" id="name" class="px-4 rounded-full mt-2 w-full" required placeholder="Nama Pekerjaan anda">
                             </div>
                             <div class="w-1/2">
-                                <label for="date" class="text-sm block">Waktu Kerja Selesai</label>
+                                <label for="date" class="text-sm block">Waktu Kerja Selesai*</label>
                                 <input type="date" name="date" id="date" class="px-4 rounded-full mt-2 w-full" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-warp mt-1">
                             <div class="w-1/2 mr-1">
                                 <label for="photo" class="block">Foto Latar Belakang</label>
-                                <input type="file" name="photo" id="photo" class="px-4 rounded-full mt-2 w-full border" required>
-                                <small class="text-red-500">*Maksimal ukuran foto 100kb</small>
+                                <input type="file" name="file" id="photo" class="px-4 rounded-full mt-2 w-full border" accept="image/png">
+                                <small class="text-red-500">*Hanya mendukung file gambar (png) maks 150Kb</small>
                             </div>
                             <div class="w-1/2">
-                                <label for="salary" class="block">Upah</label>
+                                <label for="salary" class="block">Upah*</label>
                                 <input type="number" name="salary" id="salary" class="px-4 rounded-full mt-2 w-full border" required>
                             </div>
                         </div>
-                        <label for="des-jsob">Deskripsi Pekerjaan</label>
-                        <textarea name="des-job" id="des-job" cols="30" rows="1" class="px-4 rounded-lg mt-2 w-full border" required></textarea>
-                        <input type="submit" value="Buat Pekerjaan" class="w-full mt-2 text-center bg-black text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-secondary">
+                        <div class="w-full flex flex-warp mt-1">
+                            <div class="w-1/2 mr-1">
+                                <label for="maxuser" class="block">Jumlah Mitra*</label>
+                                <input type="number" name="maxuser" id="maxuser" min="1" max="3" class="px-4 rounded-full mt-2 w-full border" required>
+                            </div>
+                            <div class="w-1/2">
+                                <label for="fieldwork" class="block">Bidang Pekerjaan*</label>
+                                <input type="text" name="fieldwork" id="fieldwork" min="1" max="3" class="px-4 rounded-full mt-2 w-full border" required placeholder="UI/UX, Desain, Front-end">
+                            </div>
+                        </div>
+                        <label for="des-jsob">Deskripsi Pekerjaan*</label>
+                        <textarea name="desc" id="des-job" cols="30" rows="1" class="px-4 rounded-lg mt-2 w-full border" required></textarea>
+                        <input type="submit" name="create-work" value="Buat Pekerjaan" class="w-full mt-2 text-center bg-black text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-secondary">
                     </form>
                     <?php else: ?>
                     <p class="w-full text-center font-semibold my-2">Segera lengkapi data anda 🖐😄</p>

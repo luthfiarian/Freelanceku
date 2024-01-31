@@ -1,6 +1,6 @@
 <?php
     /* 
-    *   Menonaktifkan Session Verify
+    *   Close Session Register
     *   @Params 'Libs/Session.php'
     *   @Funct  CallFileApp::RequireOnce
     */
@@ -8,9 +8,7 @@
 
     /* 
     *   Operator Ternary
-    *   @Params  $GetCategory : User melakukan pencarian kategori freelance
-    *   @Params  $IndexAdmin : Indexing Admin Page
-    *   @Params  $IndexAdminDashboard : Indexing Admin Dashboard Page
+    *   For Indexing Page From URL
     */
     $GetCategory = isset($_GET['category']) ? BASE_URI."?category={$_GET['category']}" : BASE_URI;
 
@@ -18,13 +16,13 @@
 
     $IndexUserSignout = ($_SERVER["REQUEST_URI"] === BASE_URI."signout/") ? BASE_URI."signout/" : BASE_URI."signout"; 
 
-
     $IndexClientDashboard  = ($_SERVER["REQUEST_URI"] === BASE_URI."dashboard/") ? BASE_URI."dashboard/" : BASE_URI."dashboard"; 
     $IndexClientWork = ($_SERVER["REQUEST_URI"] === BASE_URI."work/") ? BASE_URI."work/" : BASE_URI."work"; 
     $IndexClientPartner = ($_SERVER["REQUEST_URI"] === BASE_URI."partner/") ? BASE_URI."partner/" : BASE_URI."partner"; 
     $IndexClientAccount = ($_SERVER["REQUEST_URI"] === BASE_URI."account/") ? BASE_URI."account/" : BASE_URI."account"; 
+    
     /* 
-    *   Membuat Routing
+    *   Routes
     */
 switch ($_SERVER["REQUEST_URI"]) {
     // Home Page

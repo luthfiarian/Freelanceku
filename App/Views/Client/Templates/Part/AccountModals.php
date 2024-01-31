@@ -149,7 +149,7 @@
                             <small class="text-red-500">*Minimal 1 dan maksimal 3</small>
                             <div class="w-full mt-2">
                                 <label for="desc" class="w-full block mb-2 text-sm font-medium text-gray-900">Deskripsi Akun</label>
-                                <textarea class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-third focus:border-third block w-full p-2.5" name="desc" id="desc" cols="30" rows="1" placeholder="Ceritakan sedikit tentang anda 😄🖐"><?php echo $Data4->data->identity->description; ?></textarea>
+                                <textarea class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-third focus:border-third block w-full p-2.5" name="desc" id="desc" cols="30" rows="1" placeholder="Ceritakan sedikit tentang anda 😄🖐" required><?php echo $Data4->data->identity->description; ?></textarea>
                             </div>
                             <div class="w-full mt-2">
                                 <label for="address" class="w-full block mb-2 text-sm font-medium text-gray-900">Alamat Anda</label>

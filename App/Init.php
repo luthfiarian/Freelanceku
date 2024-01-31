@@ -1,22 +1,22 @@
 <?php
     /* 
-    *   Memanggil Memanggil File Host
-    *   @Dir    'Config'
+    *   Call File Host
+    *   @Dir    'App/Config'
     *   @Params 'Host.php'
     *   @Funct  CallFileApp::RequireOnce
     */
     CallFileApp::RequireOnce('Config/Host.php');
     ini_set('display_errors', STATUS_APP);
     /* 
-    *   Memanggil Memanggil File Session.php
+    *   Call File Session
     *   @Params 'Libs/Session.php'
     *   @Funct  CallFileApp::RequireOnce
     */
     CallFile::RequireOnce('Libs/Session.php');
     Session::Start();
     /* 
-    *   Memanggil Memanggil File Routes
-    *   @Dir    'Routes'
+    *   Call File Routes
+    *   @Dir    'App/Routes'
     *   @Params 'Routes.php'
     *   @Funct  CallFileApp::ReqireOnce
     */

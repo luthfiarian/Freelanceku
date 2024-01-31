@@ -11,6 +11,8 @@
     $CurentUrl = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     $Protocol = (empty($_SERVER['HTTPS']) ? 'http' : 'https');
 
+    date_default_timezone_set('Asia/Jakarta');
+
     /* 
     *   Mendefinisikan BASE_URL, BASE_URI
     *   Sebagai basis url, folder website

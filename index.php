@@ -1,13 +1,13 @@
 <?php
     /* 
-    *   Memanggil library Call.php 
+    *   Call library Call.php 
     *   @Params 'Libs/Call.php'
     *   @Funct  require_once
     */
     require_once('Libs/Call.php');
 
     /* 
-    *   Memanggil Memanggil File Init.php
+    *   Call File Init.php
     *   @Params 'Init.php'
     *   @Funct  CallFileApp::RequireOnce
     */

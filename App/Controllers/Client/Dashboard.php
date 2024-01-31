@@ -12,7 +12,7 @@
         $Data2 =  $Site->Bank();        // Paymet of Website
         $Data3 = (object) $UserDB->FetchUserDataDB($email);   // Fetch Data from DB
         $Data4 = $UserAPI->FetchUserDataAPI($Data3->data_username, $Data3->data_apikey); // Fetch Data from API
-        $Data5 = $UserDB->WorkHistory($Data3->data_email); // Fetch Data Work History
+        $Data5 = $UserDB->WorkHistoryDB($Data3->data_email); // Fetch Data Work History
 
 
         CallFileApp::RequireOnceData5('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5);
