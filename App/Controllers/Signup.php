@@ -1,21 +1,20 @@
 <?php
     if(isset($_POST["signup"])){
         require_once '../../Libs/Call.php';
-        require_once '../../Libs/Security.php';
         require_once '../../Libs/Session.php';
+        require_once '../../Libs/Security.php';
         CallFile::RequireOnce("../Models/Database.php");
         Session::Start();
 
         // Fetch Data Interest DB
         $Site = new Site;
-
         // Init Varibel Post
-        $first_name = Security::XSS($_POST['first_name']);
-        $last_name  = Security::XSS($_POST['last_name']);
-        $email      = Security::XSS($_POST['email']);
-        $username   = Security::XSS($_POST['username']);
-        $phone      = "62" . Security::XSS($_POST['phone']);
-        $password   = Security::XSS($_POST['password']);
+        $first_name = Security::String($_POST['first_name']);
+        $last_name  = Security::String($_POST['last_name']);
+        $email      = Security::String($_POST['email']);
+        $username   = Security::String($_POST['username']);
+        $phone      = "62" . Security::String($_POST['phone']);
+        $password   = Security::String($_POST['password']);
 
         $interval_interest = 0;
         for ($i = 1; $i <= mysqli_num_rows($Site->InterestNonRoute()); $i++) {
@@ -24,7 +23,7 @@
                 if ($interval_interest == 4) {
                     break;
                 }
-                $interest["interest_{$i}"] = Security::XSS($_POST["interest-{$i}"]);
+                $interest["interest_{$i}"] = Security::String($_POST["interest-{$i}"]);
             }
         }
 

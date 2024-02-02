@@ -2,7 +2,6 @@
     if(isset($_SESSION["fk-session"]) && isset($_COOKIE["API-COOKIE"])){
         $email = ltrim($_SESSION["fk-session"], "fk-FFFFFF-");
 
-        CallFile::RequireOnce("Libs/Security.php");
         CallFileApp::RequireOnce('Models/Database.php');
         CallFileApp::RequireOnce("Models/Api.php");
         $Site = new Site; 
@@ -29,22 +28,24 @@
             if ($extension != "pdf") {
                 $_SESSION["STATUS_ERR_ADDPORTO"] = "Format file yang diupload harus PDF!";
                 header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-            }
-            if ($size > (500 * 1024)) {
-                $_SESSION["STATUS_ERR_ADDPORTO"] = "Ukuran file yang diupload melebihi batas (500Kb)!";
-                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+            }else{
+                if ($size > (500 * 1024)) {
+                    $_SESSION["STATUS_ERR_ADDPORTO"] = "Ukuran file yang diupload melebihi batas (500Kb)!";
+                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                }else{
+                    $file = uniqid() . "." . $extension;
+                    $file_tmp = $_FILES['file']['tmp_name'];
+                    move_uploaded_file($file_tmp, "Public/upload/client/$Data4->data_email/portofolio/" . $file);
+                    
+                    $UserDB->AddPortoUserDB($Data4->data_email, $porto_name, $porto_date, $porto_field, $file);
+                }
             }
 
-            $file = uniqid() . "." . $extension;
-            $file_tmp = $_FILES['file']['tmp_name'];
-            move_uploaded_file($file_tmp, "Public/upload/client/$Data4->data_email/portofolio/" . $file);
-            
-            $UserDB->AddPortoUserDB($Data4->data_email, $porto_name, $porto_date, $porto_field, $file);
         }
         // Delete Portofolio
         else if(isset($_POST["delete-porto"])){
-            $file = Security::XSS($_POST["file"]);
-            $id = Security::XSS($_POST["id"]);
+            $file = $_POST["file"];
+            $id = $_POST["id"];
             $UserDB->DeletePortoUserDB($id, $file);
         }
         // Delete Account
@@ -69,10 +70,10 @@
         }
         // Edit Account
         else if(isset($_POST["edit-account"])){
-            $first_name = Security::XSS($_POST["first_name"]); $last_name = Security::XSS($_POST["last_name"]);
-            $phone = "62".Security::XSS($_POST["phone"]); $description = isset($_POST["desc"]) ? Security::XSS($_POST["desc"]) : NULL;
-            $street = Security::XSS($_POST["street"]); $city = Security::XSS($_POST["city"]); $province = Security::XSS($_POST["province"]);
-            $country = Security::XSS($_POST["country"]); $interest = [];
+            $first_name = $_POST["first_name"]; $last_name = $_POST["last_name"];
+            $phone = "62".$_POST["phone"]; $description = isset($_POST["desc"]) ? $_POST["desc"] : NULL;
+            $street = $_POST["street"]; $city = $_POST["city"]; $province = $_POST["province"];
+            $country = $_POST["country"]; $interest = [];
 
             $InterestData = 0;
             for ($i = 1; $i <= mysqli_num_rows($Site->Interest()); $i++) {
@@ -81,7 +82,7 @@
                     if ($InterestData == 4) {
                         break;
                     }
-                    $interest["interest_{$i}"] = Security::XSS($_POST["interest-{$i}"]);
+                    $interest["interest_{$i}"] = $_POST["interest-{$i}"];
                 }
             }
 
@@ -98,19 +99,23 @@
                         if ($extension != "png") {
                             $_SESSION["STATUS_ERR_UPDATE"] = "Format file yang diupload harus png!";
                             header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-                        }
-                        if ($size > (100 * 1024)) {
-                            $_SESSION["STATUS_ERR_UPDATE"] = "Ukuran file yang diupload melebihi batas (100Kb)!";
-                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
-                        }
-                        $file = uniqid() . "." . $extension;
-                        $file_tmp = $_FILES['file']['tmp_name'];
-                        if(unlink($Data4->data_photo) && move_uploaded_file($file_tmp, "Public/upload/client/$Data4->data_email/image/" . $file)){
-                            $UserDB->UpdateDataUserDB($Data4->data_email, $file, json_encode($interest));
-                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                            exit();
                         }else{
-                            $_SESSION["STATUS_ERR_UPDATE"] = "Terjadi galat saat upload file 😥";
-                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                            if ($size > (100 * 1024)) {
+                                $_SESSION["STATUS_ERR_UPDATE"] = "Ukuran file yang diupload melebihi batas (100Kb)!";
+                                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                                exit();
+                            }else{
+                                $file = uniqid() . "." . $extension;
+                                $file_tmp = $_FILES['file']['tmp_name'];
+                                if(unlink($Data4->data_photo) && move_uploaded_file($file_tmp, "Public/upload/client/$Data4->data_email/image/" . $file)){
+                                    $UserDB->UpdateDataUserDB($Data4->data_email, $file, json_encode($interest));
+                                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                                }else{
+                                    $_SESSION["STATUS_ERR_UPDATE"] = "Terjadi galat saat upload file 😥";
+                                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                                }
+                            }
                         }
                     }else{
                         $UserDB->UpdateDataUserDB($Data4->data_email, NULL, json_encode($interest));
@@ -126,8 +131,8 @@
         // Edit Bank
         else if(isset($_POST["edit-payment"])){
             CallFile::RequireOnce("Libs/Security.php");
-            $PaymentID = Security::XSS($_POST["data_paymentid"]);
-            $PaymentCode = Security::XSS($_POST["bank"]);
+            $PaymentID = $_POST["data_paymentid"];
+            $PaymentCode = $_POST["bank"];
             $UserDB->UpdatePayment($Data4->data_email, 1,$PaymentCode,$PaymentID);
         }
     }else{

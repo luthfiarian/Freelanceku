@@ -2,6 +2,7 @@
 <html <?php echo $AMP = $Data1->seo_amp ? "amp" : "";  ?> lang="<?php echo $Data1->seo_lang ?>">
 <head>
     <title>Freelanceku | Akun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Style.php"); ?>
     <?php if ($AMP) : ?><script async src="https://cdn.ampproject.org/v0.js"></script><?php endif ?>
@@ -26,9 +27,9 @@
             <div class="container">
                 <div class="w-full flex flex-warp ">
                     <div class="w-full md:w-1/3 h-auto mt-2 border rounded-lg py-4 px-5 text-center mr-0 md:mr-1">
-                        <img src="<?php echo $Data4->data_photo ?>" alt="Foto Profil" class="mx-auto !w-[75px] md:!w-[100px] rounded-full shadow-sm">
-                        <p class="mt-2">
-                            <span class="font-semibold"><?php echo $Data5->data->identity->first_name . " " . $Data5->data->identity->last_name ; ?></span><br>
+                        <img src="<?php echo BASE_URI . $Data4->data_photo ?>" alt="Foto Profil" class="mx-auto !w-[75px] md:!w-[100px] !h-[75px] md:!h-[100px] rounded-full shadow-sm">
+                        <p class="mt-2 text-sm md:text-base">
+                            <span class="font-semibold text-sm md:text-base"><?php echo $Data5->data->identity->first_name . " " . $Data5->data->identity->last_name ; ?></span><br>
                             <?php echo $Data5->data->identity->username; ?> <br>
                             <?php echo $Data5->data->identity->email; ?> <br>
                             <?php echo $Data5->data->identity->phone; ?> <br>
@@ -36,16 +37,15 @@
                         </p>
                     </div>
                     <div class="w-full md:w-2/3 h-auto mt-2 pb-2 pt-4 px-4 rounded-lg relative border">
-                        <p class="text-lg h-auto font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Tentang Akun&nbsp;</p>
-                        <div class="w-full">
+                        <p class="h-auto text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Tentang Akun&nbsp;</p>
+                        <div class="w-full text-sm md:text-base">
                             <p class="font-semibold">Deskripsi :</p>
-                            <p class="w-full px-2 py-1 border rounded-full text-sm"><?php if(!empty($Data5->data->identity->description)){ echo $Data5->data->identity->description; }else{ echo "Kosong"; } ?></p>
+                            <p class="w-full px-2 py-1 border rounded-full text-xs md:text-sm"><?php if(!empty($Data5->data->identity->description)){ echo $Data5->data->identity->description; }else{ echo "Kosong"; } ?></p>
                             <p class="font-semibold">Alamat :</p>
-                            <p class="w-full px-2 py-1 border rounded-full text-sm"><?php if(empty($Data5->data->address->street) && empty($Data5->data->address->city) && empty($Data5->data->address->province) && empty($Data5->data->address->country)){ echo "Kosong"; }else{echo $Data5->data->address->street . ", " . $Data5->data->address->city . ", " . $Data5->data->address->province . ", " . $Data5->data->address->country;} ?></p>
+                            <p class="w-full px-2 py-1 border rounded-full text-xs md:text-sm"><?php if(empty($Data5->data->address->street) && empty($Data5->data->address->city) && empty($Data5->data->address->province) && empty($Data5->data->address->country)){ echo "Kosong"; }else{echo $Data5->data->address->street . ", " . $Data5->data->address->city . ", " . $Data5->data->address->province . ", " . $Data5->data->address->country;} ?></p>
                             <p class="font-semibold">Akun Dibuat :</p>
                             <p class="w-full px-2 py-1 border rounded-full"><?php echo date("d-m-Y", strtotime($Data5->data->createdAt)); ?></p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
         <section id="portofolio" class="mt-5">
             <div class="container">
                 <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
-                    <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Portofolio&nbsp;</p>
+                    <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Portofolio&nbsp;</p>
                     <?php if(mysqli_num_rows($Data6) > 0): ?>
                     <div class="relative w-full mt-1 overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -91,7 +91,7 @@
                                     <td class="px-6 py-4 text-center flex">
                                         <div class="w-full flex">
                                             <div class="mx-auto flex">
-                                                <a href="<?php echo $Porto["porto_file"] ?>" class="font-medium text-blue-600 hover:underline">Unduh</a> |
+                                                <a href="<?php echo BASE_URI . $Porto["porto_file"] ?>" class="font-medium text-blue-600 hover:underline">Unduh</a> |
                                                 <form action="" method="post" class="w-fit"><input type="hidden" name="id" value="<?php echo $Porto["id"] ?>"><input type="hidden" name="file" value="<?php echo $Porto["porto_file"] ?>"><input type="submit" name="delete-porto" value="Hapus" class="font-medium text-red-600 hover:underline"></form>
                                             </div>
                                         </div>
@@ -102,10 +102,10 @@
                         </table>
                     </div>
                     <?php else: ?>
-                    <p class="w-full py-2 text-center">Tidak ada sama sekali portofolio anda disini 👀</p>
+                    <p class="text-sm md:text-base w-full py-2 text-center">Tidak ada sama sekali portofolio anda disini 👀</p>
                     <?php endif ?>
                     <div class="w-full flex flex-warp">
-                        <button data-modal-target="add-portofolio" data-modal-toggle="add-portofolio" class="py-2 px-4 rounded-lg mt-2 border mx-auto ease-in-out duration-300 hover:bg-secondary hover:text-primary" type="button">Tambah Portofolio</button>
+                        <button data-modal-target="add-portofolio" data-modal-toggle="add-portofolio" class="text-sm md:text-base py-2 px-4 rounded-lg mt-2 border mx-auto ease-in-out duration-300 hover:bg-secondary hover:text-primary" type="button">Tambah Portofolio</button>
                     </div>
                 </div>
             </div>
@@ -116,12 +116,12 @@
         <section id="setting-acc" class="mt-5">
             <div class="container">
                 <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
-                    <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Pengaturan Akun&nbsp;</p>
+                    <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Pengaturan Akun&nbsp;</p>
                     <div class="w-full">
-                        <button data-modal-target="edit-account" data-modal-toggle="edit-account" type="button" class="mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Akun</button>
-                        <?php if($Data4->data_paymentstatus == 1): ?><button data-modal-target="edit-bank" data-modal-toggle="edit-bank" type="button" class="mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Bank Akun</button><?php endif ?>
-                        <button data-modal-target="delete-account" data-modal-toggle="delete-account" type="button" class="mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Hapus Akun</button>
-                        <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "signout" ?>"><button class="mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Keluar</button></a>
+                        <button data-modal-target="edit-account" data-modal-toggle="edit-account" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Akun</button>
+                        <?php if($Data4->data_paymentstatus == 1): ?><button data-modal-target="edit-bank" data-modal-toggle="edit-bank" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Bank Akun</button><?php endif ?>
+                        <button data-modal-target="delete-account" data-modal-toggle="delete-account" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Hapus Akun</button>
+                        <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "signout" ?>"><button class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Keluar</button></a>
                     </div>
                 </div>
             </div>

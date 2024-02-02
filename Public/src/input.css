@@ -5,7 +5,8 @@
 /* HTML */
 *{ @apply scroll-smooth; font-family: 'Montserrat', sans-serif; }
 
-body{ @apply bg-primary; } 
+body{ @apply bg-primary overflow-x-hidden; } 
+
 
 /* Scroll */
 html::-webkit-scrollbar { width: 10px; }

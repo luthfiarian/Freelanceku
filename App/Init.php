@@ -6,7 +6,6 @@
     *   @Funct  CallFileApp::RequireOnce
     */
     CallFileApp::RequireOnce('Config/Host.php');
-    ini_set('display_errors', STATUS_APP);
     /* 
     *   Call File Session
     *   @Params 'Libs/Session.php'
@@ -14,6 +13,7 @@
     */
     CallFile::RequireOnce('Libs/Session.php');
     Session::Start();
+    ini_set('display_errors', STATUS_APP);
     /* 
     *   Call File Routes
     *   @Dir    'App/Routes'

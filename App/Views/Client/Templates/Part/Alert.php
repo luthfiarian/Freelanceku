@@ -19,7 +19,7 @@
     </div>
 <?php endif; ?>
 
-<!-- Alert Add payment -->
+<!-- Alert Add Work -->
 <?php if(isset($_SESSION["STATUS_ADDWORK"])) : ?>
     <div id="alert-border-2" class="sticky translate-y-5 lg:translate-y-10 shadow-md right-0 top-0 flex items-center z-20 py-2 px-4 bg-green-600 rounded-lg w-1/2 lg:w-1/3 !translate-x-[98%]" role="alert">
         <svg class="flex-shrink-0 w-4 h-4 fill-current text-primary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -40,7 +40,7 @@
     </div>
 <?php endif; ?>
 
-<!-- Alert Add payment -->
+<!-- Alert Add Work -->
 <?php if(isset($_SESSION["STATUS_ERR_ADDWORK"])) : ?>
     <div id="alert-border-2" class="sticky translate-y-5 lg:translate-y-10 shadow-md right-0 top-0 flex items-center z-20 py-2 px-4 bg-secondary rounded-lg w-1/2 lg:w-1/3 !translate-x-[98%]" role="alert">
         <svg class="flex-shrink-0 w-4 h-4 fill-current text-primary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

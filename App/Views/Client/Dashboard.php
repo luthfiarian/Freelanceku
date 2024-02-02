@@ -3,6 +3,8 @@
 
 <head>
     <title>Freelanceku | Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Style.php"); ?>
 
@@ -28,8 +30,8 @@
             <div class="container">
                 <div class="w-full flex flex-warp">
                     <div class="w-2/3 mr-1 flex flex-warp py-2 px-4 border rounded-lg">
-                        <div class="w-1/3 lg:w-1/6">
-                            <img src="<?php echo $Data3->data_photo ?>" alt="Profil" class="!w-[75px] md:!w-[100px] rounded-full shadow-sm">
+                        <div class="w-1/3 lg:w-1/6 mr-1 md:mr-0">
+                            <img src="<?php echo $Data3->data_photo ?>" alt="Profil" class="!w-[75px] md:!w-[100px] !h-[75px] md:!h-[100px] rounded-full shadow-sm">
                         </div>
                         <div class="w-2/3 lg:w-5/6 mt-2">
                             <p class="text-sm md:text-lg">Hai! <?php echo $Data4->data->identity->first_name; ?> 🖐</p>
@@ -43,8 +45,8 @@
                         <?php if($Data3->data_paymentstatus == 0): ?>
                         <button data-modal-target="add-payment" data-modal-toggle="add-payment" type="button" class="text-sm md:text-base rounded-full text-center w-full border py-1 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Tambah Pembayaran</button>
                         <?php elseif($Data3->data_paymentstatus == 1): ?>
-                        <button class="text-sm md:text-base rounded-full text-center w-full border py-1 mt-0.5 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Riwayat Keuangan</button>
-                        <button class="text-sm md:text-base rounded-full text-center w-full border py-1 mt-0.5 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Transfer</button>
+                        <button class="text-xs md:text-base rounded-full text-center w-full border py-1 mt-0.5 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Riwayat Keuangan</button>
+                        <button class="text-xs md:text-base rounded-full text-center w-full border py-1 mt-0.5 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Transfer</button>
                         <?php endif ?>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                         </form>
                     </div>
                     <div class="w-1/3 px-1 py-2 rounded-lg border">
-                        <a href="<?php echo BASE_URI . "work#create-work"?>"><button class="w-full text-sm md:text-base text-center font-semibold rounded-full py-2 border duration-300 ease-in-out hover:bg-secondary hover:text-primary">Buat Pekerjaan</button></a>
+                        <a href="<?php echo BASE_URI . "work#create-work"?>"><button class="w-full text-xs md:text-base text-center font-semibold rounded-full py-2 border duration-300 ease-in-out hover:bg-secondary hover:text-primary">Buat Pekerjaan</button></a>
                     </div>
                 </div>
             </div>
@@ -79,8 +81,8 @@
             <div class="container">
                 <div class="w-full flex flex-warp">
                     <!-- Partner -->
-                    <div class="w-full md:w-1/2 my-4 pb-2 pt-4 px-4 rounded-lg relative border mr-0 md:mr-1">
-                        <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Mitra&nbsp;</p>
+                    <div class="w-full md:w-1/2 my-4 pb-2 pt-4 px-4 rounded-lg relative border mr-0.5 md:mr-1">
+                        <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Mitra&nbsp;</p>
                         <div class="relative w-full mt-1 overflow-y-auto h-52">
                             <table class="w-full table table-auto">
                                 <tbody>
@@ -101,7 +103,7 @@
                     </div>
                     <!-- Income -->
                     <div class="w-full md:w-1/2 my-4 pb-2 pt-4 px-4 rounded-lg relative border">
-                        <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Pendapatan&nbsp;</p>
+                        <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Pendapatan&nbsp;</p>
                         <div class="relative w-full mt-1 overflow-y-auto h-52">
 
                         </div>

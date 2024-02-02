@@ -20,8 +20,8 @@
         // Add Payment Gateway
         if(isset($_POST["addpayment"])){
             CallFile::RequireOnce("Libs/Security.php");
-            $PaymentID = Security::XSS($_POST["data_paymentid"]);
-            $PaymentCode = Security::XSS($_POST["bank"]);
+            $PaymentID = $_POST["data_paymentid"];
+            $PaymentCode = $_POST["bank"];
             $UserDB->UpdatePayment($Data3->data_email, 0,$PaymentCode,$PaymentID);
         }
     }else{

@@ -18,6 +18,7 @@
 
     $IndexClientDashboard  = ($_SERVER["REQUEST_URI"] === BASE_URI."dashboard/") ? BASE_URI."dashboard/" : BASE_URI."dashboard"; 
     $IndexClientWork = ($_SERVER["REQUEST_URI"] === BASE_URI."work/") ? BASE_URI."work/" : BASE_URI."work"; 
+    $IndexClientWorkDetail = ($_SERVER["REQUEST_URI"] === BASE_URI."work/detail/") ? BASE_URI."work/detail/" : BASE_URI."work/detail"; 
     $IndexClientPartner = ($_SERVER["REQUEST_URI"] === BASE_URI."partner/") ? BASE_URI."partner/" : BASE_URI."partner"; 
     $IndexClientAccount = ($_SERVER["REQUEST_URI"] === BASE_URI."account/") ? BASE_URI."account/" : BASE_URI."account"; 
     
@@ -47,6 +48,9 @@ switch ($_SERVER["REQUEST_URI"]) {
         CallFileApp::RequireOnce('Controllers/Client/Dashboard.php');
         break;
     case $IndexClientWork:
+        CallFileApp::RequireOnce('Controllers/Client/Work.php');
+        break;
+    case $IndexClientWorkDetail:
         CallFileApp::RequireOnce('Controllers/Client/Work.php');
         break;
     case $IndexClientPartner:

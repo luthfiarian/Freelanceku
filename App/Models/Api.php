@@ -12,6 +12,7 @@
             CallFileApp::RequireOnce('Config/Api.php');
             CallFileApp::RequireOnce('Config/Host.php');
             CallFileApp::RequireOnce('Models/Database.php');
+            CallFile::RequireOnce('Libs/Security.php');
             return true;
         }
 
