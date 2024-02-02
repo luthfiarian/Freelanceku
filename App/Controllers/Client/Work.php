@@ -75,10 +75,16 @@ use Random\Engine\Secure;
             $salary = $_POST["salary"]; $maxuser = $_POST["maxuser"] < 4 ?  $_POST["maxuser"] : 3;
             $desc = $_POST["desc"]; $fieldwork = $_POST["fieldwork"];
         }
-        
+
         // Delete of Work
         else if(isset($_POST["delete-work"])){
-
+            if(Security::String((int) $_POST["status"]) == 1){
+                $id = ltrim($_POST["id"], "work-");
+            }else{
+                $_SESSION["STATUS_DELWORK"] = "Selesaikan dahulu proyek anda, jika anda ingin menghapusnya ❌";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                exit();
+            }
         }
 
         // Detail id Work to Session

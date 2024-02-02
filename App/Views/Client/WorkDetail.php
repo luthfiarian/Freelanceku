@@ -66,7 +66,7 @@
                         <textarea name="desc" id="des-job" cols="30" rows="1" class="px-4 text-xs md:text-base rounded-lg mt-2 w-full border" required><?php echo $Data4->work_des ?></textarea>
                         <input type="submit" name="update-work" value="Edit Pekerjaan" class="w-full mt-2 text-center bg-black text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-secondary">
                     </form>
-                    <form action="" method="post" style="display: none;"><input type="hidden" name="id" class="w-full" value="<?php echo "work-" . $Data4->id ?>"><button name="delete-work" type="submit" class="w-full mt-2 text-center bg-red-600 text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-opacity-80">Hapus Pekerjaan</button></form>
+                    <form action="" method="post" style="display: none;"><input type="hidden" name="id" class="w-full" value="<?php echo "work-" . $Data4->id ?>"><input type="hidden" name="status" value="<?php echo $Data4->work_status ?>"><button name="delete-work" type="submit" class="w-full mt-2 text-center bg-red-600 text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-opacity-80">Hapus Pekerjaan</button></form>
                     <button id="showContentBtn" class="w-full mt-2 text-center bg-black text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-secondary">Lihat Konten</button>
                 </div>
             </div>
