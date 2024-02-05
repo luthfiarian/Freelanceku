@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 08:40 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Waktu pembuatan: 05 Feb 2024 pada 20.28
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+07:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_data`
+-- Struktur dari tabel `user_data`
 --
 
 CREATE TABLE `user_data` (
@@ -42,7 +42,7 @@ CREATE TABLE `user_data` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_porto`
+-- Struktur dari tabel `user_porto`
 --
 
 CREATE TABLE `user_porto` (
@@ -57,7 +57,22 @@ CREATE TABLE `user_porto` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_work`
+-- Struktur dari tabel `user_reqwork`
+--
+
+CREATE TABLE `user_reqwork` (
+  `id` int(11) NOT NULL,
+  `reqwork_workid` int(11) NOT NULL,
+  `reqwork_name` varchar(255) NOT NULL,
+  `reqwork_email` varchar(255) NOT NULL,
+  `reqwork_phone` int(20) NOT NULL,
+  `reqwork_message` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user_work`
 --
 
 CREATE TABLE `user_work` (
@@ -83,41 +98,53 @@ CREATE TABLE `user_work` (
 --
 
 --
--- Indexes for table `user_data`
+-- Indeks untuk tabel `user_data`
 --
 ALTER TABLE `user_data`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_porto`
+-- Indeks untuk tabel `user_porto`
 --
 ALTER TABLE `user_porto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_work`
+-- Indeks untuk tabel `user_reqwork`
+--
+ALTER TABLE `user_reqwork`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `user_work`
 --
 ALTER TABLE `user_work`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `user_data`
+-- AUTO_INCREMENT untuk tabel `user_data`
 --
 ALTER TABLE `user_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_porto`
+-- AUTO_INCREMENT untuk tabel `user_porto`
 --
 ALTER TABLE `user_porto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_work`
+-- AUTO_INCREMENT untuk tabel `user_reqwork`
+--
+ALTER TABLE `user_reqwork`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `user_work`
 --
 ALTER TABLE `user_work`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

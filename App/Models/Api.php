@@ -189,6 +189,7 @@
             mkdir("../../Public/upload/client/" . $email, 0755, true);
             mkdir("../../Public/upload/client/" . $email . "/work", 0755, true);
             mkdir("../../Public/upload/client/" . $email . "/image", 0755, true);
+            mkdir("../../Public/upload/client/" . $email . "/partner", 0755, true);
             mkdir("../../Public/upload/client/" . $email . "/portofolio", 0755, true);
             umask($Umask);
             
@@ -196,6 +197,7 @@
             copy("../../Public/index.html", "../../Public/upload/client/". $email ."/index.html");
             copy("../../Public/index.html", "../../Public/upload/client/". $email ."/work/index.html");
             copy("../../Public/index.html", "../../Public/upload/client/". $email ."/image/index.html");
+            copy("../../Public/index.html", "../../Public/upload/client/". $email ."/partner/index.html");
             copy("../../Public/index.html", "../../Public/upload/client/". $email ."/portofolio/index.html");
             // Copy photo profile
             copy("../../Public/dist/image/user-photo.png", "../../Public/upload/client/". $email ."/image/photo.png");

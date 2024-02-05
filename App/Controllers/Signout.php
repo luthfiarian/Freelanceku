@@ -1,5 +1,6 @@
 <?php
     if($_SESSION["fk-session"]){
+        setcookie("API-COOKIE", NULL, -1, "/");
         session_unset();
         session_destroy();
         unset($_SESSION);

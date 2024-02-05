@@ -1,7 +1,6 @@
 <?php
 
 use Random\Engine\Secure;
-
     if(isset($_SESSION["fk-session"]) && isset($_COOKIE["API-COOKIE"])){
         $email = ltrim($_SESSION["fk-session"], "fk-FFFFFF-");
 
@@ -20,9 +19,8 @@ use Random\Engine\Secure;
         if(isset($_POST["create-work"])){
             $name = $_POST["name"]; $date = strtotime(date("d-m-Y", strtotime($_POST["date"]))) > strtotime(date("d-m-Y")) ?  $_POST["date"] : NULL;
             $salary = $_POST["salary"]; $maxuser = $_POST["maxuser"] < 4 ?  $_POST["maxuser"] : 3;
-            $desc = $_POST["desc"]; $fieldwork = $_POST["fieldwork"];
+            $desc = $_POST["desc"]; $fieldwork = $_POST["fieldwork"]; $id = mt_rand(56, 9999); 
 
-            $id  = rand(56, 9999);
             if(!empty($date)){
                 if(isset($_FILES["file"]) && !empty($_FILES["file"]["name"])){
                     $size = $_FILES['file']['size'];
@@ -62,29 +60,66 @@ use Random\Engine\Secure;
                     $UserDB->CreateWorkDB($id, $Data2->data_email, $name, $date, $DirPhoto, $salary, $fieldwork, $desc, $maxuser);
                 }
             }else{
-                $_SESSION["STATUS_ERR_ADDWORK"] = "Waktu selesai harus melebihi/sama dengan hari ini 😥";
+                $_SESSION["STATUS_ERR_ADDWORK"] = "Waktu selesai harus melebihi dengan hari ini 😥";
                 header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work");
                 exit();
             }
-
         }
         // Update of Work
         else if(isset($_POST["update-work"])){
             $id = ltrim($_POST["id"], "work-");
             $name = $_POST["name"]; $date = strtotime(date("d-m-Y", strtotime($_POST["date"]))) > strtotime(date("d-m-Y")) ?  $_POST["date"] : NULL;
-            $salary = $_POST["salary"]; $maxuser = $_POST["maxuser"] < 4 ?  $_POST["maxuser"] : 3;
-            $desc = $_POST["desc"]; $fieldwork = $_POST["fieldwork"];
-        }
-
-        // Delete of Work
-        else if(isset($_POST["delete-work"])){
-            if(Security::String((int) $_POST["status"]) == 1){
-                $id = ltrim($_POST["id"], "work-");
+            $salary = $_POST["salary"]; $desc = $_POST["desc"]; $fieldwork = $_POST["fieldwork"]; $background = $_POST["background"];
+            if(!empty($date)){
+                if(isset($_FILES["file"]) && !empty($_FILES["file"]["name"])){
+                    $size = $_FILES['file']['size'];
+                    $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+                    if ($extension != "png") {
+                        $_SESSION["STATUS_ERR_UPDATEWORK"] = "Format file yang diupload harus png!";
+                        header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                        exit();
+                    }else{
+                        if ($size > (100 * 1024)) {
+                            $_SESSION["STATUS_ERR_UPDATEWORK"] = "Ukuran file yang diupload melebihi batas (100Kb)!";
+                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                            exit();
+                        }else{
+                            $file = uniqid() . "." . $extension;
+                            $file_tmp = $_FILES['file']['tmp_name'];
+                            $DirPhoto = "Public/upload/client/$email/work/work-$id/$file";
+            
+                            if(unlink($background)){
+                                if(move_uploaded_file($file_tmp, $DirPhoto)){
+                                    $UserDB->WorkUpdateDB($Data2->data_email, $id, $name, $date, $DirPhoto, $salary, $fieldwork, $desc);
+                                }
+                            }
+                        }
+                    }
+                    
+                }else{
+                    $UserDB->WorkUpdateDB($Data2->data_email, $id, $name, $date, NULL, $salary, $fieldwork, $desc);
+                }
             }else{
-                $_SESSION["STATUS_DELWORK"] = "Selesaikan dahulu proyek anda, jika anda ingin menghapusnya ❌";
+                $_SESSION["STATUS_ERR_UPDATEWORK"] = "Waktu selesai harus melebihi dengan hari ini 😥";
                 header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
                 exit();
             }
+        }
+        // Delete of Work
+        else if(isset($_POST["delete-work"])){
+            $id = ltrim($_POST["id"], "work-");
+            if(Security::String((int) $_POST["status"]) == 1){
+                $UserDB->WorkDelDB($Data2->data_email, $id);
+            }else{
+                $_SESSION["STATUS_ERR_DELWORK"] = "Selesaikan dahulu proyek work-$id anda, jika anda ingin menghapusnya ❌";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                exit();
+            }
+        }
+        // Work Finish
+        else if(isset($_POST["finish-work"])){
+            $id = ltrim($_POST["id"], "work-");
+            $UserDB->WorkFinishDB($Data2->data_email, $id);
         }
 
         // Detail id Work to Session

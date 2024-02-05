@@ -91,15 +91,7 @@
         public function CreateWorkDB($id, $email, $name, $date, $photo, $salary, $fieldwork, $desc, $maxuser){
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email); $name = Security::StringDB($this->ConnDB, $name); $salary = Security::StringDB($this->ConnDB, $salary); $fieldwork = Security::StringDB($this->ConnDB, $fieldwork); $desc = Security::StringDB($this->ConnDB, $desc);
-            $maxuser = Security::StringDB($this->ConnDB, $maxuser);
-            
-            $id  = rand(56, 9999); $start = date("d-m-Y");
-
-            $Umask = umask(0);
-            mkdir("../../Public/upload/client/$email/work/work-$id", 0755, true);
-            umask($Umask);
-
-            copy("../../Public/index.html", "../../Public/upload/client/$email/work/work-$id/index.html");
+            $maxuser = Security::StringDB($this->ConnDB, $maxuser); $start = date("d-m-Y");
 
             if(!empty($photo)){
                 $table = " (id, work_name, work_host, work_des, work_field, work_salary, work_status, work_maxuser, work_startdate, work_finishdate, work_image) ";
@@ -135,7 +127,61 @@
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email);
             return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE work_host='$email' AND id='$id'");
-        }        
+        }
+
+        public function WorkUpdateDB($email, $id, $name, $date, $photo, $salary, $field, $desc){
+            $this->initDBRoute();
+            $email = Security::StringDB($this->ConnDB, $email); $name = Security::StringDB($this->ConnDB, $name); $date = Security::StringDB($this->ConnDB, $date);
+            $salary = Security::StringDB($this->ConnDB, $salary); $field = Security::StringDB($this->ConnDB, $field); $desc = Security::StringDB($this->ConnDB, $desc);
+            if(!empty(Security::StringDB($this->ConnDB, $photo))){
+                $UpdateData = "work_name='$name', work_des='$desc', work_field='$field', work_image='$photo', work_salary='$salary', work_finishdate='$date'";
+                $Query = mysqli_query($this->ConnDB, "UPDATE " . WORK_USER_DB . " SET " . $UpdateData . " WHERE work_host='$email' AND id='$id'");
+                if($Query){
+                    $_SESSION["STATUS_UPDATEWORK"] = "Berhasil mengubah pekerjaan work-$id 🎉";
+                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                    return exit();
+                }else{
+                    $_SESSION["STATUS_ERR_UPDATEWORK"] = "Terjadi galat mengubah pekerjaan work-$id ❌";
+                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                    return exit();
+                }
+            }else{
+                $UpdateData = "work_name='$name', work_des='$desc', work_field='$field', work_salary='$salary', work_finishdate='$date'";
+                $Query = mysqli_query($this->ConnDB, "UPDATE " . WORK_USER_DB . " SET " . $UpdateData . " WHERE work_host='$email' AND id='$id'");
+                if (!$Query) {echo "<script>alert('Terjadi galat pada server')</script>";}
+                $_SESSION["STATUS_UPDATEWORK"] = "Berhasil mengubah pekerjaan work-$id 🎉";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                
+                return exit();
+            }
+        }
+        
+        public function WorkFinishDB($email, $id){
+            $this->initDBRoute();
+            $email = Security::StringDB($this->ConnDB, $email);
+            $Query = mysqli_query($this->ConnDB, "UPDATE " . WORK_USER_DB . " SET work_status='1' WHERE work_host='$email' AND id='$id'");
+            if(!$Query){ echo "<script>alert('Terjadi galat pada server')</script>";}
+            $_SESSION["STATUS_FINISHWORK"] = "Selamat pekerjaan work-$id telah selesai 🎉";
+            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+            return exit();
+        }
+
+        public function WorkDelDB($email, $id){
+            $this->initDBRoute();
+            $email = Security::StringDB($this->ConnDB, $email);
+            $Query = mysqli_query($this->ConnDB, "DELETE FROM " . WORK_USER_DB . " WHERE work_host='$email' AND id='$id'");
+            if(!$Query){ echo "<script>alert('Terjadi galat pada server')</script>";}
+            $_SESSION["STATUS_DELWORK"] = "Berhasil menghapus pekerjaan work-$id 👍";
+            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work");
+            return exit();
+        }
+
+        public function PartnerSearchDB($email, $search){
+            $this->initDBRoute();
+            $email = Security::StringDB($this->ConnDB, $email); $search = Security::StringDB($this->ConnDB, $search);
+            $SearchData = " WHERE work_host LIKE '%$search%' OR work_name LIKE '%$search%' OR work_field LIKE '%$search%' OR work_salary LIKE '%$search%' AND work_status='0'";
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . $SearchData);
+        }
 
         public function FetchPortoUserDB($email){
             $this->initDBRoute();

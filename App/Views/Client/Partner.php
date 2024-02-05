@@ -20,57 +20,30 @@
         <?php CallFileApp::RequireOnceData("Views/Client/Templates/RoutesPage.php", "Mitra") ?>
         <!-- End of Routes Page Section -->
 
-        <!-- List Section -->
-        <section id="list-work" class="mt-2">
-            <div class="container">
-                <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
-                    <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Daftar Pekerjaan&nbsp;</p>
-                    <div class="relative w-full mt-1 overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Penerima
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Waktu
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Deskripsi
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Aksi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        Apple MacBook Pro 17"
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Silver
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Laptop
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <?php if(($Data2->data_paymentstatus == 0) && empty($Data3->data->address->street)): ?>
+            <setion class="mt-2">
+                <div class="container">
+                    <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
+                        <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Peringatan&nbsp;</p>
+                        <p class="w-full text-center font-semibold my-2">Segera lengkapi data anda 🖐😄</p>
+                        <div class="w-full">
+                            <?php if($Data2->data_paymentstatus == 0): ?>
+                            <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "dashboard" ?>"><button class="text-sm md:text-base rounded-full text-center w-full border py-1 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Tambahkan Data Pembayaran Anda</button></a>
+                            <?php endif ?>
+                            <?php if(empty($Data3->data->address->street)): ?>
+                            <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "account" ?>"><button class="text-sm md:text-base rounded-full mt-2 text-center w-full border py-1 duration-150 ease-in-out hover:text-primary hover:shadow-md hover:bg-secondary">Lengkapi Data Alamat Anda</button></a>
+                            <?php endif ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </setion>
+        <?php else : ?>
+
+        <section id="list-partner">
+            
         </section>
-        <!-- End of List Section -->
+
+        <?php endif ?>
     </main>
         
     <!-- Navbar Bottom -->
