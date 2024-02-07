@@ -11,10 +11,16 @@
         $Data1 = (object) $Site->Seo(); // SEO Website
         $Data2 = (object) $UserDB->FetchUserDataDB($email);   // Fetch Data from DB
         $Data3 = $UserAPI->FetchUserDataAPI($Data2->data_username, $Data2->data_apikey); // Fetch Data from API
+        $Data4 = $UserDB->PartnerRequestDB($Data2->data_email);
+
+        if(isset($_POST["delete-req"])){
+            $workid = ltrim($_POST["id"], "work-");
+            $UserDB->PartnerRequestDelDB($Data2->data_email, $workid);
+        }
 
         // Routes Partner
         if(($_SERVER["REQUEST_URI"] === BASE_URI."partner") || ($_SERVER["REQUEST_URI"] === BASE_URI."partner/")){
-            CallFileApp::RequireOnceData3('Views/Client/Partner.php', $Data1, $Data2, $Data3);
+            CallFileApp::RequireOnceData4('Views/Client/Partner.php', $Data1, $Data2, $Data3, $Data4);
         }
 
         

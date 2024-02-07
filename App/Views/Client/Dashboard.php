@@ -65,7 +65,7 @@
                     <div class="w-2/3 px-1 py-2 rounded-lg border mr-1">
                         <form action="" method="post" class="w-full flex flex-warp">
                             <input type="search" name="work"  <?php if(isset($_POST["search"])){ echo "name='{$_POST["work"]}'"; } ?> class="text-sm md:text-base w-2/3 rounded-l-full px-4" placeholder="Cari Mitra Kerja" autofocus autocomplete="off">
-                            <button type="submit" name=search class="text-sm md:text-base w-1/3 rounded-r-full border text-center duration-300 ease-in-out hover:bg-secondary hover:text-primary">Cari</button>
+                            <button type="submit" name="search" class="text-sm md:text-base w-1/3 rounded-r-full border text-center duration-300 ease-in-out hover:bg-secondary hover:text-primary">Cari</button>
                         </form>
                     </div>
                     <div class="w-1/3 px-1 py-2 rounded-lg border">
@@ -76,17 +76,17 @@
         </section>
         <!-- End of Search Work Section -->
         
-        <?php if(isset($_POST["search"]) && isset($Data6)): ?>
+        <?php if(isset($_POST["search"]) && isset($Data7)): ?>
         <!-- Search Result Section -->
         <section id="search-work" class="mt-2">
             <div class="container">
                 <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
                     <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Mencari : <?php echo $_POST["work"] ?>&nbsp;</p>
-                    <?php if(mysqli_num_rows($Data6) == 0): ?>
+                    <?php if(mysqli_num_rows($Data7) == 0): ?>
                     <p class="w-full py-4 text-center font-semibold text-sm md:text-base">Maaf kata kunci yang anda cari tidak ada 😥</p>
                     <?php else: ?>
                     <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-                        <?php CallFileApp::RequireOnceData3("Views/Client/Templates/Part/SearchCardWork.php", $Data3, $Data4, $Data6) ?>
+                        <?php CallFileApp::RequireOnceData4("Views/Client/Templates/Part/SearchCardWork.php", $Data3, $Data4, $Data6, $Data7) ?>
                     </div>
                     <?php endif ?>
                 </div>

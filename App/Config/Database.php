@@ -39,4 +39,4 @@
     define("DATA_USER_DB", "user_data");
     define("WORK_USER_DB", "user_work");
     define("PORTO_USER_DB", "user_porto");
-    define("REQWORK_USER_DB", "user_reqwork");
+    define("PARTNER_USER_DB", "user_partner");

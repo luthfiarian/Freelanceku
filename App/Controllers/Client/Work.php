@@ -121,6 +121,22 @@ use Random\Engine\Secure;
             $id = ltrim($_POST["id"], "work-");
             $UserDB->WorkFinishDB($Data2->data_email, $id);
         }
+        // Reject Partner Request
+        else if(isset($_POST["reject-partner"])){
+            $id = $_POST["id"]; $name = $_POST["name"];
+            $UserDB->WorkRejectPartnerDB($id, $name);
+        }
+        // Accept Partner Request
+        else if(isset($_POST["accept-partner"])){
+            $id = $_POST["id"]; $email = $_POST["email"]; $maxuser = 1 + $_POST["maxuser"];
+            if($_POST["partner"] == $maxuser){
+                $_SESSION["STATUS_ERR_ADDWORK"] = "Mitra yang anda terima telah mencapai batas maksimal mohon pengertiannya 🙏";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                exit(); 
+            }else{
+                $UserDB->WorkAcceptPartnerDB($id, $email, $Data2->data_email, $_SESSION["WORK_DETAIL"], $_POST["partner"]);
+            }
+        }
 
         // Detail id Work to Session
         if(isset($_POST["work-detail"])){
@@ -141,7 +157,9 @@ use Random\Engine\Secure;
             if(isset($_SESSION["WORK_DETAIL"])){
                 $Data5 = $UserDB->WorkDetailDB($Data2->data_email, $_SESSION["WORK_DETAIL"]);
                 if(mysqli_num_rows($Data5) == 1){
-                    CallFileApp::RequireOnceData4('Views/Client/WorkDetail.php', $Data1, $Data2, $Data3, (object) mysqli_fetch_assoc($Data5));
+                    $Data5 = (object) mysqli_fetch_assoc($Data5);
+                    $Data6 = $UserDB->WorkPartnerRequestDB($_SESSION["WORK_DETAIL"], "0");
+                    CallFileApp::RequireOnceData6("Views/Client/WorkDetail.php", $Data1, $Data2, $Data3, $Data5, $Data6, $UserDB);
                 }else{
                     CallFileApp::RequireOnce("Views/Error/NonGranted.php");
                 }

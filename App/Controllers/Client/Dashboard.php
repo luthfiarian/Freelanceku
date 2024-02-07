@@ -13,7 +13,7 @@
         $Data3 = (object) $UserDB->FetchUserDataDB($email);   // Fetch Data from DB
         $Data4 = $UserAPI->FetchUserDataAPI($Data3->data_username, $Data3->data_apikey); // Fetch Data from API
         $Data5 = $UserDB->WorkHistoryDB($Data3->data_email); // Fetch Data Work History
-        
+
         // Add Payment Gateway
         if(isset($_POST["addpayment"])){
             CallFile::RequireOnce("Libs/Security.php");
@@ -25,9 +25,11 @@
         else if(isset($_POST["search"])){
             if(($Data3->data_paymentstatus == 1) && !empty($Data4->data->address->street)){
                 $work = $_POST["work"];
-                $Data6 = $UserDB->PartnerSearchDB($Data3->data_email, $work);
 
-                CallFileApp::RequireOnceData6('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5, $Data6);
+                $Data6 = $UserDB->FetchPortoUserDB($email);  // Fetch Data Porto from DB
+                $Data7 = $UserDB->PartnerSearchDB($Data3->data_email, $work);
+
+                CallFileApp::RequireOnceData7('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5, $Data6, $Data7);
             }else{
                 if($Data3->data_paymentstatus == 0){
                     $_SESSION["STATUS_ERR_SEARCH"] = "Mohon lengkapi pembayaran";
@@ -41,7 +43,16 @@
                     }
                 }
             }
-        }else{
+        }
+        // Request Partner
+        else if(isset($_POST["request-partner"])){
+            $email = $Data3->data_email; $workid = ltrim($_POST["id"], "work-");
+            $name = $Data4->data->identity->first_name . " " . $Data4->data->identity->last_name;
+            $phone = $Data4->data->identity->phone; $message = !empty($_POST["message"]) ? $_POST["message"] : NULL;
+
+            $UserDB->PartnerRequestJoinDB($email, $name, $workid, $phone, $message);
+        }
+        else{
             CallFileApp::RequireOnceData5('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5);
         }
     }else{

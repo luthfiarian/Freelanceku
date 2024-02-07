@@ -156,6 +156,37 @@
             }
         }
         
+        public function WorkPartnerRequestDB($workid, $status){
+            $this->initDBRoute();
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_workid='$workid' AND partner_reqstatus='$status' AND partner_reqmessage='Proses'");
+        }
+        
+        public function WorkAcceptPartnerDB($id, $emailpartner, $emailhost, $workid, $partner){
+            $this->initDBRoute();
+            $emailpartner = Security::StringDB($this->ConnDB, $emailpartner);
+            $QueryWork = mysqli_query($this->ConnDB, "UPDATE " . WORK_USER_DB . " SET work_partner$partner='$emailpartner' WHERE work_host='$emailhost' AND id='$workid'");
+            $QueryPartner = mysqli_query($this->ConnDB, "UPDATE " . PARTNER_USER_DB . " SET partner_reqstatus='1', partner_reqmessage='Disetujui' WHERE id='$id' AND partner_email='$emailpartner'");
+            if($QueryWork && $QueryPartner){
+                $_SESSION["STATUS_REQWORK"] = "Berhasil menambah mitra, selamat bekerja 😄";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                return exit();
+            }
+        }
+
+        public function WorkPartnerDetailDB($workid, $email){
+            $this->initDBRoute();
+            return mysqli_fetch_assoc(mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_workid='$workid' AND partner_email='$email'"));
+        }
+
+        public function WorkRejectPartnerDB($id, $name){
+            $this->initDBRoute(); 
+            $Query = mysqli_query($this->ConnDB, "UPDATE " . PARTNER_USER_DB . " SET partner_reqmessage='Ditolak' WHERE id='$id'");
+            if(!$Query){$_SESSION["STATUS_ERR_REQWORK"] = "Terjadi Galat Pada Server ❌";}
+            $_SESSION["STATUS_REQWORK"] = "Anda berhasil menolak lamaran $name 😥";
+            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+            return exit();
+        }
+
         public function WorkFinishDB($email, $id){
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email);
@@ -176,11 +207,55 @@
             return exit();
         }
 
+        public function PartnerRequestDB ($email){
+            $this->initDBRoute();
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_email='$email' AND partner_reqstatus='0'");
+        }
+
         public function PartnerSearchDB($email, $search){
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email); $search = Security::StringDB($this->ConnDB, $search);
             $SearchData = " WHERE work_host LIKE '%$search%' OR work_name LIKE '%$search%' OR work_field LIKE '%$search%' OR work_salary LIKE '%$search%' AND work_status='0'";
             return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . $SearchData);
+        }
+
+        public function PartnerRequestJoinDB($email, $name, $workid, $phone, $message){
+            $this->initDBRoute();
+            $email = Security::StringDB($this->ConnDB, $email); $workid = Security::StringDB($this->ConnDB, $workid);
+            $name = Security::StringDB($this->ConnDB, $name);  $phone = Security::StringDB($this->ConnDB, $phone);
+            $message = Security::StringDB($this->ConnDB, $message); $date = date("d-m-Y");
+
+            $PartnerData = "('$workid', '0', '$date', '$name', '$email', '$phone', '$message', 'Proses')";
+            if(mysqli_num_rows(mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_email='$email' AND partner_workid='$workid'")) == 0){
+                $Query = mysqli_query($this->ConnDB, "INSERT INTO " . PARTNER_USER_DB . " (partner_workid, partner_reqstatus, partner_date, partner_name, partner_email, partner_phone, partner_message, partner_reqmessage) VALUES " . $PartnerData );
+                if($Query){
+                    $_SESSION["STATUS_REQWORK"] = "Anda berhasil melamar ke proyek #work-$workid, mohon tunggu balasan dari pemilik proyek 😄";
+                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "dashboard");
+                    return exit();
+                }else{
+                    $_SESSION["STATUS_ERR_REQWORK"] = "Terjadi galat pada server ❌";
+                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "dashboard");
+                    return exit();
+                }
+            }else{
+                $_SESSION["STATUS_ERR_REQWORK"] = "Anda telah melamar pada proyek #work-$workid, mohon tunggu balasan pemilik proyek 😥";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "dashboard");
+                return exit();
+            }
+        }
+
+        public function PartnerRequestDelDB($email, $workid){
+            $this->initDBRoute();
+            $Query = mysqli_query($this->ConnDB, "DELETE FROM " . PARTNER_USER_DB . " WHERE partner_email='$email' AND partner_workid='$workid'");
+            if($Query){
+                $_SESSION["STATUS_REQWORK"] = "Anda telah menghapus lamaran ke proyek #work-$workid 😥";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "partner");
+                return exit();
+            }else{
+                $_SESSION["STATUS_ERR_REQWORK"] = "Terjadi galat pada server ❌";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "partner");
+                return exit();
+            }
         }
 
         public function FetchPortoUserDB($email){

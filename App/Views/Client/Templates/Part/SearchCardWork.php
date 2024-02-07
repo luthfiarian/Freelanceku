@@ -1,4 +1,4 @@
-<?php while($Work = mysqli_fetch_assoc($Data3)): ?>
+<?php while($Work = mysqli_fetch_assoc($Data4)): ?>
 
 <?php 
     $Self = false;
@@ -70,7 +70,7 @@
 <?php if(!$Self): ?>
 <!-- Modal Search Result work-<?php echo $Work["id"] ?> -->
 <div id="data-<?php echo $Work["id"] ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-lg max-h-full">
+    <div class="relative p-4 w-full max-w-xl max-h-full">
         <!-- Modal Search Result work-<?php echo $Work["id"] ?> content -->
         <div class="relative bg-primary rounded-lg shadow">
             <!-- Modal Search Result work-<?php echo $Work["id"] ?> header -->
@@ -104,14 +104,39 @@
                         </p>
                     </div>
                 </div>
+                <p class="w-full block my-2 text-sm font-medium text-gray-900">Daftar Portofolio</p>
+                <div class="w-full mb-1 p-2 border rounded-lg relative flex flex-warp overflow-x-auto">
+                    <?php if(mysqli_num_rows($Data3) == 0): ?>
+                    <div class="w-full">
+                        <p class="w-full py-2 text-center font-semibold">Terlihat Tidak ada Portofolio Anda Disini 👀</p>
+                        <div class="w-full flex">
+                            <a href="<?php echo PROTOCOL_URL . "://" . BASE_URI . "account" ?>" class="mx-auto"><button class="mx-auto text-center py-2 px-4 border rounded-lg transition duration-300 ease-in-out hover:bg-secondary">Tambahkan Portofolio Anda</button></a>
+                        </div>
+                    </div>
+
+                    <?php else: ?>
+                    <?php while($Porto = mysqli_fetch_assoc($Data3)): ?>
+                    <!-- Data Portofolio -->
+                    <div class="py-1 px-2 mr-1 border rounded-lg w-auto h-auto mb-1 ease-in-out transition duration-150 hover:shadow-md">
+                        <p class="w-full font-semibold text-sm text-center"><?php echo $Porto["porto_name"] ?></p>
+                        <p class="w-full text-center text-sm"><?php echo $Porto["porto_field"] ?></p>
+                        <p class="w-full text-center mb-2"><?php echo date("Y", strtotime($Porto["porto_date"])) ?></p>
+                        <a href="<?php echo BASE_URI . $Porto["porto_file"] ?>">
+                            <button class="w-full rounded-lg bg-red-500 flex p-1 text-primary">
+                                <svg width="25px" height="25px" class="fill-current" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>pdf-document</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="add" fill="#000000" transform="translate(85.333333, 42.666667)"> <path d="M75.9466667,285.653333 C63.8764997,278.292415 49.6246897,275.351565 35.6266667,277.333333 L1.42108547e-14,277.333333 L1.42108547e-14,405.333333 L28.3733333,405.333333 L28.3733333,356.48 L40.5333333,356.48 C53.1304778,357.774244 65.7885986,354.68506 76.3733333,347.733333 C85.3576891,340.027178 90.3112817,328.626053 89.8133333,316.8 C90.4784904,304.790173 85.3164923,293.195531 75.9466667,285.653333 L75.9466667,285.653333 Z M53.12,332.373333 C47.7608867,334.732281 41.8687051,335.616108 36.0533333,334.933333 L27.7333333,334.933333 L27.7333333,298.666667 L36.0533333,298.666667 C42.094796,298.02451 48.1897668,299.213772 53.5466667,302.08 C58.5355805,305.554646 61.3626692,311.370371 61.0133333,317.44 C61.6596233,323.558965 58.5400493,329.460862 53.12,332.373333 L53.12,332.373333 Z M150.826667,277.333333 L115.413333,277.333333 L115.413333,405.333333 L149.333333,405.333333 C166.620091,407.02483 184.027709,403.691457 199.466667,395.733333 C216.454713,383.072462 225.530463,362.408923 223.36,341.333333 C224.631644,323.277677 218.198313,305.527884 205.653333,292.48 C190.157107,280.265923 170.395302,274.806436 150.826667,277.333333 L150.826667,277.333333 Z M178.986667,376.32 C170.098963,381.315719 159.922142,383.54422 149.76,382.72 L144.213333,382.72 L144.213333,299.946667 L149.333333,299.946667 C167.253333,299.946667 174.293333,301.653333 181.333333,308.053333 C189.877212,316.948755 194.28973,329.025119 193.493333,341.333333 C194.590843,354.653818 189.18793,367.684372 178.986667,376.32 L178.986667,376.32 Z M254.506667,405.333333 L283.306667,405.333333 L283.306667,351.786667 L341.333333,351.786667 L341.333333,329.173333 L283.306667,329.173333 L283.306667,299.946667 L341.333333,299.946667 L341.333333,277.333333 L254.506667,277.333333 L254.506667,405.333333 L254.506667,405.333333 Z M234.666667,7.10542736e-15 L9.52127266e-13,7.10542736e-15 L9.52127266e-13,234.666667 L42.6666667,234.666667 L42.6666667,192 L42.6666667,169.6 L42.6666667,42.6666667 L216.96,42.6666667 L298.666667,124.373333 L298.666667,169.6 L298.666667,192 L298.666667,234.666667 L341.333333,234.666667 L341.333333,106.666667 L234.666667,7.10542736e-15 L234.666667,7.10542736e-15 Z" id="document-pdf"> </path> </g> </g> </g></svg>
+                                <span class="text-xs self-center">Unduh Portofolio</span>
+                            </button>
+                        </a>
+                    </div>
+                    <!-- Data Portofolio -->
+                    <?php endwhile ?>
+                    <?php endif ?>
+                </div>
                 <form action="" method="post">
-                    <input type="hidden" name="workid" value="work-<?php echo $Work["id"] ?>">
-                    <input type="hidden" name="name" value="<?php echo $Data2->data->identity->first_name . " " . $Data2->data->identity->last_name ?>">
-                    <input type="hidden" name="email" value="<?php echo $Data1->data_email ?>">
-                    <input type="hidden" name="phone" value="<?php echo $Data2->data->identity->phone ?>">
+                    <input type="hidden" name="id" value="work-<?php echo $Work["id"] ?>">
                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Berikan Pesan</label>
                     <textarea name="message" id="message" rows="1" class="w-full resize-y py-2 px-4 rounded-lg" placeholder="Apakah saya dapat bergabung dalam proyek anda ? 😄"></textarea>
-                    <button name="request-work" type="submit" class="w-full text-primary bg-secondary hover:bg-third focus:ring-4 focus:outline-none focus:ring-secondary font-medium rounded-lg text-sm px-5 py-2.5 text-center">Permohonan Bergabung</button>
+                    <button name="request-partner" type="submit" class="w-full text-primary bg-secondary hover:bg-third focus:ring-4 focus:outline-none focus:ring-secondary font-medium rounded-lg text-sm px-5 py-2.5 text-center">Permohonan Bergabung</button>
                 </form>
             </div>
         </div>

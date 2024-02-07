@@ -95,7 +95,17 @@
                     <div class="w-full md:w-2/3 mr-1 pb-2 pt-4 px-4 rounded-lg relative border h-auto">
                         <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Mitra Pekerjaan&nbsp;</p>
                         <?php if (!empty($Data4->work_partner1) || !empty($Data4->work_partner2) || !empty($Data4->work_partner3)) : ?>
-
+                            <?php 
+                                if(!empty($Data4->work_partner1)){
+                                    CallFileApp::RequireOnceData("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data6->WorkPartnerDetailDB($Data4->id, $Data4->work_partner1));
+                                }
+                                if(!empty($Data4->work_partner2)){
+                                    CallFileApp::RequireOnceData("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data6->WorkPartnerDetailDB($Data4->id, $Data4->work_partner2));
+                                }
+                                if(!empty($Data4->work_partner3)){
+                                    CallFileApp::RequireOnceData("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data6->WorkPartnerDetailDB($Data4->id, $Data4->work_partner2));
+                                }
+                            ?>
                         <?php else : ?>
                             <p class="w-full text-center py-2 text-base md:text-lg">Belum ada mitra 👨‍🔧</p>
                         <?php endif ?>
@@ -103,8 +113,12 @@
                     <!-- Partner Request -->
                     <div class="w-full md:w-1/3 pb-2 pt-4 px-4 rounded-lg relative border h-auto">
                         <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Permintaan Mitra&nbsp;</p>
-                        <?php if (!empty($Data4->work_partner1) || !empty($Data4->work_partner2) || !empty($Data4->work_partner3)) : ?>
-
+                        <?php if (mysqli_num_rows($Data5) != 0) : ?>
+                            <div class="w-full h-52 overflow-y-auto">
+                                <?php while($WorkReq = mysqli_fetch_assoc($Data5)): ?>
+                                <?php CallFileApp::RequireOnceData3("Views/Client/Templates/Part/WorkDetailRequest.php", (object) $WorkReq, $Data6, $Data4) ?>
+                                <?php endwhile ?>
+                            </div>
                         <?php else : ?>
                             <p class="w-full text-center py-2 text-base md:text-lg">Belum ada mitra 👨‍🔧</p>
                         <?php endif ?>
