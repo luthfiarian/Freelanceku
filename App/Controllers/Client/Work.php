@@ -137,6 +137,10 @@ use Random\Engine\Secure;
                 $UserDB->WorkAcceptPartnerDB($id, $email, $Data2->data_email, $_SESSION["WORK_DETAIL"], $_POST["partner"]);
             }
         }
+        // Add Message for Partner
+        else if(isset($_POST["add-message"])){
+            $UserDB->WorkAddMessagePartnerDB($_POST["id"], $_POST["name"], $_POST["message"]);
+        }
 
         // Detail id Work to Session
         if(isset($_POST["work-detail"])){
@@ -154,12 +158,18 @@ use Random\Engine\Secure;
 
         // Routes to Detail Work Page
         if((($_SERVER["REQUEST_URI"] === BASE_URI."work/detail") || ($_SERVER["REQUEST_URI"] === BASE_URI."work/detail/"))){
+            // Check ID of Work
             if(isset($_SESSION["WORK_DETAIL"])){
-                $Data5 = $UserDB->WorkDetailDB($Data2->data_email, $_SESSION["WORK_DETAIL"]);
-                if(mysqli_num_rows($Data5) == 1){
-                    $Data5 = (object) mysqli_fetch_assoc($Data5);
-                    $Data6 = $UserDB->WorkPartnerRequestDB($_SESSION["WORK_DETAIL"], "0");
-                    CallFileApp::RequireOnceData6("Views/Client/WorkDetail.php", $Data1, $Data2, $Data3, $Data5, $Data6, $UserDB);
+                $Data4 = $UserDB->WorkDetailDB($Data2->data_email, $_SESSION["WORK_DETAIL"]);
+                // Work must be 1 on DB
+                if(mysqli_num_rows($Data4) == 1){
+                    $Data4 = (object) mysqli_fetch_assoc($Data4);
+
+                    if(isset($_POST["transfer"])){
+                        define("TOKEN_TRX_NOW", $UserAPI->TokenTrxAPI($Data4->work_salary, $_SESSION["WORK_DETAIL"], $Data3->data->identity->first_name, $Data3->data->identity->last_name, $Data2->data_email, $_POST["email-partner"], $Data3->data->identity->phone));
+                    }
+
+                    CallFileApp::RequireOnceData5("Views/Client/WorkDetail.php", $Data1, $Data2, $Data3, $Data4, $UserDB);
                 }else{
                     CallFileApp::RequireOnce("Views/Error/NonGranted.php");
                 }

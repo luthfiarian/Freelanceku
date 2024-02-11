@@ -1,7 +1,8 @@
+<?php $PartnerData = json_decode($Data1->partner_data) ?>
 <div class="w-full flex flex-warp">
-    <div class="w-1/3 self-center text-center"><p class="text-sm font-semibold"><?php echo $Data1->partner_name?></p></div>
+    <div class="w-1/3 self-center text-center"><p class="text-sm font-semibold"><?php echo $PartnerData->first_name ?></p></div>
     <div class="w-1/3 flex"><button data-modal-target="data-<?php echo $Data1->id ?>" data-modal-toggle="data-<?php echo $Data1->id ?>" class="py-1 px-2 text-primary bg-secondary rounded-lg ease-in-out duration-300 transition hover:bg-opacity-80">Detail</button></div>
-    <div class="w-1/3 flex"><form action="" method="post"><input type="hidden" name="id" value="<?php echo $Data1->id ?>"><input type="hidden" name="name" value="<?php echo $Data1->partner_name?>"><button name="reject-partner" type="submit" class="py-1 px-2 text-primary bg-red-500 rounded-lg ease-in-out duration-300 transition hover:bg-opacity-80">Tolak</button></form></div>
+    <div class="w-1/3 flex"><form action="" method="post"><input type="hidden" name="id" value="<?php echo $Data1->id ?>"><input type="hidden" name="name" value="<?php echo $PartnerData->first_name ?>"><button name="reject-partner" type="submit" class="py-1 px-2 text-primary bg-red-500 rounded-lg ease-in-out duration-300 transition hover:bg-opacity-80">Tolak</button></form></div>
 </div>
 <!-- Modal Partner Request -->
 <div id="data-<?php echo $Data1->id ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -10,7 +11,7 @@
         <div class="relative bg-primary rounded-lg shadow">
             <!-- Modal Partner Request header -->
             <div class="flex items-center justify-between p-4 md:p-5 rounded-t">
-                <h3 class="text-xl font-semibold text-gray-900 hover:underline"><?php echo $Data1->partner_name?></h3>
+                <h3 class="text-xl font-semibold text-gray-900 hover:underline"><?php echo $PartnerData->first_name ?></h3>
                 <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="data-<?php echo $Data1->id ?>">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -21,13 +22,26 @@
             <!-- Modal Partner Request body -->
             <div class="p-4 md:p-5">
                 <p class="w-full">Data Diri Pelamar</p>
-                <div class="w-full p-2 border rounded-lg">
-                    <p class="text-justify">
-                        Nama Lengkap : <?php echo $Data1->partner_name ?><br>
-                        Tanggal Melamar : <?php echo $Data1->partner_date ?><br>
-                        Pesan : <br>
-                        <?php echo $Data1->partner_message ?><br>
-                    </p>
+                <div class="w-full flex flex-warp">
+                    <div class="w-1/2 border rounded-lg mr-1">
+                        <table class="table table-auto w-full text-sm">
+                            <tr>
+                                <td><strong>Nama</strong></td><td>:</td><td><?php echo $PartnerData->first_name . ' ' . $PartnerData->last_name ?></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lokasi</strong></td><td>:</td><td><?php echo $PartnerData->address ?></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Deskripsi</strong></td><td>:</td><td><?php echo $PartnerData->description ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-full border rounded-lg"><?php echo $Data1->partner_date ?></div>
+                        <div class="w-full border rounded-lg mt-1 max-h-full">
+                            <p>Pesan:<br><?php echo $Data1->partner_message ?></p>
+                        </div>
+                    </div>
                 </div>
                 <p class="w-full">Portofolio Pelamar</p>
                 <div class="w-full mb-1 p-2 border rounded-lg relative flex flex-warp overflow-x-auto">
@@ -58,8 +72,8 @@
                     <?php endif ?>
                 </div>
                 <div class="w-full flex flex-warp mt-1">
-                    <a href="https://wa.me/<?php echo $Data1->partner_phone ?>" target="_blank" rel="noopener noreferrer" class="w-1/2 mr-1">
-                        <button class="w-full flex flex-warp py-2 rounded-lg bg-forth self-center text-primary text-center ease-in-out duration-300 transition hover:bg-opacity-80">
+                    <a href="https://wa.me/<?php echo $PartnerData->phone ?>" target="_blank" rel="noopener noreferrer" class="w-1/2 mr-1">
+                        <button class="w-full flex flex-warp py-2 rounded-lg border self-center text-center ease-in-out duration-300 transition hover:bg-black hover:text-primary">
                             <div class="w-1/2 mx-auto flex">
                                 <svg role="img" class="fill-current text-[#25D366] !w-[25px] !h-[25px] mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>WhatsApp</title><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                                 <span>Whatsapp</span>
@@ -67,7 +81,7 @@
                         </button>
                     </a>
                     <a href="mailto:<?php echo $Data1->partner_email ?>" class="w-1/2">
-                        <button class="w-full flex flex-warp py-2 rounded-lg bg-third self-center text-primary text-center ease-in-out duration-300 transition hover:bg-opacity-80">
+                        <button class="w-full flex flex-warp py-2 rounded-lg border self-center text-center ease-in-out duration-300 transition hover:bg-black hover:text-primary">
                             <div class="w-1/2 mx-auto flex">
                                 <svg role="img" class="fill-current text-[#ff6153] !w-[25px] !h-[25px] mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Gmail</title><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
                                 <span>Email</span>

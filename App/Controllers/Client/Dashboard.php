@@ -1,4 +1,7 @@
 <?php
+    // Search Work from Home
+    if(isset($_SESSION["SEARCH"])){ $_POST += array( "search" => "" , "work" => $_SESSION["SEARCH"]); }
+    
     if(isset($_SESSION["fk-session"]) && isset($_COOKIE["API-COOKIE"])){
         $email = ltrim($_SESSION["fk-session"], "fk-FFFFFF-");
 
@@ -47,10 +50,17 @@
         // Request Partner
         else if(isset($_POST["request-partner"])){
             $email = $Data3->data_email; $workid = ltrim($_POST["id"], "work-");
-            $name = $Data4->data->identity->first_name . " " . $Data4->data->identity->last_name;
-            $phone = $Data4->data->identity->phone; $message = !empty($_POST["message"]) ? $_POST["message"] : NULL;
+            $message = !empty($_POST["message"]) ? $_POST["message"] : NULL;
 
-            $UserDB->PartnerRequestJoinDB($email, $name, $workid, $phone, $message);
+            $ReqData = array(
+                "first_name"    => $Data4->data->identity->first_name,
+                "last_name"     => $Data4->data->identity->last_name,
+                "description"   => $Data4->data->identity->description,
+                "phone"         => $Data4->data->identity->phone,
+                "address"       => $Data4->data->address->city . ', ' . $Data4->data->address->province . ', ' . $Data4->data->address->country
+            );
+
+            $UserDB->PartnerRequestJoinDB($email, $workid, $message, json_encode($ReqData),);
         }
         else{
             CallFileApp::RequireOnceData5('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5);

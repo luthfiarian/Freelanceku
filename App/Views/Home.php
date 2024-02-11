@@ -83,7 +83,7 @@
         <!-- End of Present Section -->
 
         <!-- Search Section -->
-        <?php  if(isset($_GET['category'])){ CallFileApp::RequireOnce('Views/Templates/Part/Search.php'); } ?>
+        <?php  if(isset($_GET['category'])){ CallFileApp::RequireOnceData('Views/Templates/Part/Search.php', $Data3); } ?>
         <!-- End of Search Section -->
 
         <!-- About Section -->

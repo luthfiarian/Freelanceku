@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2024 at 04:46 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Waktu pembuatan: 11 Feb 2024 pada 19.07
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_data`
+-- Struktur dari tabel `user_data`
 --
 
 CREATE TABLE `user_data` (
@@ -42,28 +42,25 @@ CREATE TABLE `user_data` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_partner`
+-- Struktur dari tabel `user_partner`
 --
 
 CREATE TABLE `user_partner` (
   `id` int(11) NOT NULL,
-  `partner_workid` int(11) NOT NULL,
-  `partner_reqstatus` int(1) NOT NULL,
-  `partner_reqmessage` varchar(255) NOT NULL,
-  `partner_date` varchar(200) NOT NULL,
-  `partner_name` varchar(255) NOT NULL,
   `partner_email` varchar(255) NOT NULL,
-  `partner_phone` varchar(20) NOT NULL,
+  `partner_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`partner_data`)),
+  `partner_workid` int(11) NOT NULL,
+  `partner_reqstatus` int(2) NOT NULL,
+  `partner_date` varchar(200) NOT NULL,
   `partner_message` longtext DEFAULT NULL,
   `partner_revmessage` longtext NOT NULL,
-  `partner_file` longtext DEFAULT NULL,
-  `partner_revfile` longtext DEFAULT NULL
+  `partner_file` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_porto`
+-- Struktur dari tabel `user_porto`
 --
 
 CREATE TABLE `user_porto` (
@@ -78,7 +75,7 @@ CREATE TABLE `user_porto` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_work`
+-- Struktur dari tabel `user_work`
 --
 
 CREATE TABLE `user_work` (
@@ -95,8 +92,7 @@ CREATE TABLE `user_work` (
   `work_partner3` varchar(255) NOT NULL,
   `work_startdate` varchar(255) NOT NULL,
   `work_finishdate` varchar(255) NOT NULL,
-  `work_image` varchar(255) NOT NULL,
-  `work_files` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+  `work_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -104,53 +100,53 @@ CREATE TABLE `user_work` (
 --
 
 --
--- Indexes for table `user_data`
+-- Indeks untuk tabel `user_data`
 --
 ALTER TABLE `user_data`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_partner`
+-- Indeks untuk tabel `user_partner`
 --
 ALTER TABLE `user_partner`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_porto`
+-- Indeks untuk tabel `user_porto`
 --
 ALTER TABLE `user_porto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_work`
+-- Indeks untuk tabel `user_work`
 --
 ALTER TABLE `user_work`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `user_data`
+-- AUTO_INCREMENT untuk tabel `user_data`
 --
 ALTER TABLE `user_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_partner`
+-- AUTO_INCREMENT untuk tabel `user_partner`
 --
 ALTER TABLE `user_partner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_porto`
+-- AUTO_INCREMENT untuk tabel `user_porto`
 --
 ALTER TABLE `user_porto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_work`
+-- AUTO_INCREMENT untuk tabel `user_work`
 --
 ALTER TABLE `user_work`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

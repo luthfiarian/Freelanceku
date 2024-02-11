@@ -24,6 +24,36 @@
         <?php CallFileApp::RequireOnceData("Views/Client/Templates/RoutesPage.php", "Mitra") ?>
         <!-- End of Routes Page Section -->
 
+        <!-- List of Work  -->
+        <section class="mt-2">
+            <div class="container">
+                <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
+                    <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Daftar Pekerjaan&nbsp;</p>
+                    <?php if(mysqli_num_rows($Data6)): ?>
+                        <?php $i = 1; while($List = mysqli_fetch_assoc($Data6)): ?>
+                            <div class="w-full flex">
+                                <div class="w-8/12 py-2 border rounded-l-lg flex mr-1">
+                                    <p class="w-1/4 text-center"><?php echo $i ?></p>
+                                    <p class="w-1/4 text-center">Work-<?php echo $List["id"] ?></p>
+                                    <p class="w-1/4 text-center"><?php echo $List["work_name"] ?></p>
+                                    <p class="w-1/4 text-center"><?php echo date('d-m-Y', strtotime($List["work_finishdate"])) ?></p>
+                                </div>
+                                <form action="" method="post" class="w-4/12">
+                                    <input type="hidden" name="workid" value="workid-<?php echo $List["id"] ?>">
+                                    <button type="submit" name="work-detail" class="py-2 text-primary w-full rounded-r-lg bg-secondary ease-in-out duration-300 transition hover:bg-third">Selengkapnya</button>
+                                </form>
+                            </div>
+                        <?php endwhile ?>
+                    <?php else: ?>
+                    <div class="w-full">
+                        <p class="py-4 w-full text-center font-semibold">Terlihat tidak ada pekerjaan 👀</p>
+                    </div>
+                    <?php endif ?>
+                </div>
+            </div>
+        </section>
+        <!-- End of List Work -->
+
         <!-- Request Work Section -->
         <setion class="mt-2">
             <div class="container">

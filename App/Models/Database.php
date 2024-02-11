@@ -1,4 +1,7 @@
 <?php
+
+use Random\Engine\Secure;
+
     class Site{
         private $ConnDB;
 
@@ -19,6 +22,7 @@
 
         protected function initDBNonRoute(){
             CallFile::RequireOnce('../Config/Database.php');
+            CallFile::RequireOnce('../../Libs/Security.php');
             return $this->ConnDB = CONN_DB_USER;
         }
         protected function initDBRoute(){
@@ -59,6 +63,12 @@
                 $_SESSION["STATUS_UPDATE"] = "Data telah berhasil diubah 🎉";
                 return true;
             }
+        }
+
+        public function GlobalSearchWorkDB($Word){
+            $this->initDBRoute();
+            $Word = Security::StringDB($this->ConnDB, $Word);
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE work_name LIKE '%$Word%' OR work_field LIKE '%$Word%' AND work_status='0'");
         }
     }
 
@@ -158,14 +168,14 @@
         
         public function WorkPartnerRequestDB($workid, $status){
             $this->initDBRoute();
-            return mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_workid='$workid' AND partner_reqstatus='$status' AND partner_reqmessage='Proses'");
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_workid='$workid' AND partner_reqstatus='$status'");
         }
         
         public function WorkAcceptPartnerDB($id, $emailpartner, $emailhost, $workid, $partner){
             $this->initDBRoute();
             $emailpartner = Security::StringDB($this->ConnDB, $emailpartner);
             $QueryWork = mysqli_query($this->ConnDB, "UPDATE " . WORK_USER_DB . " SET work_partner$partner='$emailpartner' WHERE work_host='$emailhost' AND id='$workid'");
-            $QueryPartner = mysqli_query($this->ConnDB, "UPDATE " . PARTNER_USER_DB . " SET partner_reqstatus='1', partner_reqmessage='Disetujui' WHERE id='$id' AND partner_email='$emailpartner'");
+            $QueryPartner = mysqli_query($this->ConnDB, "UPDATE " . PARTNER_USER_DB . " SET partner_reqstatus=1 WHERE id='$id' AND partner_email='$emailpartner'");
             if($QueryWork && $QueryPartner){
                 $_SESSION["STATUS_REQWORK"] = "Berhasil menambah mitra, selamat bekerja 😄";
                 header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
@@ -180,9 +190,19 @@
 
         public function WorkRejectPartnerDB($id, $name){
             $this->initDBRoute(); 
-            $Query = mysqli_query($this->ConnDB, "UPDATE " . PARTNER_USER_DB . " SET partner_reqmessage='Ditolak' WHERE id='$id'");
+            $Query = mysqli_query($this->ConnDB, "UPDATE " . PARTNER_USER_DB . " SET partner_reqstatus=2 WHERE id='$id'");
             if(!$Query){$_SESSION["STATUS_ERR_REQWORK"] = "Terjadi Galat Pada Server ❌";}
             $_SESSION["STATUS_REQWORK"] = "Anda berhasil menolak lamaran $name 😥";
+            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+            return exit();
+        }
+
+        public function WorkAddMessagePartnerDB($id, $name,$message){
+            $this->initDBRoute();
+            $message = Security::StringDB($this->ConnDB, $message);
+            $Query = mysqli_query($this->ConnDB, "UPDATE " . PARTNER_USER_DB . " SET partner_revmessage='$message' WHERE id='$id'");
+            if(!$Query){$_SESSION["STATUS_ERR_UPDATEWORK"] = "Terjadi Galat Pada Server ❌";}
+            $_SESSION["STATUS_UPDATEWORK"] = "Anda berhasil memberi pesan kepada $name";
             header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
             return exit();
         }
@@ -213,21 +233,33 @@
         }
 
         public function PartnerSearchDB($email, $search){
-            $this->initDBRoute();
+            $this->initDBRoute(); if(isset($_SESSION["SEARCH"])){ unset($_SESSION["SEARCH"]); }
             $email = Security::StringDB($this->ConnDB, $email); $search = Security::StringDB($this->ConnDB, $search);
             $SearchData = " WHERE work_host LIKE '%$search%' OR work_name LIKE '%$search%' OR work_field LIKE '%$search%' OR work_salary LIKE '%$search%' AND work_status='0'";
             return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . $SearchData);
         }
 
-        public function PartnerRequestJoinDB($email, $name, $workid, $phone, $message){
+        // List of Partner Work
+        public function PartnerListWorkDB($email){
+            $this->initDBRoute();
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_email='$email'");
+        }
+
+        // 
+        public function PartnerWorkDetailDB($email){
+            $this->initDBRoute();
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE work_partner1='$email' OR work_partner2='$email' OR work_partner3='$email'");
+        }
+
+        // Partner Request for a Job
+        public function PartnerRequestJoinDB($email, $workid, $message, $data){
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email); $workid = Security::StringDB($this->ConnDB, $workid);
-            $name = Security::StringDB($this->ConnDB, $name);  $phone = Security::StringDB($this->ConnDB, $phone);
             $message = Security::StringDB($this->ConnDB, $message); $date = date("d-m-Y");
 
-            $PartnerData = "('$workid', '0', '$date', '$name', '$email', '$phone', '$message', 'Proses')";
+            $PartnerData = "('$workid', '0', '$date', '$email', '$message', '$data')";
             if(mysqli_num_rows(mysqli_query($this->ConnDB, "SELECT * FROM " . PARTNER_USER_DB . " WHERE partner_email='$email' AND partner_workid='$workid'")) == 0){
-                $Query = mysqli_query($this->ConnDB, "INSERT INTO " . PARTNER_USER_DB . " (partner_workid, partner_reqstatus, partner_date, partner_name, partner_email, partner_phone, partner_message, partner_reqmessage) VALUES " . $PartnerData );
+                $Query = mysqli_query($this->ConnDB, "INSERT INTO " . PARTNER_USER_DB . " (partner_workid, partner_reqstatus, partner_date, partner_email, partner_message, partner_data) VALUES " . $PartnerData );
                 if($Query){
                     $_SESSION["STATUS_REQWORK"] = "Anda berhasil melamar ke proyek #work-$workid, mohon tunggu balasan dari pemilik proyek 😄";
                     header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "dashboard");
@@ -244,6 +276,7 @@
             }
         }
 
+        // Partner Delete Request a Job
         public function PartnerRequestDelDB($email, $workid){
             $this->initDBRoute();
             $Query = mysqli_query($this->ConnDB, "DELETE FROM " . PARTNER_USER_DB . " WHERE partner_email='$email' AND partner_workid='$workid'");
@@ -258,12 +291,14 @@
             }
         }
 
+        // Collect Data of Portofolio
         public function FetchPortoUserDB($email){
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email);
             return mysqli_query($this->ConnDB, "SELECT * FROM " . PORTO_USER_DB . " WHERE porto_user='$email'");
         }
 
+        // Add Portofolio
         public function AddPortoUserDB($email, $name, $date, $field, $file){
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email); $name = Security::StringDB($this->ConnDB, $name); $field = Security::StringDB($this->ConnDB, $field);
@@ -274,6 +309,7 @@
             return header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
         }
 
+        // Delete Portofolio
         public function DeletePortoUserDB($id, $file){
             $this->initDBRoute();
             if(unlink($file)){

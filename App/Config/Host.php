@@ -23,3 +23,18 @@
     define('CURRENT_URL', $CurentUrl);
     define('PROTOCOL_URL', $Protocol);
     define('STATUS_APP', $Status);
+
+    /**
+     * Midtrans Configuration
+     *  @Param $ServerKey
+     *  @Param $ClientKey
+     *  @Param $MerchantID
+     */
+  
+    $ServerKey  = "SB-Mid-server-pfOmHQiFZyebEPt9udatjSo0";
+    $ClientKey  = "SB-Mid-client-qMe0tQcBLfbQ9FHx";
+    $MerchantID = "G020968998";
+
+    define("TRX_SERVERKEY", $ServerKey);
+    define("TRX_CLIENTKEY", $ClientKey);
+    define("TRX_MERCHANTID", $MerchantID);

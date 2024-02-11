@@ -6,6 +6,7 @@
             CallFile::RequireOnce('../Config/Api.php');
             CallFile::RequireOnce('../Config/Host.php');
             CallFile::RequireOnce('../Models/Database.php');
+            CallFile::RequireOnce('../../Libs/Security.php');
             return true;
         }
         protected function initAPIRoute(){
@@ -15,6 +16,9 @@
             CallFile::RequireOnce('Libs/Security.php');
             return true;
         }
+        protected function initAPItrx(){
+            return CallFile::RequireOnce("vendor/midtrans/midtrans-php/Midtrans.php");
+        }
 
         // Signin User
         public function SigninAPI($email, $password){
@@ -22,8 +26,8 @@
             $this->initAPINonRoute();
             // Declare Array Assosiative for Signin
             $userSignin = array(
-                "email"     => $email,
-                "password"  => $password
+                "email"     => Security::String($email),
+                "password"  => Security::String($password)
             );
 
             // Process of Signin User to API
@@ -82,7 +86,7 @@
 
         public function DeleteUserAPI($email, $username, $apikey){
             $this->initAPIRoute();
-            $DeleteUser = array("username" => $username);
+            $DeleteUser = array("username" => Security::String($username));
             $curlInitDelUser   = curl_init(API_USER_SPECIAL . $username);
             curl_setopt($curlInitDelUser, CURLOPT_POST, true);
             curl_setopt($curlInitDelUser, CURLOPT_POSTFIELDS, json_encode($DeleteUser));
@@ -100,15 +104,14 @@
         public function UpdateDataUserAPI($apikey, $username, $first_name, $last_name, $phone, $description, $street, $city, $province, $country){
             $this->initAPIRoute();
             $UpdateDataUser = array(
-                "new_first_name"=> $first_name,
-                "new_last_name" => $last_name,
-                "new_username"  => $username,
-                "new_phone"     => $phone,
-                "new_street"    => $street,
-                "new_city"      => $city,
-                "new_province"  => $province,
-                "new_country"   => $country,
-                "new_description"=> $description,
+                "new_first_name"=> Security::String($first_name),
+                "new_last_name" => Security::String($last_name),
+                "new_phone"     => Security::String($phone),
+                "new_street"    => Security::String($street),
+                "new_city"      => Security::String($city),
+                "new_province"  => Security::String($province),
+                "new_country"   => Security::String($country),
+                "new_description"=> Security::String($description),
             );
             $curlInitUpdUser    = curl_init(API_USER_SPECIAL);
             $encodeUpdUser      = json_encode($UpdateDataUser);
@@ -126,11 +129,64 @@
                 return true;
             }else{
                 $_SESSION["STATUS_ERR_UPDATE"] = "Terjadi galat, mohon periksa kembali!";
+                exit();
                 return false;
             }
         }
-    }
 
+        public function SignoutAPI(): never{
+            $this->initAPIRoute();
+            $curlInitSignout    = curl_init(API_USER_SIGNOUT);
+            curl_setopt($curlInitSignout, CURLOPT_URL, API_USER_SIGNOUT);
+            curl_setopt($curlInitSignout, CURLOPT_RETURNTRANSFER, true);
+            $ResultSignout = curl_exec($curlInitSignout);
+            curl_close($curlInitSignout);
+            die;
+        }
+
+        public function TokenTrxAPI($Amount, $Workid, $first_name, $last_name, $email, $email_partner, $phone){
+            $this->initAPIRoute();
+            $this->initAPItrx();
+
+            \Midtrans\Config::$serverKey = TRX_SERVERKEY;
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = STATUS_APP ? false : true;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
+                    
+            $params = array(
+                'transaction_details'   => array(
+                    'order_id'          => 'work-' . $Workid . '-' . rand(9,999),
+                    'gross_amount'      => ($Amount * 11/100) + $Amount,
+                ),
+                'item_details'          => array(
+                    0                   => array(
+                        'id'            => 'work-' . $Workid . '-' . rand(9,999),
+                        'price'         => ($Amount * 11/100),
+                        'quantity'      => 1,
+                        'name'          => 'Pajak'
+                    ),
+                    1                   => array(
+                        'id'            => 'work-' . $Workid . '-' . rand(9,999),
+                        'price'         => $Amount,
+                        'quantity'      => 1,
+                        'name'          => $email_partner
+                    )     
+                ),
+                'customer_details'      => array(
+                    'first_name'        => $first_name,
+                    'last_name'         => $last_name,
+                    'email'             => $email,
+                    'phone'             => $phone,
+                ),
+            );
+            
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            return $snapToken;
+        }
+    }
     /**
      * Class For Register New Freelancer
      */
@@ -142,17 +198,17 @@
             $this->initAPINonRoute();
             // Create User API
             $userSignup = array(
-                "first_name"=>  $fname,
-                "last_name" =>  $lname,
-                "email"     =>  $email,
-                "username"  =>  $username,
-                "phone"     =>  $phone,
+                "first_name"=>  Security::String($fname),
+                "last_name" =>  Security::String($lname),
+                "email"     =>  Security::String($email),
+                "username"  =>  Security::String($username),
+                "phone"     =>  Security::String($phone),
                 "street"    =>  NULL,
                 "city"      =>  NULL,
                 "province"  =>  NULL,
                 "country"   =>  NULL,
-                "password"  =>  $password,
-                "description"=>NULL
+                "password"  =>  Security::String($password),
+                "description"=> NULL
             );
             
             // Process of Add User to API

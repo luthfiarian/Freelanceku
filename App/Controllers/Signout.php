@@ -1,10 +1,13 @@
 <?php
     if($_SESSION["fk-session"]){
+        CallFileApp::RequireOnce("Models/Api.php");
         setcookie("API-COOKIE", NULL, -1, "/");
         session_unset();
         session_destroy();
-        unset($_SESSION);
+        unset($_SESSION, $_COOKIE);
         header("Location: " . PROTOCOL_URL . "://" . BASE_URL);
+        $Signout = new MasterAPI; $Signout->SignoutAPI();
     }else{
-        CallFileApp::RequireOnce('Views/Error/NonGranted.php');
+        header("Location: " . PROTOCOL_URL . "://" . BASE_URL);
+        exit();
     }
