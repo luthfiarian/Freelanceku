@@ -137,7 +137,7 @@ https://tailwindcss.com
 <p>Register as new admin from url / method GET (var portal-admin) and value is Admin key (you can see in file <a href="#configuration">Admin.php</a>) For example:</p>
 
 ```bash
-https://localhost/freelanceku/?portal-admin=adminKey
+http://localhost/freelanceku/?portal-admin=adminKey
 ``` 
 <h2 id="feature">🌟 Feature</h2>
 
