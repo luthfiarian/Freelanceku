@@ -7,14 +7,14 @@ Freelanceku
 <small>Freelanceku &copy; 2024</small>
 </p>
 
-<center><hr width="50%" align="center" style="margin-left: auto; margin-right: auto; width: 50%;" /></center>
+<div style="text-align: center;"><center><hr width="50%" align="center" style="display: inline-block; margin-left: auto; margin-right: auto; width: 50%;" /></center></div>
 
 <p style="text-align: justify;">
     <span style="font-size: 25px;"><strong>What is Freelanceku ?</strong></span><br />
     <strong>Freelanceku</strong> is a web application that allows you to share work with others and find partners who are suitable to accompany you in completing projects. You can choose work that matches your skills, interests, and time, and communicate directly with your clients and partners through the chat feature. You can also give and receive feedback to improve the quality of your work. One of the interesting features of <strong>Freelanceku</strong> is payment through a reliable and secure payment gateway. You don’t have to worry about your money being deposited on the platform, because you can withdraw it anytime to your bank account. You can also see your transaction history easily and transparently. <strong>Freelanceku</strong> is a web application that is suitable for you who want to work flexibly and not binding, and expand your network and experience.
 </p>
 
-<center><hr width="50%" align="center" style="margin-left: auto; margin-right: auto; width: 50%;" /></center>
+<div style="text-align: center;"><center><hr width="50%" align="center" style="display: inline-block; margin-left: auto; margin-right: auto; width: 50%;" /></center></div>
 
 <p align="center">
 
@@ -24,7 +24,7 @@ Freelanceku
 <a herf="#documentation">Documentation</a> •
 </p>
 
-<center><hr width="50%" align="center" style="margin-left: auto; margin-right: auto; width: 50%;" /></center>
+<div style="text-align: center;"><center><hr width="50%" align="center" style="display: inline-block; margin-left: auto; margin-right: auto; width: 50%;" /></center></div>
 
 
 <h2 id="prerequisite">👀 Pre-requisite</h2>
