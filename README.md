@@ -22,7 +22,9 @@ Freelanceku
 <a href="#installation">Installation</a> •
 <a href="#configuration">Configuration</a> •
 <a href="#documentation">Documentation</a> •
-<a href="#feature">Feature</a>
+<a href="#trick">Trick</a> •
+<a href="#feature">Feature</a> •
+<a href="#license">License</a>
 </p>
 
 
@@ -133,10 +135,12 @@ https://simulator.sandbox.midtrans.com/
 
 <h2 id="trick">🐱‍👤 Trick (To Register as admin)</h2>
 <p>Register as new admin from debug mode (app status must be development)</p>
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGhybjlkM2p1aW1yM2x6Mnd1ajVocHk3OHp5ejBhejRlYWdoMWczNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TdOWU941bxg5z3CpDY/giphy.gif" alt="Register as admin from debug mode">
-<p>Register as new admin from url / method GET (var portal-admin) and value is Admin key (you can see in file <a href="#configuration">Admin.php</a>)</p>
-<img src="https://s9.gifyu.com/images/SFGQd.gif" alt="Register as admin from url / GET Method">
+<p align="center"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGhybjlkM2p1aW1yM2x6Mnd1ajVocHk3OHp5ejBhejRlYWdoMWczNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TdOWU941bxg5z3CpDY/giphy.gif" width="75%" alt="Register as admin from debug mode" /></p>
+<p>Register as new admin from url / method GET (var portal-admin) and value is Admin key (you can see in file <a href="#configuration">Admin.php</a>) For example:</p>
 
+```bash
+https://localhost/freelanceku/?portal-admin=adminKey
+``` 
 <h2 id="feature">🌟 Feature</h2>
 
 - Freelance users share work with up to 3 partners
