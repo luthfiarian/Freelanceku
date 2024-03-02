@@ -14,6 +14,7 @@ Freelanceku
 </p>
 
 <hr style="width: 50%;" />
+
 <p align="center">
 
 <a herf="#prerequisite">Pre-requisite</a> •
@@ -21,6 +22,7 @@ Freelanceku
 <a herf="#configuration">Configuration</a> •
 <a herf="#documentation">Documentation</a> •
 </p>
+
 <hr style="width: 50%;" />
 
 
