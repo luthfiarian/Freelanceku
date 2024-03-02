@@ -163,7 +163,7 @@
                             <div class="w-full mt-2">
                                 <label for="photo" class="w-full block mb-2 text-sm font-medium text-gray-900">Foto Profil Anda</label>
                                 <input type="file" name="file" id="photo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-third focus:border-third block w-full p-2.5" accept="image/png">
-                                <small class="text-red-500">*Hanya mendukung file gambar (png) maks 150Kb</small>
+                                <small class="text-red-500">*Hanya mendukung file gambar (png) maks 100Kb</small>
                             </div>
                         </div>
                         <button name="edit-account" type="submit" class="w-full text-primary bg-secondary hover:bg-third focus:ring-4 focus:outline-none focus:ring-secondary font-medium rounded-lg text-sm px-5 py-2.5 text-center">Ubah Akun</button>

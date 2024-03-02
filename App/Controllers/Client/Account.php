@@ -62,7 +62,7 @@
                     rmdir($dir);
                 }
                 rmdir_recursive($path);
-                $UserAPI->DeleteUserAPI($email_del, $username_del, $Data4->data_apikey);
+                $UserAPI->DeleteUserAPI($email_del, $username_del, $Data4->data_apikey, NULL);
             }else{
                 $_SESSION["STATUS_DEL_ACC"] = "Persiksa kembali email dan nama pengguna anda 👀";
                 header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");

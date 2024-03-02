@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html <?php echo $AMP = $Data1['seo_amp'] ? "amp" : "";  ?> lang="<?php echo $Data1['seo_lang'] ?>">
+<html <?php echo $AMP = $Data1->seo_amp ? "amp" : "";  ?> lang="<?php echo $Data1->seo_lang ?>">
 <head>
     <!-- Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="<?php echo $Data1["seo_author"] ?>">
-    <meta name="keywords" content="<?php echo $Data1["seo_keyword"] ?>">
-    <meta name="description" content="<?php echo $Data1['seo_des'] ?>">
+    <meta name="author" content="<?php echo $Data1->seo_author ?>">
+    <meta name="keywords" content="<?php echo $Data1->seo_keyword ?>">
+    <meta name="description" content="<?php echo $Data1->seo_des ?>">
     <!-- Title -->
     <title>Freelanceku </title>
 
     <!-- Open Graph -->
     <meta property="og:site_name" content="<?php echo CURRENT_URL ?>" />
-    <meta property="og:title" content="<?php echo $Data1['seo_name'] ?>" />
-    <meta property="og:type" content="<?php echo $Data1['seo_type'] ?>" />
-    <meta property="og:locale" content="<?php echo $Data1['seo_locale'] ?>"  />
+    <meta property="og:title" content="<?php echo $Data1->seo_name ?>" />
+    <meta property="og:type" content="<?php echo $Data1->seo_type ?>" />
+    <meta property="og:locale" content="<?php echo $Data1->seo_locale ?>"  />
     <meta property="og:url" content="<?php echo CURRENT_URL ?>" />
-    <meta property="og:image" content="<?php echo CallAny::File('Public/dist/image/favicon.png'); ?>" />
+    <meta property="og:image" content="<?php echo BASE_URI . 'Public/dist/image/favicon.png' ?>" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="300" />
     <meta property="og:image:height" content="300" />
-    <meta property="og:description" content="<?php echo $Data1['seo_des'] ?>" />
+    <meta property="og:description" content="<?php echo $Data1->seo_des ?>" />
 
     <!-- Canonical -->
     <link rel="canonical" href="<?php echo CURRENT_URL ?>">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="!hidden md:!contents md:!w-1/4 self-center">
-                    <img src="<?php echo CallAny::File('Public/dist/image/bag.png'); ?>" class="md:!w-[250px] mx-auto drop-shadow-2xl smooth-bounce-hero" alt="Hero Image" srcset="">
+                    <img src="<?php echo BASE_URI . 'Public/dist/image/bag.png' ?>" class="md:!w-[250px] mx-auto drop-shadow-2xl smooth-bounce-hero" alt="Hero Image" srcset="">
                 </div>
             </div>
         </section>
@@ -74,16 +74,16 @@
                     <h1 class="text-center font-semibold uppercase tracking-[10px]">Persembahan</h1>
                 </div>
                 <div class="w-full lg:w-1/2 mx-auto flex mt-2">
-                    <img src="<?php echo CallAny::File('Public/dist/image/umsida.png'); ?>" title="Universitas Muhammadiyah Sidoarjo" alt="Umsida Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
-                    <img src="<?php echo CallAny::File('Public/dist/image/km.png'); ?>" title="Kampus Merdeka" alt="Kampus Merdeka Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
-                    <img src="<?php echo CallAny::File('Public/dist/image/sinta.png'); ?>" title="Sinta" alt="Sinta Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
+                    <img src="<?php echo BASE_URI . 'Public/dist/image/umsida.png' ?>" title="Universitas Muhammadiyah Sidoarjo" alt="Umsida Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
+                    <img src="<?php echo BASE_URI . 'Public/dist/image/km.png' ?>" title="Kampus Merdeka" alt="Kampus Merdeka Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
+                    <img src="<?php echo BASE_URI . 'Public/dist/image/sinta.png' ?>" title="Sinta" alt="Sinta Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
                 </div>
             </div>
         </section>
         <!-- End of Present Section -->
 
         <!-- Search Section -->
-        <?php  if(isset($_GET['category'])){ CallFileApp::RequireOnceData('Views/Templates/Part/Search.php', $Data3); } ?>
+        <?php  if(isset($_GET['category'])){ CallFileApp::RequireOnceData('Views/Templates/Part/Search.php', $Data4); } ?>
         <!-- End of Search Section -->
 
         <!-- About Section -->
@@ -122,20 +122,46 @@
                     <!-- Swiper -->
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="<?php echo CallAny::File('Public/dist/image/cs.png'); ?>" alt="Pelanggan" class="block mx-auto rounded-full !w-[100px]">
-                                <p class="font-semibold block">Jhon Doe</p>
-                                <p class="text-lg font-semibold">" <span class="italic">Gak Tau Mau Bilang apa!</span> "</p>
+                            <!-- Rating 1 -->
+                            <div class="swiper-slide">  
+                                <figure class="max-w-screen-md mx-auto text-center">
+                                    <svg class="w-10 h-10 smooth-bounce-hero mx-auto mb-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+                                        <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
+                                    </svg>
+                                    <blockquote>
+                                        <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a beatae blanditiis modi molestias voluptatibus amet eum alias. Blanditiis ea quaerat modi dolorem tenetur adipisci temporibus nostrum aspernatur debitis magnam."</p>
+                                    </blockquote>
+                                    <figcaption class="flex items-center justify-center mt-6 space-x-3 rtl:space-x-reverse">
+                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_URI . 'Public/dist/image/cs.png' ?>" alt="profile picture">
+                                        <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-500-700">
+                                            <cite class="pe-3 font-medium text-gray-900">Michael Gough</cite>
+                                            <cite class="ps-3 text-sm text-gray-500">CEO at Freelanceku</cite>
+                                        </div>
+                                    </figcaption>
+                                </figure>
                             </div>
-                            <div class="swiper-slide">
-                                <img src="<?php echo CallAny::File('Public/dist/image/cs.png'); ?>" alt="Pelanggan" class="block mx-auto rounded-full !w-[100px]">
-                                <p class="font-semibold block">Jhon Doe</p>
-                                <p class="text-lg font-semibold">" <span class="italic">Gak Tau Mau Bilang apa!</span> "</p>
+                            <!-- Rating 2 -->
+                            <div class="swiper-slide">  
+                                <figure class="max-w-screen-md mx-auto text-center">
+                                    <svg class="w-10 h-10 smooth-bounce-hero mx-auto mb-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+                                        <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
+                                    </svg>
+                                    <blockquote>
+                                        <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a beatae blanditiis modi molestias voluptatibus amet eum alias. Blanditiis ea quaerat modi dolorem tenetur adipisci temporibus nostrum aspernatur debitis magnam."</p>
+                                    </blockquote>
+                                    <figcaption class="flex items-center justify-center mt-6 space-x-3 rtl:space-x-reverse">
+                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_URI . 'Public/dist/image/cs.png' ?>" alt="profile picture">
+                                        <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-500-700">
+                                            <cite class="pe-3 font-medium text-gray-900">Michael Gough</cite>
+                                            <cite class="ps-3 text-sm text-gray-500">CEO at Freelanceku</cite>
+                                        </div>
+                                    </figcaption>
+                                </figure>
                             </div>
                         </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next fill-current text-third"></div>
+                        <div class="swiper-button-prev fill-current text-third"></div>
+                        <!-- <div class="swiper-pagination"></div> -->
                     </div>
                 </div>
             </div>
@@ -146,7 +172,10 @@
     <!-- End of Main -->
 
     <?php
-    if(isset($_SESSION["fk-session"])){ CallFileApp::RequireOnce("Views/Client/Templates/NavbarBottom.php"); }
+    if(isset($_SESSION["fk-session"])){ 
+        if(str_contains($_SESSION["fk-session"], "fk-808080-")){ CallFileApp::RequireOnce("Views/Admin/Templates/NavbarBottom.php"); } 
+        else if(str_contains($_SESSION["fk-session"], "fk-FFFFFF-")){ CallFileApp::RequireOnce("Views/Client/Templates/NavbarBottom.php"); }
+    }
     ?>
 
     <!-- Modal -->
@@ -156,7 +185,20 @@
     ?>
 
     <!-- Footer -->
-    <?php CallFileApp::RequireOnce('views/templates/Footer.php') ?>
+    <?php $Footer = (object) array(
+        "host"        => PROTOCOL_URL . "://" . BASE_URL,
+        "description" => $Data1->seo_des,
+        "phone"       => $Data3->identity_phone,
+        "address"     => $Data3->identity_address,
+        "maps_embed"  => $Data3->identity_maps_embed,
+        "maps_link"   => $Data3->identity_maps_link,
+        "medsos"      => (object) array(
+            "ig"      => $Data3->identity_ig,
+            "linkedin"=> $Data3->identity_linkedin,
+            "x"       => $Data3->identity_x,
+            "fb"      => $Data3->identity_fb
+        )
+    ); CallFileApp::RequireOnceData('views/templates/Footer.php', $Footer) ?>
     <!-- End of Footer -->
     <!-- JS -->
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Javascript.php") ?>

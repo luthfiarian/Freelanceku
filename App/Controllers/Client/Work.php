@@ -6,9 +6,12 @@ use Random\Engine\Secure;
 
         CallFileApp::RequireOnce('Models/Database.php');
         CallFileApp::RequireOnce("Models/Api.php");
+        CallFileApp::RequireOnce("Models/Midtrans.php");
         $Site = new Site; 
         $UserDB = new ClientDB; 
         $UserAPI = new ClientAPI;
+        $TrxAPI = new TransactionAPI;
+        $TrxDB  = new TransactionDB;
         
         $Data1 = (object) $Site->Seo(); // SEO Website
         $Data2 = (object) $UserDB->FetchUserDataDB($email);   // Fetch Data from DB
@@ -164,12 +167,25 @@ use Random\Engine\Secure;
                 // Work must be 1 on DB
                 if(mysqli_num_rows($Data4) == 1){
                     $Data4 = (object) mysqli_fetch_assoc($Data4);
+                    // New Transaction
+                    if(isset($_POST["transaction"])){
+                        // Generate Random Transaction Id for Midtrans, API, DB
+                        $Trxid = 'work-' . $_SESSION["WORK_DETAIL"] . '-' . rand(9,999);
+                        $EmailPartner = $_POST["email-partner"];
 
-                    if(isset($_POST["transfer"])){
-                        define("TOKEN_TRX_NOW", $UserAPI->TokenTrxAPI($Data4->work_salary, $_SESSION["WORK_DETAIL"], $Data3->data->identity->first_name, $Data3->data->identity->last_name, $Data2->data_email, $_POST["email-partner"], $Data3->data->identity->phone));
+                        // Partner Worker
+                        $DataPartnerCheck = $UserAPI->FindUserAPI($Data2->data_apikey, $_POST["username-partner"]);
+                        if($DataPartnerCheck->status === "SUCCESS"){
+                            $Tax = (object) $Site->Tax();
+                            $AmountComplete = ($Data4->work_salary * $Tax->tax_pay/100) + $Tax->tax_midtrans + $Data4->work_salary;
+                            // Fetch Token from Midtrans API
+                            $MidtransToken = Midtrans::Transaction($Trxid, $Data4->work_salary, $Data3->data->identity->first_name, $Data3->data->identity->last_name, $Data2->data_email, $EmailPartner, $Data3->data->identity->phone, $Tax->tax_pay, $Tax->tax_midtrans,"work/detail");
+                            // Add Data Transaction to Current API
+                            $TrxAPI->AddTransactionAPI($MidtransToken, $_SESSION["WORK_DETAIL"], $Data4->work_name, $Trxid, $Data2->data_email, $EmailPartner, $Data4->work_salary, $AmountComplete, $Data2->data_apikey);
+                        }
                     }
-
-                    CallFileApp::RequireOnceData5("Views/Client/WorkDetail.php", $Data1, $Data2, $Data3, $Data4, $UserDB);
+                    // unset($_SESSION["STATUS_TRX_PAY"], $_SESSION["TRX_DATA"]);
+                    CallFileApp::RequireOnceData6("Views/Client/WorkDetail.php", $Data1, $Data2, $Data3, $Data4, $UserDB, $UserAPI);
                 }else{
                     CallFileApp::RequireOnce("Views/Error/NonGranted.php");
                 }

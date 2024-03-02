@@ -25,8 +25,8 @@
                         </select>
                     </div>
                     <div>
-                        <label for="data_paymentid" class="block mb-2 text-sm font-medium text-gray-900">Nomor Rekening Bank</label>
-                        <input type="text" name="data_paymentid" id="data_paymentid" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-third focus:border-third block w-full p-2.5" placeholder="81231xxxx" required>
+                        <label for="data_paymentid" class="block mb-2 text-sm font-medium text-gray-900">Nomor Rekening</label>
+                        <input type="tel" inputmode="numeric" placeholder="12345xxxx" minlength="5" maxlength="19" name="data_paymentid" id="data_paymentid" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-third focus:border-third block w-full p-2.5" required>
                     </div>
                     <div class="flex items-center">
                         <input id="link-checkbox" name="data_paymentstatus" type="checkbox" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 " required>

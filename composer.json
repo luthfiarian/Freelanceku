@@ -1,16 +1,20 @@
 {
     "name": "luthfiarian/freelanceku",
-    "description": "Freelanceku WebApps for The Creator and The Partners, brought to yo by Muhammad Azzamul Azmi",
+    "description": "Freelanceku WebApps for The Creator and The Partners, brought to yo by Muhammad Azzamul Azmi and Muhammad Agung Laksono",
     "type": "project",
     "license": "MIT",
     "authors": [
         {
-            "name"  : "Luthfi Arian Nugraha",
-            "email" : "hello@luthfiarian.my.id"
+            "name"  : "Muhammad Alvin Azzamul Azmi",
+            "email" : "alvinazzamul@gmail.com"
         },
         {
-            "name"  : "Muhammad Alvin Azzamul Azmi",
-            "email" : "-@gmail.com"
+            "name"  : "Muhammad Agung Laksono",
+            "email" : "agunglaks002@gmail.com"
+        },
+        {
+            "name"  : "Luthfi Arian Nugraha",
+            "email" : "hello@luthfiarian.my.id"
         }
     ],
     "require": {

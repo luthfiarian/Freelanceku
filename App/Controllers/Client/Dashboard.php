@@ -15,14 +15,30 @@
         $Data2 =  $Site->Bank();        // Paymet of Website
         $Data3 = (object) $UserDB->FetchUserDataDB($email);   // Fetch Data from DB
         $Data4 = $UserAPI->FetchUserDataAPI($Data3->data_username, $Data3->data_apikey); // Fetch Data from API
-        $Data5 = $UserDB->WorkHistoryDB($Data3->data_email); // Fetch Data Work History
 
+        $Data5 = (object) array(
+            "work"      => $UserDB->WorkHistoryDB($Data3->data_email),
+            "income"    => $UserDB->IncomeHistoryDB($Data3->data_email),
+            "bill"      => isset($_POST["bill"])        ? $UserDB->SearchUserBillDB($Data3->data_email, $_POST["history"]) : $UserDB->FetchUserBillDB($Data3->data_email),
+            "transfer"  => isset($_POST["transfer"])    ? $UserDB->SearchUserTransferDB($Data3->data_email, $_POST["history"]) : $UserDB->FetchUserTransferDB($Data3->data_email)
+        );
         // Add Payment Gateway
         if(isset($_POST["addpayment"])){
             CallFile::RequireOnce("Libs/Security.php");
             $PaymentID = $_POST["data_paymentid"];
             $PaymentCode = $_POST["bank"];
             $UserDB->UpdatePayment($Data3->data_email, 0,$PaymentCode,$PaymentID);
+        }
+        // Withdraw Balance Request
+        else if(isset($_POST["withdraw"])){
+            $Balance = $_POST["balance"];
+            if(($Balance >= 50000) && ($Balance <= $Data3->data_balance)){
+                $UserDB->AddUserBillDB($Data3->data_email, $_POST["balance"], $Data3->data_balance);
+            }else{
+                $_SESSION["STATUS_ERR_DASHBOARD"] = "Pastikan tarik tunai lebih dari sama dengan Rp. 50.000 dan kurang dari sama dengan saldo anda saat ini ";
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "dashboard");
+                exit();
+            }
         }
         // Search Work
         else if(isset($_POST["search"])){
@@ -52,15 +68,26 @@
             $email = $Data3->data_email; $workid = ltrim($_POST["id"], "work-");
             $message = !empty($_POST["message"]) ? $_POST["message"] : NULL;
 
-            $ReqData = array(
-                "first_name"    => $Data4->data->identity->first_name,
-                "last_name"     => $Data4->data->identity->last_name,
-                "description"   => $Data4->data->identity->description,
-                "phone"         => $Data4->data->identity->phone,
-                "address"       => $Data4->data->address->city . ', ' . $Data4->data->address->province . ', ' . $Data4->data->address->country
-            );
-
-            $UserDB->PartnerRequestJoinDB($email, $workid, $message, json_encode($ReqData),);
+            $UserDB->PartnerRequestJoinDB($email, $workid, $message, $Data3->data_username);
+        }
+        // View Invoice
+        else if(isset($_POST["invoice"])){
+            $FetchBill = (object) $UserDB->ViewInvoiceUserBillDB($Data3->data_email, $_POST["invoice"]);
+            if($FetchBill->bill_status == "Berhasil"){
+                $Data5 = (object) array(
+                    "work"      => $UserDB->WorkHistoryDB($Data3->data_email),
+                    "income"    => $UserDB->IncomeHistoryDB($Data3->data_email),
+                    "bill"      => isset($_POST["bill"])        ? $UserDB->SearchUserBillDB($Data3->data_email, $_POST["history"]) : $UserDB->FetchUserBillDB($Data3->data_email),
+                    "transfer"  => isset($_POST["transfer"])    ? $UserDB->SearchUserTransferDB($Data3->data_email, $_POST["history"]) : $UserDB->FetchUserTransferDB($Data3->data_email),
+                    "invoice"   => $FetchBill
+                );
+                CallFileApp::RequireOnceData5('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5);
+            }
+        }
+        else if(($Data3->data_paymentstatus == 1) && !empty($Data4->data->address->street)){
+            $Data6 = $UserDB->FetchPortoUserDB($email);  // Fetch Data Porto from DB
+            $Data7 = $UserDB->SearchWorkDefaultDB($Data3->data_email);
+            CallFileApp::RequireOnceData7('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5, $Data6, $Data7);
         }
         else{
             CallFileApp::RequireOnceData5('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5);

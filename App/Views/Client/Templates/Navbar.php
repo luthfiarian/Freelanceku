@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start rtl:justify-end">
         <a href="" class="flex ms-2 md:me-24">
-          <img src="<?php echo CallAny::File("Public/dist/image/favicon.png") ?>" class="h-8 me-3" alt="Freelanceku Logo" />
+          <img src="<?php echo BASE_URI . "Public/dist/image/favicon.png" ?>" class="h-8 me-3" alt="Freelanceku Logo" />
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Freelanceku</span>
         </a>
       </div>

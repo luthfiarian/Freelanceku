@@ -19,11 +19,16 @@
                             <li class="group"><a href="#about" class="text-base font-semibold py-2 mx-8 flex text-forth group-hover:!text-secondary transition duration-300 ease-in-out">Tentang</a></li>
                             <li class="group"><a href="#rating" class="text-base font-semibold py-2 mx-8 flex text-forth group-hover:!text-secondary transition duration-300 ease-in-out">Testimoni</a></li>
                             <?php if(isset($_SESSION["fk-session"])): ?>
-                            <li class="group"><a href="<?php if($_SESSION["fk-session"] === "fk-808080"){echo PROTOCOL_URL . "://" . BASE_URL . "admin/dashboard";} else {echo PROTOCOL_URL . "://" . BASE_URL . "dashboard";} ?>"><button class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-green-400 transition duration-300 ease-in-out">Dashboard</button></a></li>
+                            <li class="group"><a href="<?php if(str_contains($_SESSION["fk-session"], "fk-808080-")){echo PROTOCOL_URL . "://" . BASE_URL . "admin/dashboard";} else {echo PROTOCOL_URL . "://" . BASE_URL . "dashboard";} ?>"><button class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-green-400 transition duration-300 ease-in-out">Dashboard</button></a></li>
                             <li class="group"><a href="<?php echo BASE_URI . "signout" ?>"><button class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-red-400 transition duration-300 ease-in-out">Keluar</button></a></li>
                             <?php else : ?>
-                            <li class="group"><button data-modal-target="signup-modal" data-modal-toggle="signup-modal" class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-green-400 transition duration-300 ease-in-out">Daftar</button></li>
-                            <li class="group"><button data-modal-target="login-modal" data-modal-toggle="login-modal" class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-red-400 transition duration-300 ease-in-out">Masuk</button></li>
+                                <?php if(isset($_SESSION["portal-admin"])): ?>
+                                    <li class="group"><button data-modal-target="signup-admin" data-modal-toggle="signup-admin" class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-green-400 transition duration-300 ease-in-out">Daftar</button></li>
+                                    <li class="group"><button data-modal-target="login-modal" data-modal-toggle="login-modal" class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-red-400 transition duration-300 ease-in-out">Masuk</button></li>
+                                <?php else: ?>
+                                    <li class="group"><button data-modal-target="signup-modal" data-modal-toggle="signup-modal" class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-green-400 transition duration-300 ease-in-out">Daftar</button></li>
+                                    <li class="group"><button data-modal-target="login-modal" data-modal-toggle="login-modal" class="text-base text-forth font-semibold py-2 mx-8 flex group-hover:!text-red-400 transition duration-300 ease-in-out">Masuk</button></li>
+                                <?php endif ?>
                             <?php endif; ?>
                         </ul>
                     </nav>

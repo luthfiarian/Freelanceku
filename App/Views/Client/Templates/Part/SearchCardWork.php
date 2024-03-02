@@ -55,7 +55,7 @@
             </svg>
         </button>
         <?php else: ?>
-        <a href="<?php echo PROTOCOL_URL . "://". BASE_URI."work" ?>">
+        <a href="<?php echo PROTOCOL_URL . "://". BASE_URL."work" ?>">
             <button class="w-full text-right text-sm inline-flex items-center px-3 py-2 font-medium text-primary bg-secondary rounded-lg hover:bg-forth focus:ring-4 focus:outline-none focus:ring-secondary">
                 <span class="text-xs lg:text-sm">Lihat Milik Anda</span>
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -87,7 +87,7 @@
             <div class="p-4 md:p-5">
                 <div class="w-full flex flex-warp border rounded-lg p-2 mb-1">
                     <div class="w-1/4 border rounded-lg mr-1">
-                        <?php ?>
+                        <img src="<?php echo BASE_URI . $Work["work_image"] ?>" alt="<?php echo $Work["work_name"] ?>" width="100px" height="250px" srcset="">
                     </div>
                     <div class="w-3/4">
                         <p class="w-full text-sm text-justify">
@@ -110,7 +110,7 @@
                     <div class="w-full">
                         <p class="w-full py-2 text-center font-semibold">Terlihat Tidak ada Portofolio Anda Disini 👀</p>
                         <div class="w-full flex">
-                            <a href="<?php echo PROTOCOL_URL . "://" . BASE_URI . "account" ?>" class="mx-auto"><button class="mx-auto text-center py-2 px-4 border rounded-lg transition duration-300 ease-in-out hover:bg-secondary">Tambahkan Portofolio Anda</button></a>
+                            <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "account" ?>" class="mx-auto"><button class="mx-auto text-center py-2 px-4 border rounded-lg transition duration-300 ease-in-out hover:bg-secondary">Tambahkan Portofolio Anda</button></a>
                         </div>
                     </div>
 

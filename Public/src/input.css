@@ -46,7 +46,7 @@ html::-webkit-scrollbar-thumb:active { background: rgb(68, 68, 68);border-radius
 .swiper-slide{ @apply text-center text-[18px] flex justify-center items-center; }
 
 /* Dashboard Admin */
-.table-nav{@apply table table-auto mx-auto;}
+.table-nav{@apply table table-auto mx-auto text-sm md:text-base;}
 .table-nav-td-spacing{@apply px-2;}
 .table-nav-td-active{@apply border-b border-black font-medium;}
 .table-nav-td{@apply ease-linear duration-300 hover:border-b hover:border-yellow-900 hover:text-yellow-600;}

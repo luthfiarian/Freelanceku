@@ -1,9 +1,10 @@
 <?php
-    /* 
-    * File Konfigurasi API
-    */
+    /**
+     * File Config API
+     * @api https://github.com/rayzio-jax/freelance-api
+     */
 
-    // API BASE URL -> contoh : https://google.com/
+    // API BASE URL -> example : https://google.com/
     $Api    = "https://freelance-api-production.up.railway.app/v1/";
 
     // API Routes
@@ -12,7 +13,9 @@
     $Signout    = "auth/logout/";
     $AllUsers   = "users?size=MAX_DATA_IN_PAGE&page=CURRENT_PAGE&sortBy=username&sortOrder=asc";
     $TrxLog     = "transaction/";
+    $TrxUpd     = "transaction/status/";
     $TrxNew     = "transaction/new";
+    $Find       = "user/find";
     // API Routes User (Special) - GET, PATCH (UPDATE), DELETE
     $SPECIAL_FUN_USER = "user/"; // add behind it based on the username
 
@@ -21,7 +24,10 @@
     define("API_USER_SIGNOUT", $Api.$Signout);
     define("API_ALLUSER_DATA", $Api.$AllUsers);
     define("API_USER_TRXLOG", $Api.$TrxLog);
+    define("API_UPDATE_TRX", $Api.$TrxUpd);
     define("API_USER_TRXNEW", $Api.$TrxNew);
     define("API_USER_SPECIAL", $Api.$SPECIAL_FUN_USER);
+    define("API_USER_SEARCH", $Api.$Find);
+
 
 

@@ -6,10 +6,17 @@
         <small class="text-primary">Debug Mode</small>
     </div>
     <div id="dragText" class="w-full py-1 !px-4 whitespace-pre-line overflow-y-hidden md:overflow-y-auto rounded-b-lg h-fit md:h-36">
+        <?php if((($_SERVER["REQUEST_URI"] === BASE_URI) || ($_SERVER["REQUEST_URI"] === BASE_URI)) && (!isset($_SESSION["fk-session"]) && !isset($_COOKIE["API-COOKIE"]))): ?>
+            <div class="w-full flex">
+                <button data-modal-target="signup-admin" data-modal-toggle="signup-admin" type="button" class="py-2 px-4 rounded-lg bg-secondary text-primary mx-auto ease-in-out duration-300 transition hover:bg-third">Signup Admin</button>
+            </div>
+        <?php endif ?>
         <p class="w-full max-w-full whitespace-normal text-xs md:text-base">GET : <?php var_dump($_GET) ?></p>
         <p class="w-full max-w-full whitespace-normal text-xs md:text-base">POST : <?php var_dump($_POST) ?></p>
         <p class="w-full max-w-full whitespace-normal text-xs md:text-base">SESSION : <?php var_dump($_SESSION) ?></p>
         <p class="w-full max-w-full whitespace-normal text-xs md:text-base">COOKIE : <?php var_dump($_COOKIE) ?></p>
+        <?php if(isset($_POST["clear"])) : unset($_GET, $_POST, $_SESSION); session_unset(); session_destroy();  endif ?>
+        <form action="" method="post"><button type="submit" name="clear" class="py-2 px-4 rounded-lg bg-secondary text-primary mx-auto ease-in-out duration-300 transition hover:bg-third">Clear GET, POST, SESSION</button></form>
     </div>
     <div id="minimizedContent" class="hidden border p-2 text-xs text-center"></div>
 </div>

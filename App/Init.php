@@ -13,7 +13,12 @@
     */
     CallFile::RequireOnce('Libs/Session.php');
     Session::Start();
-    ini_set('display_errors', STATUS_APP);
+    
+    // ERROR REPORTING
+    ini_set('display_errors', !STATUS_APP);
+    ini_set('display_startup_errors', !STATUS_APP);
+    !STATUS_APP ? error_reporting(E_ALL) : false;
+    
     /* 
     *   Call File Routes
     *   @Dir    'App/Routes'

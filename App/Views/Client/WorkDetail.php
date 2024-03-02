@@ -8,7 +8,7 @@
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Style.php"); ?>
     <?php if ($AMP) : ?><script async src="https://cdn.ampproject.org/v0.js"></script><?php endif ?>
     
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo TRX_CLIENTKEY ?>"></script>
+    <script type="text/javascript" src="<?php echo TRX_URL_APP ?>snap.js" data-client-key="<?php echo TRX_CLIENTKEY ?>"></script>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         <!-- End of Navbar -->
     </header>
     
-    <?php if(date("Y-m-d") >= date("Y-m-d", strtotime($Data4->work_finishdate))){ $_SESSION["STATUS_ERR_REQWORK"] = "Mohon segera dikonfirmasi selesai pekerjaan, karena jadwalnya adalah hari ini. Jika tidak segera melakukan perpanjangan waktu di sunting pekerjaan!"; } ?>
+    <?php if($Data4->work_status == 0){if(date("Y-m-d") >= date("Y-m-d", strtotime($Data4->work_finishdate))){ $_SESSION["STATUS_ERR_REQWORK"] = "Mohon segera dikonfirmasi selesai pekerjaan, karena jadwalnya adalah hari ini. Jika tidak segera melakukan perpanjangan waktu di sunting pekerjaan!"; }} ?>
     
     <!-- Alert -->
     <?php CallFileApp::RequireOnce("Views/Client/Templates/Part/Alert.php") ?>
@@ -38,7 +38,7 @@
                         <div class="w-1/3 md:w-1/4 mr-1">
                             <div class="w-full h-fit border rounded-lg group ease-linear duration-300 hover:shadow-lg relative">
                                 <p class="text-xs md:text-base text-center font-semibold absolute top-[40%] z-10 left-0 right-0 text-primary ease-linear duration-300 group-hover:p-0.5 group-hover:bg-primary group-hover:text-black">#WORK-<?php echo $_SESSION["WORK_DETAIL"] ?></p>
-                                <img src="<?php echo BASE_URI . $Data4->work_image ?>" class="w-full rounded-lg -z-20 grayscale ease-in-out duration-300 group-hover:grayscale-0" alt="Latar belakang #work-<?php echo $_SESSION["WORK_DETAIL"] ?>">
+                                <img src="<?php echo BASE_URI . $Data4->work_image ?>" width="150px" height="150px" class="mx-auto rounded-lg -z-20 grayscale ease-in-out duration-300 group-hover:grayscale-0" alt="Latar belakang #work-<?php echo $_SESSION["WORK_DETAIL"] ?>">
                             </div>
                         </div>
                         <div class="w-2/3 md:w-3/4 flex">
@@ -46,7 +46,7 @@
                                 <tr><td colspan="3"><p class="font-semibold"><?php echo $Data4->work_name ?></p></td></tr>
                                 <tr><td>Tanggal Dibuat</td><td>:</td><td><?php echo $Data4->work_startdate ?></td></tr>
                                 <tr><td>Tanggal Selesai</td><td>:</td><td><?php echo $Data4->work_finishdate ?></td></tr>
-                                <tr><td>Deskripsi</td><td>:</td><td><?php echo $Data4->work_des ?></td></tr>
+                                <tr><td>Deskripsi</td><td>:</td><td class="text-justify"><?php echo $Data4->work_des ?></td></tr>
                             </table>
                         </div>
                     </div>
@@ -65,13 +65,13 @@
                         <?php if (!empty($Data4->work_partner1) || !empty($Data4->work_partner2) || !empty($Data4->work_partner3)) : ?>
                             <?php 
                                 if(!empty($Data4->work_partner1)){
-                                    CallFileApp::RequireOnceData3("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data5->FetchUserDataDB($Data4->work_partner1), (object) $Data5->WorkPartnerDetailDB($_SESSION["WORK_DETAIL"], $Data4->work_partner1), $Data4);
+                                    CallFileApp::RequireOnceData5("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data5->FetchUserDataDB($Data4->work_partner1), (object) $Data5->WorkPartnerDetailDB($_SESSION["WORK_DETAIL"], $Data4->work_partner1), $Data4, $Data2, $Data6);
                                 }
                                 if(!empty($Data4->work_partner2)){
-                                    CallFileApp::RequireOnceData3("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data5->FetchUserDataDB($Data4->work_partner2), (object) $Data5->WorkPartnerDetailDB($_SESSION["WORK_DETAIL"], $Data4->work_partner2), $Data4);
+                                    CallFileApp::RequireOnceData5("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data5->FetchUserDataDB($Data4->work_partner2), (object) $Data5->WorkPartnerDetailDB($_SESSION["WORK_DETAIL"], $Data4->work_partner2), $Data4, $Data2, $Data6);
                                 }
                                 if(!empty($Data4->work_partner3)){
-                                    CallFileApp::RequireOnceData3("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data5->FetchUserDataDB($Data4->work_partner3), (object) $Data5->WorkPartnerDetailDB($_SESSION["WORK_DETAIL"], $Data4->work_partner3), $Data4);
+                                    CallFileApp::RequireOnceData5("Views/Client/Templates/Part/WorkDetailPartner.php", (object) $Data5->FetchUserDataDB($Data4->work_partner3), (object) $Data5->WorkPartnerDetailDB($_SESSION["WORK_DETAIL"], $Data4->work_partner3), $Data4, $Data2, $Data6);
                                 }
                             ?>
                         <?php else : ?>
@@ -85,7 +85,7 @@
                         <?php if (mysqli_num_rows($PartnerRequest) != 0) : ?>
                             <div class="w-full h-52 overflow-y-auto">
                                 <?php while($WorkReq = mysqli_fetch_assoc($PartnerRequest)): ?>
-                                <?php CallFileApp::RequireOnceData3("Views/Client/Templates/Part/WorkDetailRequest.php", (object) $WorkReq, $Data5, $Data4) ?>
+                                <?php CallFileApp::RequireOnceData5("Views/Client/Templates/Part/WorkDetailRequest.php", (object) $WorkReq, $Data5, $Data4, $Data2, $Data6) ?>
                                 <?php endwhile ?>
                             </div>
                         <?php else : ?>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="w-1/2">
                                 <label for="salary" class="text-xs md:text-sm block">Upah*</label>
-                                <input type="number" name="salary" id="salary" value="<?php echo $Data4->work_salary ?>" class="px-4 text-xs md:text-base rounded-full mt-2 w-full border" required>
+                                <input type="number" inputmode="numeric" max="50000000" min="50000" name="salary" id="salary" value="<?php echo $Data4->work_salary ?>" class="px-4 text-xs md:text-base rounded-full mt-2 w-full border" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-warp mt-1">

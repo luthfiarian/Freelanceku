@@ -112,21 +112,34 @@
         </section>
         <!-- End of Portofolio Section -->
 
-        <!-- Setting Account Section -->
-        <section id="setting-acc" class="mt-5">
-            <div class="container">
-                <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
-                    <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Pengaturan Akun&nbsp;</p>
-                    <div class="w-full">
-                        <button data-modal-target="edit-account" data-modal-toggle="edit-account" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Akun</button>
-                        <?php if($Data4->data_paymentstatus == 1): ?><button data-modal-target="edit-bank" data-modal-toggle="edit-bank" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Bank Akun</button><?php endif ?>
-                        <button data-modal-target="delete-account" data-modal-toggle="delete-account" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Hapus Akun</button>
-                        <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "signout" ?>"><button class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Keluar</button></a>
+        <!-- Guide & Setting Account Section -->
+        <section id="guide" class="mt-5">
+            <div class="w-full flex-none md:flex container">
+                <div class="w-full md:w-1/2 mr-0 md:mr-3">
+                    <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
+                        <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Panduan Pengguna&nbsp;</p>
+                        <div class="w-full">
+                            <button data-modal-target="guide-user" data-modal-toggle="guide-user" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Panduan Pengguna</button>
+                            <button data-modal-target="call-center" data-modal-toggle="call-center" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Pusat Panggilan</button>
+                            <a href="#"><button type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Kantor Kami</button></a>
+                            <a href="#"><button type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">FAQ</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 mr-0 md:mr-1">
+                    <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
+                        <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Pengaturan Akun&nbsp;</p>
+                        <div class="w-full">
+                            <button data-modal-target="edit-account" data-modal-toggle="edit-account" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Akun</button>
+                            <?php if($Data4->data_paymentstatus == 1): ?><button data-modal-target="edit-bank" data-modal-toggle="edit-bank" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Atur Bank Akun</button><?php endif ?>
+                            <button data-modal-target="delete-account" data-modal-toggle="delete-account" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Hapus Akun</button>
+                            <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "signout" ?>"><button class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-red-500">Keluar</button></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- End of Setting Account Section -->
+        <!-- End of Guide & Setting Account Section -->
     </main>
 
     <!-- Modal -->

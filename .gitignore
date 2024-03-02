@@ -3,3 +3,7 @@ node_modules
 vendor
 Public/upload/client/**
 Public/upload/admin/**
+
+# GIT Tracked
+!Public/upload/client/index.php
+!Public/upload/admin/index.php

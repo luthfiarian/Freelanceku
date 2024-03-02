@@ -49,7 +49,7 @@
                             </div>
                             <div class="w-1/2">
                                 <label for="salary" class="text-xs md:text-sm block">Upah*</label>
-                                <input type="number" name="salary" id="salary" class="px-4 text-xs md:text-base rounded-full mt-2 w-full border" required>
+                                <input type="number" inputmode="numeric" max="50000000" min="50000" name="salary" id="salary" class="px-4 text-xs md:text-base rounded-full mt-2 w-full border" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-warp mt-1">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <label class="text-xs md:text-sm" for="des-jsob">Deskripsi Pekerjaan*</label>
-                        <textarea name="desc" id="des-job" cols="30" rows="1" class="px-4 text-xs md:text-base rounded-lg mt-2 w-full border" required></textarea>
+                        <textarea name="desc" id="des-job" cols="30" rows="1" class="text-justify px-4 text-xs md:text-base rounded-lg mt-2 w-full border" required></textarea>
                         <input type="submit" name="create-work" value="Buat Pekerjaan" class="w-full mt-2 text-center bg-black text-primary py-2 rounded-full duration-300 ease-in-out hover:bg-secondary">
                     </form>
                     <?php else: ?>
