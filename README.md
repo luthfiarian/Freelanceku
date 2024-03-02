@@ -3,8 +3,8 @@
 Freelanceku
 </h1>
 <p align="center">
-<small><i>The Best Way to Share Work!</i></small>
-<small>Freelanceku &copy; 2024</small> <br />
+<small><i>The Best Way to Share Work!</i></small><br />
+<small>Freelanceku &copy; 2024</small>
 </p>
 <br />
 
@@ -16,15 +16,15 @@ Freelanceku
 <hr style="width: 50%;" />
 <p align="center">
 
-[Pre-requisite](#Freelanceku) •
-[Installation](#Installation) •
-[Configuration](#Configuration) •
-[Documentation](#Documentation)
+<a herf="#prerequisite">Pre-requisite</a> •
+<a herf="#installation">Installation</a> •
+<a herf="#configuration">Configuration</a> •
+<a herf="#documentation">Documentation</a> •
 </p>
 <hr style="width: 50%;" />
 
 
-<h2>👀 Pre-requisite</h2>
+<h2 id="prerequisite">👀 Pre-requisite</h2>
 <p>Make sure you have installed the following list:</p>
     
     PHP Version 8.0+ 
@@ -37,7 +37,7 @@ Freelanceku
 https://tailwindcss.com
 ```
 
-<h2>👨‍🔧 Installation</h2>
+<h2 id="installation">👨‍🔧 Installation</h2>
 <p>For installation, you can use GIT using the link below</p>
 
 ```bash
@@ -75,7 +75,7 @@ Public/src/input.css
 Public/dist/css/style.css
 ``` 
 
-<h2>🔧 Configuration</h2>
+<h2 id="configuration">🔧 Configuration</h2>
 <p>For first time installation, you can configuration file in bellow</p>
 <p>1. Host - To change the site address</p>
 
@@ -102,7 +102,7 @@ App/Config/Admin.php
 ```bash
 App/Config/Mitrans.php
 ```
-<h2>📄 Documentation</h2>
+<h2 id="documentation">📄 Documentation</h2>
 <h3>Admin User</h3>
 
 ```bash
