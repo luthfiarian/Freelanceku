@@ -120,10 +120,15 @@ Docs/client/freelance.pdf
 ```bash
 https://github.com/rayzio-jax/freelance-api
 ``` 
-<h3>Documentation Midtrans</h3>
+<h3>Documentation Midtrans API</h3>
+<p>Full Documentation Midtrans API</p>
 
 ```bash
 https://docs.midtrans.com/
+``` 
+<p>payment trial in sandbox / testing mode</p>
+
+```bash
 https://simulator.sandbox.midtrans.com/
 ``` 
 
