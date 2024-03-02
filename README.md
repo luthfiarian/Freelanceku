@@ -16,13 +16,13 @@ Freelanceku
 
 <hr />
 
-<p style="text-align: center;">
+    <p style="text-align: center;">
 
-<a style="text-align: center;" align="center" href="#prerequisite">Pre-requisite</a> •
-<a style="text-align: center;" align="center" href="#installation">Installation</a> •
-<a style="text-align: center;" align="center" href="#configuration">Configuration</a> •
-<a style="text-align: center;" align="center" href="#documentation">Documentation</a>
-</p>
+        <a style="text-align: center;" align="center" href="#prerequisite">Pre-requisite</a> •
+        <a style="text-align: center;" align="center" href="#installation">Installation</a> •
+        <a style="text-align: center;" align="center" href="#configuration">Configuration</a> •
+        <a style="text-align: center;" align="center" href="#documentation">Documentation</a>
+    </p>
 
 
 <hr />
