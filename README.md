@@ -126,7 +126,7 @@ https://github.com/rayzio-jax/freelance-api
 ```bash
 https://docs.midtrans.com/
 ``` 
-<p>payment trial in sandbox / testing mode</p>
+<p>Payment trial in sandbox / testing mode</p>
 
 ```bash
 https://simulator.sandbox.midtrans.com/
