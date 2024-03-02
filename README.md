@@ -131,7 +131,7 @@ https://simulator.sandbox.midtrans.com/
 ```bash
 https://tailwindcss.com
 ```
-<h2 id="trick">🐱‍👤 Trick (To Register as admin)</h2>
+<h2 id="trick">🤫 Trick (To Register as admin)</h2>
 <p>Register as new admin from debug mode (app status must be development)</p>
 <p align="center"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGhybjlkM2p1aW1yM2x6Mnd1ajVocHk3OHp5ejBhejRlYWdoMWczNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TdOWU941bxg5z3CpDY/giphy.gif" width="75%" alt="Register as admin from debug mode" /></p>
 <p>Register as new admin from url / method GET (var portal-admin) and value is Admin key (you can see in file <a href="#configuration">Admin.php</a>) For example:</p>
