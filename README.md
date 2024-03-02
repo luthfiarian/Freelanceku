@@ -1,9 +1,11 @@
 <h1 id="Freelanceku" align="center" style="text-align: center;">
 <img src="https://i.ibb.co/cNSLB3x/favicon.png" alt="Logo Freelanceku" width="15%" height="20%"><br />
 Freelanceku
-<small><i>The Best Way to Share Work!</i></small>
-<small>&copy; 2024 Freelanceku</small> <br />
 </h1>
+<p align="center">
+<small><i>The Best Way to Share Work!</i></small>
+<small>Freelanceku &copy; 2024</small> <br />
+</p>
 <br />
 
 <p style="text-align: justify;">
@@ -13,10 +15,11 @@ Freelanceku
 
 <hr style="width: 50%;" />
 <p align="center">
-    <a herf="#freelanceku">Pre-requisite</a> • 
-    <a herf="#Installation">Installation</a> • 
-    <a herf="#Configuration">Configuration</a> • 
-    <a herf="#Documentation">Documentation</a>
+
+[Pre-requisite](#Freelanceku) •
+[Installation](#Installation) •
+[Configuration](#Configuration) •
+[Documentation](#Documentation)
 </p>
 <hr style="width: 50%;" />
 
