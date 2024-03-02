@@ -32,6 +32,11 @@ Jump to <br />
     Node.js
     Composer
 
+
+
+<p align="center">
+<a href="https://www.php.net">PHP</a> • <a href="https://nodejs.org">Node.js</a> • <a href="https://getcomposer.org">Composer</a>
+</p>
 <h2 id="installation">👨‍🔧 Installation</h2>
 <p>For installation, you can use GIT using the link below</p>
 
