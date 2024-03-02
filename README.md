@@ -21,7 +21,8 @@ Freelanceku
 <a href="#prerequisite">Pre-requisite</a> •
 <a href="#installation">Installation</a> •
 <a href="#configuration">Configuration</a> •
-<a href="#documentation">Documentation</a>
+<a href="#documentation">Documentation</a> •
+<a href="#feature">Feature</a>
 </p>
 
 
@@ -130,7 +131,13 @@ https://docs.midtrans.com/
 https://simulator.sandbox.midtrans.com/
 ``` 
 
-<h2>🌟 Feature</h2>
+<h2 id="trick">🐱‍👤 Trick (To Register as admin)</h2>
+<p>Register as new admin from debug mode (app status must be development)</p>
+<img src="https://i.ibb.co/wWjLNFd/debug.gif" width="75%" align="center" alt="Register as admin from debug mode">
+<p>Register as new admin from url / method GET (var portal-admin) and value is Admin key (you can see in file <a href="#configuration">Admin.php</a>)</p>
+<img src="https://i.ibb.co/6ZMq8Dc/url.gif" width="75%" align="center" alt="Register as admin from url / GET Method">
+
+<h2 id="feature">🌟 Feature</h2>
 
 - Freelance users share work with up to 3 partners
 - Create unlimited works
@@ -138,6 +145,7 @@ https://simulator.sandbox.midtrans.com/
 - Join unlimited works (for partners)
 - Use Payment gateway for payment after job completion
 - There is no change in account to become a partner/employer
+- Debug Mode in Development (for Developer)
 - Midtrans Webhook (Coming soon)
 
 <h2>⚠️ License</h2>
