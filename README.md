@@ -16,15 +16,9 @@ Freelanceku
 
 <hr />
 
-<p style="text-align: center;" align="center" width="100%">
-
-<a href="#prerequisite">Pre-requisite</a> •
-<a href="#installation">Installation</a> •
-<a href="#configuration">Configuration</a> •
-<a href="#documentation">Documentation</a> •
-<a href="#trick">Trick</a> •
-<a href="#feature">Feature</a> •
-<a href="#license">License</a>
+<p align="center">
+Jump to <br />
+<a href="#prerequisite">Pre-requisite</a> •<a href="#installation">Installation</a> • <a href="#configuration">Configuration</a> • <a href="#documentation">Documentation</a> • <a href="#trick">Trick</a> • <a href="#feature">Feature</a> • <a href="#license">License</a>
 </p>
 
 
