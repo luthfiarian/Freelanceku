@@ -1,37 +1,40 @@
-<center>
-    <h1 id="Freelanceku" style="text-align: center;">Freelanceku</h1>
-    <small><i>The Best Way to Share Work!</i></small><br />
-    <img src="https://i.ibb.co/cNSLB3x/favicon.png" alt="Logo Freelanceku" width="15%" height="15%"><br />
-    <small>&copy; 2024 Freelanceku</small> <br />
-    <hr style="width: 50%;" />
-</center>
+<h1 id="Freelanceku" align="center" style="text-align: center;">
+<img src="https://i.ibb.co/cNSLB3x/favicon.png" alt="Logo Freelanceku" width="15%" height="20%"><br />
+Freelanceku
+<small><i>The Best Way to Share Work!</i></small>
+<small>&copy; 2024 Freelanceku</small> <br />
+</h1>
+<br />
+
 <p style="text-align: justify;">
-    <span style="font-size: 20px;"><b>What is Freelanceku ?</b></span><br />
+    <span style="font-size: 25px;"><strong>What is Freelanceku ?</strong></span><br />
     <strong>Freelanceku</strong> is a web application that allows you to share work with others and find partners who are suitable to accompany you in completing projects. You can choose work that matches your skills, interests, and time, and communicate directly with your clients and partners through the chat feature. You can also give and receive feedback to improve the quality of your work. One of the interesting features of <strong>Freelanceku</strong> is payment through a reliable and secure payment gateway. You don’t have to worry about your money being deposited on the platform, because you can withdraw it anytime to your bank account. You can also see your transaction history easily and transparently. <strong>Freelanceku</strong> is a web application that is suitable for you who want to work flexibly and not binding, and expand your network and experience.
 </p>
-<center>
-    <hr style="width: 50%;" />
-    <a herf="https://github.com/luthfionumsida/freelanceku#freelanceku"><button>Pre-requisite</button></a> • 
-    <a herf="https://github.com/luthfionumsida/freelanceku#Installation"><button>Installation</button></a> • 
-    <a herf="https://github.com/luthfionumsida/freelanceku#Configuration"><button>Configuration</button></a> • 
-    <a herf="https://github.com/luthfionumsida/freelanceku#Documentation"><button>Documentation</button></a>
-    <hr style="width: 50%;" />
-</center>
 
-<h4>👀 Pre-requisite</h4>
+<hr style="width: 50%;" />
+<p align="center">
+    <a herf="#freelanceku">Pre-requisite</a> • 
+    <a herf="#Installation">Installation</a> • 
+    <a herf="#Configuration">Configuration</a> • 
+    <a herf="#Documentation">Documentation</a>
+</p>
+<hr style="width: 50%;" />
+
+
+<h2>👀 Pre-requisite</h2>
 <p>Make sure you have installed the following list:</p>
     
     PHP Version 8.0+ 
     Node.js
     Composer
 
-<h5>Framework</h5>
+<h3>Framework</h3>
 
 ```bash
 https://tailwindcss.com
 ```
 
-<h4>👨‍🔧 Installation</h4>
+<h2>👨‍🔧 Installation</h2>
 <p>For installation, you can use GIT using the link below</p>
 
 ```bash
@@ -69,7 +72,7 @@ Public/src/input.css
 Public/dist/css/style.css
 ``` 
 
-<h4>🔧 Configuration</h4>
+<h2>🔧 Configuration</h2>
 <p>For first time installation, you can configuration file in bellow</p>
 <p>1. Host - To change the site address</p>
 
@@ -96,30 +99,30 @@ App/Config/Admin.php
 ```bash
 App/Config/Mitrans.php
 ```
-<h4>📄 Documentation</h4>
-<h5>Admin User</h5>
+<h2>📄 Documentation</h2>
+<h3>Admin User</h3>
 
 ```bash
 Docs/admin/admin.pdf
 ``` 
-<h5>Freelance User</h5>
+<h3>Freelance User</h3>
 
 ```bash
 Docs/client/freelance.pdf
 ``` 
 
-<h5>Documentation API</h5>
+<h3>Documentation API</h3>
 
 ```bash
 https://github.com/rayzio-jax/freelance-api
 ``` 
-<h5>Documentation Midtrans</h5>
+<h3>Documentation Midtrans</h3>
 
 ```bash
 https://docs.midtrans.com/
 https://simulator.sandbox.midtrans.com/
 ``` 
 
-<h4>⚠️ License</h4>
+<h2>⚠️ License</h2>
 
 Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. See [LICENSE.txt](https://github.com/luthfionumsida/freelanceku/blob/main/LICENSE) for more information.
