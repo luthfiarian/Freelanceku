@@ -10,7 +10,7 @@ Freelanceku
 <hr />
 
 <p style="text-align: justify;">
-    <span style="font-size: 25px;"><strong>What is Freelanceku ?</strong></span><br />
+    <span style="font-size: 30px;"><strong>What is Freelanceku ?</strong></span><br />
     <strong>Freelanceku</strong> is a web application that allows you to share work with others and find partners who are suitable to accompany you in completing projects. You can choose work that matches your skills, interests, and time, and communicate directly with your clients and partners through the chat feature. You can also give and receive feedback to improve the quality of your work. One of the interesting features of <strong>Freelanceku</strong> is payment through a reliable and secure payment gateway. You don’t have to worry about your money being deposited on the platform, because you can withdraw it anytime to your bank account. You can also see your transaction history easily and transparently. <strong>Freelanceku</strong> is a web application that is suitable for you who want to work flexibly and not binding, and expand your network and experience.
 </p>
 
@@ -129,6 +129,16 @@ https://github.com/rayzio-jax/freelance-api
 https://docs.midtrans.com/
 https://simulator.sandbox.midtrans.com/
 ``` 
+
+<h2>🌟 Feature</h2>
+
+- Freelance users share work with up to 3 partners
+- Create unlimited works
+- Freelance User Monitoring System (For Admin)
+- Join unlimited works (for partners)
+- Use Payment gateway for payment after job completion
+- There is no change in account to become a partner/employer
+- Midtrans Webhook (Coming soon)
 
 <h2>⚠️ License</h2>
 
