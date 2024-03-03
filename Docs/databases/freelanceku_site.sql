@@ -116,7 +116,6 @@ CREATE TABLE `site_seo` (
   `seo_type` varchar(255) NOT NULL,
   `seo_locale` varchar(255) NOT NULL,
   `seo_des` varchar(255) NOT NULL,
-  `seo_amp` tinyint(1) NOT NULL,
   `seo_lang` varchar(255) NOT NULL,
   `seo_host` varchar(255) NOT NULL,
   `seo_author` varchar(100) NOT NULL,
@@ -127,8 +126,8 @@ CREATE TABLE `site_seo` (
 -- Dumping data untuk tabel `site_seo`
 --
 
-INSERT INTO `site_seo` (`id`, `seo_name`, `seo_type`, `seo_locale`, `seo_des`, `seo_amp`, `seo_lang`, `seo_host`, `seo_author`, `seo_keyword`) VALUES
-(1, 'Freelanceku', 'Marketplace', 'id_ID', 'No.1 Situs web pekerja lepas untuk meraih impian', 0, 'id', 'localhost', 'Freelanceku', 'Freelanceku, website freelance, freelance indonesia');
+INSERT INTO `site_seo` (`id`, `seo_name`, `seo_type`, `seo_locale`, `seo_des`, `seo_lang`, `seo_host`, `seo_author`, `seo_keyword`) VALUES
+(1, 'Freelanceku', 'Marketplace', 'id_ID', 'No.1 Situs web pekerja lepas untuk meraih impian', 'id', 'localhost', 'Freelanceku', 'Freelanceku, website freelance, freelance indonesia');
 
 -- --------------------------------------------------------
 

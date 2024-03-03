@@ -27,10 +27,10 @@
         // Update Seo Site
         if(isset($_POST["update-seo"])){
             $seo_name = $_POST["seo_name"]; $seo_type = $_POST["seo_type"]; $seo_locale = $_POST["seo_locale"];
-            $seo_amp  = $_POST["seo_amp"];  $seo_host = $_POST["seo_host"]; $seo_author = $_POST["seo_author"];
+            $seo_host = $_POST["seo_host"]; $seo_author = $_POST["seo_author"];
             $seo_keyword  = $_POST["seo_keyword"]; $seo_des = $_POST["seo_des"];
 
-            $Site->UpdateSEO($seo_name, $seo_type, $seo_locale, $seo_amp, $seo_host, $seo_author, $seo_keyword, $seo_des);
+            $Site->UpdateSEO($seo_name, $seo_type, $seo_locale, $seo_host, $seo_author, $seo_keyword, $seo_des);
             $_SESSION["STATUS_SITE"] = "Berhasil mengubah seo situs web 👍"; header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "admin/site"); exit();
         }
         // Update Site

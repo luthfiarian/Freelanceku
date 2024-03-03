@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelanceku | Freelancer Admin</title>
+    <title>Freelanceku | Tagihan Pelanggan Admin</title>
 
     <?php CallFileApp::RequireOnce('Views/Templates/Part/Style.php') ?>
 </head>
@@ -180,10 +180,8 @@
 
     <!-- Javascript -->
     <?php CallFileApp::RequireOnce('Views/Templates/Part/Javascript.php') ?>
-    <!-- End of Javascript -->
     <script type="text/javascript">window.onload = function () {document.getElementById("userDetail").click(); }; $(document).ready(function() {$("#userDetail").click(); }); window.onload = function() { document.getElementById("paybillButton").click();}; $(document).ready(function() {$("#paybillButton").click(); });</script>
-
-
+    <!-- End of Javascript -->
 </body>
 
 </html>

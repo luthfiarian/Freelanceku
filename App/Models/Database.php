@@ -15,7 +15,7 @@ use Random\Engine\Secure;
         // Update Data Site Identity
         public function UpdateIdentity($identity_phone, $identity_email, $identity_maps_link, $identity_maps_embed, $identity_address, $identity_ig, $identity_linkedin, $identity_x, $identity_fb){ $this->initDBRoute(); return mysqli_query($this->ConnDB, "UPDATE ". IDENTITY_SITE_DB . " SET identity_phone='$identity_phone', identity_email='$identity_email', identity_maps_link='$identity_maps_link', identity_maps_embed='$identity_maps_embed', identity_address='$identity_address', identity_ig='$identity_ig', identity_linkedin='$identity_linkedin', identity_x='$identity_x', identity_fb='$identity_fb' WHERE id='1'"); }
         // Update Data SEO
-        public function UpdateSEO($seo_name, $seo_type, $seo_locale, $seo_amp, $seo_host, $seo_author, $seo_keyword, $seo_des){ $this->initDBRoute(); return mysqli_query($this->ConnDB, "UPDATE ". SEO_SITE_DB . " SET seo_name='$seo_name', seo_type='$seo_type', seo_locale='$seo_locale', seo_amp='$seo_amp', seo_host='$seo_host', seo_author='$seo_author', seo_keyword='$seo_keyword', seo_des='$seo_des' WHERE id='1'"); }
+        public function UpdateSEO($seo_name, $seo_type, $seo_locale, $seo_host, $seo_author, $seo_keyword, $seo_des){ $this->initDBRoute(); return mysqli_query($this->ConnDB, "UPDATE ". SEO_SITE_DB . " SET seo_name='$seo_name', seo_type='$seo_type', seo_locale='$seo_locale', seo_host='$seo_host', seo_author='$seo_author', seo_keyword='$seo_keyword', seo_des='$seo_des' WHERE id='1'"); }
         // Fetch Data BANK
         public function Bank(){ $this->initDBRoute(); return mysqli_query($this->ConnDB, "SELECT * FROM ". BANK_SITE_DB); }
         // Search Data Bank

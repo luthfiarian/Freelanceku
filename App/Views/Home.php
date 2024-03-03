@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php echo $AMP = $Data1->seo_amp ? "amp" : "";  ?> lang="<?php echo $Data1->seo_lang ?>">
+<html lang="<?php echo $Data1->seo_lang ?>">
 <head>
     <!-- Meta -->
     <meta charset="UTF-8">
@@ -26,8 +26,6 @@
     <link rel="canonical" href="<?php echo CURRENT_URL ?>">
     
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Style.php");?>
-
-    <?php if($AMP): ?><script async src="https://cdn.ampproject.org/v0.js"><?php endif ?></script>
 </head>
 
 <body>
@@ -200,10 +198,16 @@
         )
     ); CallFileApp::RequireOnceData('views/templates/Footer.php', $Footer) ?>
     <!-- End of Footer -->
-    <!-- JS -->
+    
+    <!-- Javascript -->
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Javascript.php") ?>
     <!-- Navbar -->
     <script src="<?php echo CallAny::File('Public/dist/js/navbar.js'); ?>"></script>
+    <!-- Swipper's JS -->
+    <script src="<?php echo BASE_URI . 'node_modules/swiper/swiper-bundle.min.js' ?>"></script>
+    <!-- Initialize Swiper -->
+    <script>var swiper=new Swiper(".mySwiper",{cssMode:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination"},mousewheel:!0,keyboard:!0});</script>
+    <!-- End of Javascript -->
 </body>
 
 </html>

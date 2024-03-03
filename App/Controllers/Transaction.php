@@ -29,7 +29,7 @@
                         $StatusDB  = "Berhasil";
                         $TrxDB->AddTransactionDB($_SESSION["TRX_DATA"]["id"], $_SESSION["WORK_DETAIL"], $_SESSION["TRX_DATA"]["email"], $_SESSION["TRX_DATA"]["email_partner"], $_SESSION["TRX_DATA"]["amount"]);
                         $IncomeAmount = ($_SESSION["TRX_DATA"]["amount_wtax"] - $Tax->tax_midtrans) / (1 + ($Tax->tax_pay / 100)) * ($Tax->tax_pay / 100);
-                        $Site->AddIncome($_SESSION["TRX_DATA"]["id"], $_SESSION["TRX_DATA"]["email"], $IncomeAmount);
+                        $Site->AddIncome($_SESSION["TRX_DATA"]["id"], $_SESSION["TRX_DATA"]["email"], (int) $IncomeAmount);
                         $UserDB->AddBalanceDB($_SESSION["TRX_DATA"]["email_partner"], $_SESSION["TRX_DATA"]["amount"]);
                     }else if($_GET["transaction_status"] === "deny"){
                         $StatusAPI = "FAILED";
@@ -79,13 +79,19 @@
         else{
             $Trxid = $Notification->order_id;
             $TransferData = (object) mysqli_fetch_assoc($WebhooksDB->FetchAllDataTransferDB("trf_id='$Trxid'"));
+            $IncomeAmount = ($TransferData->trf_amount - $Tax->tax_midtrans) / (1 + ($Tax->tax_pay / 100)) * ($Tax->tax_pay / 100);
+            $TrxAmount = ($TransferData->trf_amount -  $Tax->tax_midtrans) * ($Tax->tax_pay / 100);
             
             if($Notification->statusDB === "Berhasil"){
-              $WebhooksDB->AddTransactionDB($Trxid, $TransferData->trf_workid, $TransferData->trf_fromemail, $TransferData->trf_toemail, "");  
-              $Site->AddIncome($Trxid, $TransferData->trf_fromemail, $IncomeAmount);
+              $WebhooksDB->AddTransactionDB($Trxid, $TransferData->trf_workid, $TransferData->trf_fromemail, $TransferData->trf_toemail, (int) $TrxAmount);  
+              $WebhooksDB->AddBalanceDB($TransferData->trf_toemail,  (int) $TrxAmount);
+              $Site->AddIncome($Trxid, $TransferData->trf_fromemail, (int) $IncomeAmount);
             }else{
 
             }
+
+            $WebhooksDB->UpdateTransferDB($Trxid, $Notification->statusDB);
+            // $TrxAPI->UpdateTransactionAPI($Data1->data_apikey, $Trxid, $StatusAPI);
         }
     }
 

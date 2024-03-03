@@ -5,7 +5,7 @@
      */
 
     // API BASE URL -> example : https://google.com/
-    $Api    = "https://freelance-api-production.up.railway.app/v1/";
+    $Api    = "";
 
     // API Routes
     $Signup     = "auth/register/";

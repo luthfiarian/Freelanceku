@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelanceku | Freelancer Admin</title>
+    <title>Freelanceku | Situs Admin</title>
 
     <?php CallFileApp::RequireOnce('Views/Templates/Part/Style.php') ?>
-    <?php CallFileApp::RequireOnce('Views/Templates/Part/Javascript.php') ?>
 </head>
 
 <body>
@@ -54,13 +53,9 @@
                                 </div>
                             </div>
                             <div class="w-full flex">
-                                <div class="w-1/2 mr-1">
+                                <div class="w-full">
                                     <label for="seo_locale" class="block" title="Wajib di isi">Lokasi Situs Web*</label>
                                     <input type="text" name="seo_locale" id="seo_locale" class="w-full rounded-full py-1 px-4" placeholder="Lokasi Situs Web" value="<?php echo $Data3->seo->seo_locale ?>" required>
-                                </div>
-                                <div class="w-1/2">
-                                    <label for="seo_amp" class="block" title="Wajib di isi">Status Amp Situs Web*</label>
-                                    <input type="number" inputmode="numeric" min="0" max="1" name="seo_amp" id="seo_amp" class="w-full rounded-full py-1 px-4" placeholder="Status Amp Situs Web" value="<?php echo $Data3->seo->seo_amp ?>" required>
                                 </div>
                             </div>
                             <div class="w-full flex">
@@ -260,6 +255,10 @@
     <!-- Footer -->
     <?php CallFileApp::RequireOnce('Views/Admin/Templates/Footer.php') ?>
     <!-- End of Footer -->
+
+    <!-- Javascript -->
+    <?php CallFileApp::RequireOnce('Views/Templates/Part/Javascript.php') ?>
+    <!-- End of Javascript -->
 </body>
 
 </html>

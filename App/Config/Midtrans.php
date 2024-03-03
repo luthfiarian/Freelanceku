@@ -7,9 +7,9 @@
      *  @param $MerchantID
      */
 
-     $ServerKey  = "";
-     $ClientKey  = "";
-     $MerchantID = "";
+     $ServerKey  = "SB-Mid-server-pfOmHQiFZyebEPt9udatjSo0";
+     $ClientKey  = "SB-Mid-client-qMe0tQcBLfbQ9FHx";
+     $MerchantID = "G020968998";
      $Sandbox    = "https://app.sandbox.midtrans.com/snap/";
      $Production = "https://app.midtrans.com/snap/";
  

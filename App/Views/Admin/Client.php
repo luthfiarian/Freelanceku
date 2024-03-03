@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelanceku | Freelancer Admin</title>
+    <title>Freelanceku | Pengguna Pelanggan Admin</title>
 
     <?php CallFileApp::RequireOnce('Views/Templates/Part/Style.php') ?>
-    <?php CallFileApp::RequireOnce('Views/Templates/Part/Javascript.php') ?>
 </head>
 
 <body>
@@ -167,6 +166,10 @@
     <!-- Footer -->
     <?php CallFileApp::RequireOnce('Views/Admin/Templates/Footer.php') ?>
     <!-- End of Footer -->
+
+    <!-- Javascript -->
+    <?php CallFileApp::RequireOnce('Views/Templates/Part/Javascript.php') ?>
+    <!-- End of Javascript -->
 </body>
 
 </html>

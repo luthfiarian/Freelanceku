@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html <?php echo $AMP = $Data1->seo_amp ? "amp" : "";  ?> lang="<?php echo $Data1->seo_lang ?>">
+<html lang="<?php echo $Data1->seo_lang ?>">
 <head>
     <title>Freelanceku | Akun</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Style.php"); ?>
-    <?php if ($AMP) : ?><script async src="https://cdn.ampproject.org/v0.js"></script><?php endif ?>
 
 </head>
 <body>

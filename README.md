@@ -50,17 +50,24 @@ git clone https://github.com/luthfionumsida/freelanceku.git
 ```bash
 https://github.com/luthfionumsida/freelanceku/archive/refs/heads/main.zip
 ```
-<p>Install npm and composer package</p>
+<p>Install npm and composer package <br /> For Development</p>
 
 ```bash
 npm install
 composer install
+```
+<p>For Production</p>
+
+```bash
+npm install --production
+composer install --no-dev
 ```
 
 <p>List of package</p>
 
     Midtrans/Midstrans-php  (composer)
     Flowbite                (npm)
+    Swiper                  (npm)
 
 <p>Location Database</p>
 
@@ -150,6 +157,7 @@ https://localhost/freelanceku/?portal-admin=adminKey
 - There is no change in account to become a partner/employer
 - Debug Mode in Development (for Developer)
 - Midtrans Webhook (Coming soon)
+- Built in PWA (Coming Soon)
 
 <h2>⚠️ License</h2>
 

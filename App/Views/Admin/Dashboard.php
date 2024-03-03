@@ -6,7 +6,6 @@
     <title>Freelanceku | Dashboard Admin</title>
 
     <?php CallFileApp::RequireOnce('Views/Templates/Part/Style.php') ?>
-    <?php CallFileApp::RequireOnce('Views/Templates/Part/Javascript.php') ?>
 </head>
 <body>
     <!-- Header -->
@@ -180,5 +179,9 @@
     <!-- Footer -->
     <?php CallFileApp::RequireOnce('Views/Admin/Templates/Footer.php') ?>
     <!-- End of Footer -->
+    
+    <!-- Javascript -->
+    <?php CallFileApp::RequireOnce('Views/Templates/Part/Javascript.php') ?>
+    <!-- End of Javascript -->
 </body>
 </html>

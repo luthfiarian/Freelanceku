@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "flowbite": "^2.2.1"
+    "flowbite": "^2.2.1",
+    "swiper": "^11.0.7"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1"
