@@ -40,7 +40,7 @@
                 <div class="w-full flex">
                     <!-- Profile -->
                     <div class="w-1/3 h-full rounded-lg shadow-lg backdrop-blur-md bg-slate-600/80 py-4 px-2 mr-2 self-center">
-                        <div class="w-full flex"><img src="<?php echo BASE_URI . $Data1->data_photo ?>" alt="Foto Profil" class="w-1/3 md:w-1/5 rounded-full shadow-md mx-auto"></div>
+                        <div class="w-full flex"><img src="<?php echo BASE_ROOT . $Data1->data_photo ?>" alt="Foto Profil" class="w-1/3 md:w-1/5 rounded-full shadow-md mx-auto"></div>
                         <p class="w-2/3 mx-auto mt-2 py-1 px-2 text-xs md:text-base text-center text-primary rounded-full bg-secondary"><?php echo $Data2->data->identity->first_name . " " . $Data2->data->identity->last_name ?></p>
                         <p class="w-2/3 mx-auto mt-2 py-1 px-2 text-xs md:text-base text-center text-primary rounded-full bg-secondary line-clamp-1"><?php echo $Data2->data->identity->phone ?></p>
                         <p class="w-2/3 mx-auto mt-2 py-1 px-2 text-xs md:text-base text-center text-primary rounded-full bg-secondary line-clamp-1"><?php echo $Data2->data->identity->email ?></p>

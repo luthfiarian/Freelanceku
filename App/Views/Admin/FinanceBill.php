@@ -94,7 +94,7 @@
                                     <td><form action="" method="post"><input type="hidden" name="email" value="<?php echo $Finish["bill_email"] ?>"><input type="submit" name="client-detail" value="<?php echo $Finish["bill_email"] ?>" class="rounded-lg px-2 bg-secondary cursor-help"></form></td>
                                     <td><?php echo date('H:i d M Y', strtotime($Finish["bill_date"])) ?></td>
                                     <td>Rp. <?php echo $Finish["bill_amount"] ?></td>
-                                    <td <?php if($j == $QueryBillFinish): ?> class="rounded-br-xl" <?php endif ?>><a href="<?php echo BASE_URI . $Finish["bill_file"] ?>"><button type="button" class="rounded-lg px-2 text-primary bg-secondary">Lihat Bukti</button></a></td>
+                                    <td <?php if($j == $QueryBillFinish): ?> class="rounded-br-xl" <?php endif ?>><a href="<?php echo BASE_ROOT . $Finish["bill_file"] ?>"><button type="button" class="rounded-lg px-2 text-primary bg-secondary">Lihat Bukti</button></a></td>
                                 </tr>
                                 <?php $j++; endwhile ?>
                                 <?php if($QueryBillFinish == 0): ?>

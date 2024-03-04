@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start rtl:justify-end">
         <a href="" class="flex ms-2 md:me-24">
-          <img src="<?php echo BASE_URI . "Public/dist/image/favicon.png" ?>" class="h-8 me-3" alt="Freelanceku Logo" />
+          <img src="<?php echo BASE_ROOT . "Public/dist/image/favicon.png" ?>" class="h-8 me-3" alt="Freelanceku Logo" />
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Freelanceku</span>
         </a>
       </div>
@@ -12,7 +12,7 @@
             <div>
               <button type="button" class="flex text-sm bg-white border rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span class="sr-only">Open user menu</span>
-                <img class="!w-8 !h-8 rounded-full" src="<?php echo BASE_URI . $Data1->data_photo ?>" alt="user photo">
+                <img class="!w-8 !h-8 rounded-full" src="<?php echo BASE_ROOT . $Data1->data_photo ?>" alt="user photo">
               </button>
             </div>
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="dropdown-user">

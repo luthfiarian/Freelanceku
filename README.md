@@ -160,8 +160,8 @@ http://localhost/freelanceku/?portal-admin=adminKey
 - Use Payment gateway for payment after job completion
 - There is no change in account to become a partner/employer
 - Debug Mode in Development (for Developer)
+- Built in PWA
 - Midtrans Webhook (Coming soon)
-- Built in PWA (Coming Soon)
 
 <h2>⚠️ License</h2>
 

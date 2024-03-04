@@ -132,17 +132,17 @@
                                         // Pengecekan dan penambahan ke array processedPartners
                                         if (!empty($Partner["work_partner1"]) && !in_array($Partner["work_partner1"], $processedPartners)) {
                                             $processedPartners[] = $Partner["work_partner1"]; // Tambahkan ke array processedPartners
-                                            echo "<tr><td class='py-2'><img width='25px' src='" . BASE_URI . "Public/dist/image/user-photo.png'></td><td class='py-1'>{$Partner['work_partner1']}</td><td><a href='mailto:{$Partner["work_partner1"]}'><button type='button' class='py-1 px-2 rounded-lg text-primary bg-secondary hover:bg-third'>Hubungi</button></a></td></tr>";
+                                            echo "<tr><td class='py-2'><img width='25px' src='" . BASE_ROOT . "Public/dist/image/user-photo.png'></td><td class='py-1'>{$Partner['work_partner1']}</td><td><a href='mailto:{$Partner["work_partner1"]}'><button type='button' class='py-1 px-2 rounded-lg text-primary bg-secondary hover:bg-third'>Hubungi</button></a></td></tr>";
                                         }
                                         // Lakukan hal yang sama untuk work_partner2 dan work_partner3
                                         if (!empty($Partner["work_partner2"]) && !in_array($Partner["work_partner2"], $processedPartners)) {
                                             $processedPartners[] = $Partner["work_partner2"]; // Tambahkan ke array processedPartners
-                                            echo "<tr><td class='py-2'><img width='25px' src='" . BASE_URI . "Public/dist/image/user-photo.png'></td><td class='py-1'>{$Partner['work_partner2']}</td><td><a href='mailto:{$Partner["work_partner2"]}'><button type='button' class='py-1 px-2 rounded-lg text-primary bg-secondary hover:bg-third'>Hubungi</button></a></td></tr>";
+                                            echo "<tr><td class='py-2'><img width='25px' src='" . BASE_ROOT . "Public/dist/image/user-photo.png'></td><td class='py-1'>{$Partner['work_partner2']}</td><td><a href='mailto:{$Partner["work_partner2"]}'><button type='button' class='py-1 px-2 rounded-lg text-primary bg-secondary hover:bg-third'>Hubungi</button></a></td></tr>";
                                         }
                                         // Lakukan hal yang sama untuk work_partner3
                                         if (!empty($Partner["work_partner3"]) && !in_array($Partner["work_partner3"], $processedPartners)) {
                                             $processedPartners[] = $Partner["work_partner3"]; // Tambahkan ke array processedPartners
-                                            echo "<tr><td class='py-2'><img width='25px' src='" . BASE_URI . "Public/dist/image/user-photo.png'></td><td class='py-1'>{$Partner['work_partner3']}</td><td><a href='mailto:{$Partner["work_partner3"]}'><button type='button' class='py-1 px-2 rounded-lg text-primary bg-secondary hover:bg-third'>Hubungi</button></a></td></tr>";
+                                            echo "<tr><td class='py-2'><img width='25px' src='" . BASE_ROOT . "Public/dist/image/user-photo.png'></td><td class='py-1'>{$Partner['work_partner3']}</td><td><a href='mailto:{$Partner["work_partner3"]}'><button type='button' class='py-1 px-2 rounded-lg text-primary bg-secondary hover:bg-third'>Hubungi</button></a></td></tr>";
                                         }
                                     }
                                     ?>
@@ -337,7 +337,7 @@
                     <p class="w-full text-center text-sm">Telah Dikirim ke (<?php echo $Data3->data_paymentid ?>)</p>
                     <p class="w-full text-center">Rp. <?php echo $Data5->invoice->bill_amount ?></p>
                     <div class="w-full flex mt-2">
-                        <a href="<?php echo BASE_URI . $Data5->invoice->bill_file ?>" class="mx-auto">
+                        <a href="<?php echo BASE_ROOT . $Data5->invoice->bill_file ?>" class="mx-auto">
                             <button type="button" class="py-2 flex px-4 text-primary bg-red-500 hover:shadow-lg hover:bg-red-700">
                                 <svg viewBox="0 0 1024 1024" width="25px" height="25px" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M731.15 585.97c-100.99 0-182.86 81.87-182.86 182.86s81.87 182.86 182.86 182.86 182.86-81.87 182.86-182.86-81.87-182.86-182.86-182.86z m0 292.57c-60.5 0-109.71-49.22-109.71-109.71s49.22-109.71 109.71-109.71c60.5 0 109.71 49.22 109.71 109.71s-49.21 109.71-109.71 109.71z" fill="#ffffff"></path><path d="M718.01 778.55l-42.56-38.12-36.6 40.86 84.02 75.26 102.98-118.46-41.4-36zM219.51 474.96h219.43v73.14H219.51z" fill="#ffffff"></path><path d="M182.61 365.86h585.62v179.48h73.14V145.21c0-39.96-32.5-72.48-72.46-72.48h-27.36c-29.18 0-55.04 16.73-65.88 42.59-5.71 13.64-27.82 13.66-33.57-0.02-10.86-25.86-36.71-42.57-65.88-42.57h-18.16c-29.18 0-55.04 16.73-65.88 42.59-5.71 13.64-27.82 13.66-33.57-0.02-10.86-25.86-36.71-42.57-65.88-42.57H375.3c-29.18 0-55.04 16.73-65.88 42.59-5.71 13.64-27.82 13.66-33.57-0.02-10.86-25.86-36.71-42.57-65.88-42.57H182.4c-39.96 0-72.48 32.52-72.48 72.48v805.14h401.21v-73.14H183.04l-0.43-511.35z m25.81-222.29c14.25 34.09 47.32 56.11 84.23 56.11 36.89 0 69.96-22.02 82.66-53.8l15.86-2.3c14.25 34.09 47.32 56.11 84.23 56.11 36.89 0 69.96-22.02 82.66-53.8l16.59-2.3c14.25 34.09 47.32 56.11 84.23 56.11 36.89 0 69.96-22.02 82.66-53.8l26.68-0.66v147.5H182.54l-0.13-146.84 26.01-2.33z" fill="#ffffff"></path></g></svg>
                                 Unduh Faktur

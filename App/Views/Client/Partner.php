@@ -98,7 +98,7 @@
                         <div class="w-1/3 md:w-1/4 mr-1">
                             <div class="w-full h-fit border rounded-lg group ease-linear duration-300 hover:shadow-lg relative">
                                 <p class="text-xs md:text-base text-center font-semibold absolute top-[40%] z-10 left-0 right-0 text-primary ease-linear duration-300 group-hover:p-0.5 group-hover:bg-primary group-hover:text-black">#WORK-<?php echo ltrim($_SESSION["WORK_DETAIL_PARTNER"], "workid-") ?></p>
-                                <img src="<?php echo BASE_URI . $Data9->work_image ?>" width="150px" height="150px" class="mx-auto rounded-lg -z-20 grayscale ease-in-out duration-300 group-hover:grayscale-0" alt="Latar belakang #work-<?php echo $_SESSION["WORK_DETAIL_PARTNER"] ?>">
+                                <img src="<?php echo BASE_ROOT . $Data9->work_image ?>" width="150px" height="150px" class="mx-auto rounded-lg -z-20 grayscale ease-in-out duration-300 group-hover:grayscale-0" alt="Latar belakang #work-<?php echo $_SESSION["WORK_DETAIL_PARTNER"] ?>">
                             </div>
                         </div>
                         <div class="w-2/3 md:w-3/4 flex">
@@ -113,7 +113,7 @@
                                         <?php if($Data9->work_status == 0): ?>
                                         <button data-modal-target="upload-<?php echo $Data8->id ?>" data-modal-toggle="upload-<?php echo $Data8->id ?>" type="button" class="py-0.5 px-2 bg-secondary text-primary rounded-lg ease-in-out duration-150 hover:bg-third">📁 Unggah Berkas</button>
                                         <?php elseif(($Data9->work_status == 1) && !empty($Data8->partner_file) ): ?>
-                                        <a href="<?php echo BASE_URI . $Data8->partner_file ?>"><button type="button" class="py-0.5 px-2 bg-green-500 text-primary rounded-lg ease-in-out duration-150 hover:bg-green-600">📁 Unduh Berkas</button></a>
+                                        <a href="<?php echo BASE_ROOT . $Data8->partner_file ?>"><button type="button" class="py-0.5 px-2 bg-green-500 text-primary rounded-lg ease-in-out duration-150 hover:bg-green-600">📁 Unduh Berkas</button></a>
                                         <?php endif ?>
                                     </td>
                                 </tr>

@@ -54,7 +54,7 @@
                 <!-- Previous File -->
                 <?php if(!empty($Data->partner_file)): ?>
                 <div class="w-full mb-1">
-                    <a href="<?php echo BASE_URI . $Data->partner_file ?>"><button type="button" class="w-full py-2 rounded-lg text-primary bg-green-500 ease-in-out duration-300 hover:bg-green-600">Unduh Berkas Sebelumnya</button></a>
+                    <a href="<?php echo BASE_ROOT . $Data->partner_file ?>"><button type="button" class="w-full py-2 rounded-lg text-primary bg-green-500 ease-in-out duration-300 hover:bg-green-600">Unduh Berkas Sebelumnya</button></a>
                 </div>
                 <?php endif ?>
                 <form action="" method="post" class="w-full" enctype="multipart/form-data">

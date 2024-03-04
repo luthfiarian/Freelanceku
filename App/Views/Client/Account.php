@@ -26,7 +26,7 @@
             <div class="container">
                 <div class="w-full flex flex-warp ">
                     <div class="w-full md:w-1/3 h-auto mt-2 border rounded-lg py-4 px-5 text-center mr-0 md:mr-1">
-                        <img src="<?php echo BASE_URI . $Data4->data_photo ?>" alt="Foto Profil" class="mx-auto !w-[75px] md:!w-[100px] !h-[75px] md:!h-[100px] rounded-full shadow-sm">
+                        <img src="<?php echo BASE_ROOT . $Data4->data_photo ?>" alt="Foto Profil" class="mx-auto !w-[75px] md:!w-[100px] !h-[75px] md:!h-[100px] rounded-full shadow-sm">
                         <p class="mt-2 text-sm md:text-base">
                             <span class="font-semibold text-sm md:text-base"><?php echo $Data5->data->identity->first_name . " " . $Data5->data->identity->last_name ; ?></span><br>
                             <?php echo $Data5->data->identity->username; ?> <br>
@@ -90,7 +90,7 @@
                                     <td class="px-6 py-4 text-center flex">
                                         <div class="w-full flex">
                                             <div class="mx-auto flex">
-                                                <a href="<?php echo BASE_URI . $Porto["porto_file"] ?>" class="font-medium text-blue-600 hover:underline">Unduh</a> |
+                                                <a href="<?php echo BASE_ROOT . $Porto["porto_file"] ?>" class="font-medium text-blue-600 hover:underline">Unduh</a> |
                                                 <form action="" method="post" class="w-fit"><input type="hidden" name="id" value="<?php echo $Porto["id"] ?>"><input type="hidden" name="file" value="<?php echo $Porto["porto_file"] ?>"><input type="submit" name="delete-porto" value="Hapus" class="font-medium text-red-600 hover:underline"></form>
                                             </div>
                                         </div>

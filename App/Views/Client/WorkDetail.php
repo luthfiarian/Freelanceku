@@ -37,7 +37,7 @@
                         <div class="w-1/3 md:w-1/4 mr-1">
                             <div class="w-full h-fit border rounded-lg group ease-linear duration-300 hover:shadow-lg relative">
                                 <p class="text-xs md:text-base text-center font-semibold absolute top-[40%] z-10 left-0 right-0 text-primary ease-linear duration-300 group-hover:p-0.5 group-hover:bg-primary group-hover:text-black">#WORK-<?php echo $_SESSION["WORK_DETAIL"] ?></p>
-                                <img src="<?php echo BASE_URI . $Data4->work_image ?>" width="150px" height="150px" class="mx-auto rounded-lg -z-20 grayscale ease-in-out duration-300 group-hover:grayscale-0" alt="Latar belakang #work-<?php echo $_SESSION["WORK_DETAIL"] ?>">
+                                <img src="<?php echo BASE_ROOT . $Data4->work_image ?>" width="150px" height="150px" class="mx-auto rounded-lg -z-20 grayscale ease-in-out duration-300 group-hover:grayscale-0" alt="Latar belakang #work-<?php echo $_SESSION["WORK_DETAIL"] ?>">
                             </div>
                         </div>
                         <div class="w-2/3 md:w-3/4 flex">

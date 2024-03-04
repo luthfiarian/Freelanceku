@@ -18,7 +18,7 @@
             ?>
                 <div class="flex py-2 md:py-4 justify-center">
                     <div class="pb-2 rounded-2xl border-2 border-forth bg-white bg-opacity-80 shadow-2xl">
-                        <img src="<?php echo BASE_URI . $Work["work_image"] ?>" alt="Search" class="!w-[150px] !h-[100px] md:!w-[200px] md:!h-[150px] rounded-t-xl">
+                        <img src="<?php echo BASE_ROOT . $Work["work_image"] ?>" alt="Search" class="!w-[150px] !h-[100px] md:!w-[200px] md:!h-[150px] rounded-t-xl">
                         <p class="text-center text-sm md:text-base my-1 md:my-2 font-medium md:font-semibold"><?php echo $Work["work_name"] ?></p>
                         <p class="text-center my-2"><span class="p-0.5 md:p-1 rounded-sm md:rounded-lg border md:border-2 text-sm md:text-base border-forth font-medium mx-0.5"><?php echo $Work["work_field"] ?></span></p>
                         <div class="w-full flex">

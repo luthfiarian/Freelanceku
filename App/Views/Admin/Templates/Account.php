@@ -2,7 +2,7 @@
     <div class="container">
         <div class="w-full flex">
             <div class="w-full flex bg-gradient-to-r from-third to-secondary backdrop-blur-lg rounded-lg py-2 px-4 shadow-xl">
-                <img src="<?php echo BASE_URI . $Data1->data_photo ?>" alt="Avatar Admin" class="rounded-full !w-[75px] !h-[75px]">
+                <img src="<?php echo BASE_ROOT . $Data1->data_photo ?>" alt="Avatar Admin" class="rounded-full !w-[75px] !h-[75px]">
                 <div class="font-medium ml-5 text-white self-center">
                     <p>Hai! <?php echo $Data2->data->identity->first_name . " " . $Data2->data->identity->last_name ?> <br><?php echo $Data1->data_email ?></p>
                 </div>

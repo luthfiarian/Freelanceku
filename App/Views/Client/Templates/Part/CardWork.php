@@ -1,6 +1,6 @@
 <?php while($Work = mysqli_fetch_assoc($Data)): ?>
 <div class="w-full rounded-lg pb-2 border shadow-md bg-gradient-to-tr from-primary to-slate-300">
-    <img src="<?php echo BASE_URI . $Work["work_image"] ?>"  alt="Latar Belakang Pekerjaan" class="rounded-t-lg !w-full !h-[100px] md:!h-[75px] lg:!h-[250px] hover:grayscale-[50%]">
+    <img src="<?php echo BASE_ROOT . $Work["work_image"] ?>"  alt="Latar Belakang Pekerjaan" class="rounded-t-lg !w-full !h-[100px] md:!h-[75px] lg:!h-[250px] hover:grayscale-[50%]">
     <div class="w-full p-1">
         <p class="text-sm md:text-base font-semibold"><?php echo $Work["work_name"] ?></p>
         <p class="text-[10px] md:text-xs lg:text-sm">

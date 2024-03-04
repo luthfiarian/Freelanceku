@@ -6,7 +6,6 @@
      *  @param $ClientKey
      *  @param $MerchantID
      * 
-     * If you 
      */
 
      $ServerKey  = "";

@@ -135,7 +135,7 @@
                                         <td><form action="" method="post"><input type="hidden" name="email" value="<?php echo $Partner["partner_email"] ?>"><input type="submit" name="client-detail" value="<?php echo $Partner["partner_email"] ?>" class="rounded-lg px-2 bg-secondary cursor-help"></form></td>
                                         <td><?php echo ($Partner["partner_reqstatus"] == 0 ? "Proses" : $Partner["partner_reqstatus"] == 1) ? "Diterima" : "Ditolak" ?></td>
                                         <td><?php echo date('d M Y', strtotime($Partner["partner_date"])) ?></td>
-                                        <td <?php if($k == $QueryPartner): ?> class="rounded-br-xl" <?php endif ?>><a href="<?php echo !empty($Partner["partner_file"]) ? BASE_URI . $Partner["partner_file"] : "#" ?>" class="py-1 px-2 rounded-lg text-primary bg-secondary">Unduh Berkas</a></td>
+                                        <td <?php if($k == $QueryPartner): ?> class="rounded-br-xl" <?php endif ?>><a href="<?php echo !empty($Partner["partner_file"]) ? BASE_ROOT . $Partner["partner_file"] : "#" ?>" class="py-1 px-2 rounded-lg text-primary bg-secondary">Unduh Berkas</a></td>
                                     </tr>
                                     <?php $k++; endwhile ?>
                                     <?php if($QueryPartner == 0): ?>

@@ -20,4 +20,4 @@
     </div>
     <div id="minimizedContent" class="hidden border p-2 text-xs text-center"></div>
 </div>
-<script src="<?php echo CallAny::File("Public/dist/js/debug.js"); ?>"></script>
+<script src="<?php echo BASE_ROOT . "Public/dist/js/debug.js" ?>"></script>

@@ -7,7 +7,7 @@
     <div class="w-full flex flex-warp">
         <!-- Image Profile Partner-->
         <div class="w-2/6 mr-1">
-            <center><img src="<?php echo BASE_URI . $Data1->data_photo ?>" alt="Foto Profil <?php echo $PartnerData->data->identity->first_name ?>" class="w-full mx-0 md:w-1/2 lg:w-1/3 md:mx-auto"></center>
+            <center><img src="<?php echo BASE_ROOT . $Data1->data_photo ?>" alt="Foto Profil <?php echo $PartnerData->data->identity->first_name ?>" class="w-full mx-0 md:w-1/2 lg:w-1/3 md:mx-auto"></center>
         </div>
         <!-- Data Partner -->
         <div class="w-4/6 mx-auto">
@@ -15,7 +15,7 @@
             <p class="w-full border rounded-lg bg-gray-300 px-2 py-1 md:px-4 text-sm md:text-base font-semibold"><?php echo $PartnerData->data->identity->first_name . ' ' . $PartnerData->data->identity->last_name ?></p>
             
             <div class="w-full flex flex-warp mt-1">
-                <a href="<?php echo !empty($Data2->partner_file) ?  BASE_URI . $Data2->partner_file : '#' ?>" class="w-1/3 mr-1"><button type="button" class="w-full text-xs md:text-sm lg:text-base p-1 border rounded-lg ease-in-out duration-300 transition hover:bg-black hover:text-primary h-auto"><span class="mr-0 md:mr-1">⏬</span><span class="hidden md:!contents">File</span></button></a>  
+                <a href="<?php echo !empty($Data2->partner_file) ?  BASE_ROOT . $Data2->partner_file : '#' ?>" class="w-1/3 mr-1"><button type="button" class="w-full text-xs md:text-sm lg:text-base p-1 border rounded-lg ease-in-out duration-300 transition hover:bg-black hover:text-primary h-auto"><span class="mr-0 md:mr-1">⏬</span><span class="hidden md:!contents">File</span></button></a>  
                 <button data-modal-target="modal-<?php echo $PartnerData->data->identity->first_name ?>" data-modal-toggle="modal-<?php echo $PartnerData->data->identity->first_name ?>" type="button" class="w-1/3 mx-auto text-xs md:text-sm lg:text-base mr-1 p-1 border rounded-lg ease-in-out duration-300 transition hover:bg-black hover:text-primary h-auto"><span class="mr-0 md:mr-1">📝</span><span class="hidden md:!contents">Pesan</span></button>
                 <button data-modal-target="call-<?php echo $PartnerData->data->identity->first_name ?>" data-modal-toggle="call-<?php echo $PartnerData->data->identity->first_name ?>" type="button" class="w-1/3 mx-auto text-xs md:text-sm lg:text-base p-1 border rounded-lg ease-in-out duration-300 transition hover:bg-black hover:text-primary h-auto"><span class="mr-0 md:mr-0.5">📲</span><span class="hidden md:!contents">Hubungi</span></button>
             </div>

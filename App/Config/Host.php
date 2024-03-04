@@ -3,8 +3,9 @@
      * Config Host 
      */
 
-    $Host = "localhost";         // Input Only Host Domain / Host Subdomain (example www.google.com / sub.google.com) Without Protocol(http/https) and Slash or Back-Slash
-    $Uri  = "/freelanceku/";    // Uri input must be with a slash, start of uri and end of uri (example /freelanceku/)
+    $Host   = "localhost";         // Input Only Host Domain / Host Subdomain (example www.google.com / sub.google.com) Without Protocol(http/https) and Slash or Back-Slash
+    $Uri    = "/freelanceku/";    // Uri input must be with a slash, start of uri and end of uri (example /freelanceku/)
+    $Root   = "/freelanceku/";    // Base of folder root youre save this project
     $Status = 0;                // 0 = Development / 1 = Production
     $CurentUrl = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     $Protocol = (empty($_SERVER['HTTPS']) ? 'http' : 'https');
@@ -18,6 +19,7 @@
     define('BASE_HOST', $Host);
     define('BASE_URI', $Uri);
     define('BASE_URL', $Host.$Uri);
+    define('BASE_ROOT', $Root);
     define('CURRENT_URL', $CurentUrl);
     define('PROTOCOL_URL', $Protocol);
     define('STATUS_APP', $Status);

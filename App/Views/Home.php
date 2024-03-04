@@ -16,12 +16,14 @@
     <meta property="og:type" content="<?php echo $Data1->seo_type ?>" />
     <meta property="og:locale" content="<?php echo $Data1->seo_locale ?>"  />
     <meta property="og:url" content="<?php echo CURRENT_URL ?>" />
-    <meta property="og:image" content="<?php echo BASE_URI . 'Public/dist/image/favicon.png' ?>" />
+    <meta property="og:image" content="<?php echo BASE_ROOT . 'Public/dist/image/favicon.png' ?>" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="300" />
     <meta property="og:image:height" content="300" />
     <meta property="og:description" content="<?php echo $Data1->seo_des ?>" />
-
+    
+    <?php CallFileApp::RequireOnce("Views/Templates/Part/PWA.php");?>
+    
     <!-- Canonical -->
     <link rel="canonical" href="<?php echo CURRENT_URL ?>">
     
@@ -59,7 +61,7 @@
                     </div>
                 </div>
                 <div class="!hidden md:!contents md:!w-1/4 self-center">
-                    <img src="<?php echo BASE_URI . 'Public/dist/image/bag.png' ?>" class="md:!w-[250px] mx-auto drop-shadow-2xl smooth-bounce-hero" alt="Hero Image" srcset="">
+                    <img src="<?php echo BASE_ROOT . 'Public/dist/image/bag.png' ?>" class="md:!w-[250px] mx-auto drop-shadow-2xl smooth-bounce-hero" alt="Hero Image" srcset="">
                 </div>
             </div>
         </section>
@@ -72,9 +74,9 @@
                     <h1 class="text-center font-semibold uppercase tracking-[10px]">Persembahan</h1>
                 </div>
                 <div class="w-full lg:w-1/2 mx-auto flex mt-2">
-                    <img src="<?php echo BASE_URI . 'Public/dist/image/umsida.png' ?>" title="Universitas Muhammadiyah Sidoarjo" alt="Umsida Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
-                    <img src="<?php echo BASE_URI . 'Public/dist/image/km.png' ?>" title="Kampus Merdeka" alt="Kampus Merdeka Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
-                    <img src="<?php echo BASE_URI . 'Public/dist/image/sinta.png' ?>" title="Sinta" alt="Sinta Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
+                    <img src="<?php echo BASE_ROOT . 'Public/dist/image/umsida.png' ?>" title="Universitas Muhammadiyah Sidoarjo" alt="Umsida Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
+                    <img src="<?php echo BASE_ROOT . 'Public/dist/image/km.png' ?>" title="Kampus Merdeka" alt="Kampus Merdeka Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
+                    <img src="<?php echo BASE_ROOT . 'Public/dist/image/sinta.png' ?>" title="Sinta" alt="Sinta Logo" class="grayscale !w-[100px] md:!w-[150px] mx-auto self-center hover:grayscale-0">
                 </div>
             </div>
         </section>
@@ -99,7 +101,7 @@
                     </div>
                     <div class="!hidden md:!contents md:w-2/6 lg:w-1/6">
                         <div class="w-full flow-root self-center">
-                            <img src="<?php echo CallAny::File('Public/dist/image/cs.png'); ?>" alt="About Image" class="float-right self-center rounded-xl shadow-lg !w-[200px]">
+                            <img src="<?php echo BASE_ROOT . 'Public/dist/image/cs.png'; ?>" alt="About Image" class="float-right self-center rounded-xl shadow-lg !w-[200px]">
                         </div>
                     </div>
                 </div>
@@ -130,7 +132,7 @@
                                         <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a beatae blanditiis modi molestias voluptatibus amet eum alias. Blanditiis ea quaerat modi dolorem tenetur adipisci temporibus nostrum aspernatur debitis magnam."</p>
                                     </blockquote>
                                     <figcaption class="flex items-center justify-center mt-6 space-x-3 rtl:space-x-reverse">
-                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_URI . 'Public/dist/image/cs.png' ?>" alt="profile picture">
+                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_ROOT . 'Public/dist/image/cs.png' ?>" alt="profile picture">
                                         <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-500-700">
                                             <cite class="pe-3 font-medium text-gray-900">Michael Gough</cite>
                                             <cite class="ps-3 text-sm text-gray-500">CEO at Freelanceku</cite>
@@ -148,7 +150,7 @@
                                         <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a beatae blanditiis modi molestias voluptatibus amet eum alias. Blanditiis ea quaerat modi dolorem tenetur adipisci temporibus nostrum aspernatur debitis magnam."</p>
                                     </blockquote>
                                     <figcaption class="flex items-center justify-center mt-6 space-x-3 rtl:space-x-reverse">
-                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_URI . 'Public/dist/image/cs.png' ?>" alt="profile picture">
+                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_ROOT . 'Public/dist/image/cs.png' ?>" alt="profile picture">
                                         <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-500-700">
                                             <cite class="pe-3 font-medium text-gray-900">Michael Gough</cite>
                                             <cite class="ps-3 text-sm text-gray-500">CEO at Freelanceku</cite>
@@ -202,12 +204,16 @@
     <!-- Javascript -->
     <?php CallFileApp::RequireOnce("Views/Templates/Part/Javascript.php") ?>
     <!-- Navbar -->
-    <script src="<?php echo CallAny::File('Public/dist/js/navbar.js'); ?>"></script>
+    <script src="<?php echo BASE_ROOT .'Public/dist/js/navbar.js' ?>"></script>
     <!-- Swipper's JS -->
-    <script src="<?php echo BASE_URI . 'node_modules/swiper/swiper-bundle.min.js' ?>"></script>
+    <script src="<?php echo BASE_ROOT . 'node_modules/swiper/swiper-bundle.min.js' ?>"></script>
     <!-- Initialize Swiper -->
     <script>var swiper=new Swiper(".mySwiper",{cssMode:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination"},mousewheel:!0,keyboard:!0});</script>
     <!-- End of Javascript -->
+
+    <!-- PWA Register Service Worker Javascript -->
+    <?php CallFileApp::RequireOnce("Views/Templates/Part/RegisSWPWA.php");?>
+    <!-- End of PWA Register Service Worker Javascript -->
 </body>
 
 </html>
