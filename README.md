@@ -172,7 +172,7 @@ http://localhost/freelanceku/?portal-admin=adminKey
 <p align="center">
 <a href="https://serveo.net/">Serveo</a> • <a href="https://localhost.run/">localhost.run</a> • <a href="https://www.cloudflare.com/products/tunnel/">Cloudflare Tunnel</a>
 </p>
-<p style="text-align: justify;">Don't forget to configure your Midtrans account (on the Midtrans right navigation, click integration and click configuration), fill in the gray box image below:</p>
+<p style="text-align: justify;">Don't forget to configure your Midtrans account (on the Midtrans right navigation, click integration and click configuration), fill in the gray box image below according to the complete URL of your website:</p>
 <p align="center"><img src="https://i.ibb.co/jDqmsTY/webhook.png" width="75%" alt="Webhook Configuration Midtrans" /></p>
 <p>The message of failure to receive notification from Midtrans will be stored in the freelanceku_site table site_webhook database</p>
 <h2 id="feature">🌟 Feature</h2>
