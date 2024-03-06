@@ -168,7 +168,7 @@ http://localhost/freelanceku/?portal-admin=adminKey
 <p>If you have input the URL above, the page will automatically reload / go to the home page, then click on the register button</p>
 
 <h3>Webhook / HTTP(S) Notification Midtrans</h3>
-<p style="text-align: justify;">If you use webhooks, use port forwarding or local tunneling software to receive notifications from Midtrans. Make sure the software is free from "Visit Site" prompts or pages that are harmful to web browsers. Software suggestions:</p>
+<p style="text-align: justify;">If you use webhooks, use port forwarding or local tunneling software to receive notifications from Midtrans (<strong>If you have a website that has integrated domain and SSL, it is highly recommended 👍</strong>). Make sure the software is free from "Visit Site" prompts or pages that are harmful to web browsers. Software suggestions:</p>
 <p align="center">
 <a href="https://serveo.net/">Serveo</a> • <a href="https://localhost.run/">localhost.run</a> • <a href="https://www.cloudflare.com/products/tunnel/">Cloudflare Tunnel</a>
 </p>
