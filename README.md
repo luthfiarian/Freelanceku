@@ -28,11 +28,9 @@ Jump to <br />
 <h2 id="prerequisite">👀 Pre-requisite</h2>
 <p>Make sure you have installed the following list:</p>
     
-    PHP Version 8.0+ 
+    PHP Version 8.1.25 + 
     Node.js
     Composer
-
-
 
 <p align="center">
 <a href="https://www.php.net">PHP</a> • <a href="https://nodejs.org">Node.js</a> • <a href="https://getcomposer.org">Composer</a>
@@ -65,6 +63,7 @@ composer install --no-dev
 <p>List of package</p>
 
     Midtrans/Midstrans-php  (composer)
+    Tailwindcss             (npm)
     Flowbite                (npm)
     Swiper                  (npm)
 
@@ -81,7 +80,16 @@ Docs/databases/freelanceku_user.sql
 Public/src/input.css
 Public/dist/css/style.css
 ``` 
+<p>Location PWA</p>
 
+```bash
+Public/dist/pwa/{manifest.json, offline.php, img, ext.}
+``` 
+<p>Location PWA Register Service Worker</p>
+
+```bash
+App/Views/Templates/Part/RegisSWPWA.php
+``` 
 <h2 id="configuration">🔧 Configuration</h2>
 <p>For first time installation, you can configuration file in bellow</p>
 <p>1. Host - To change the site address</p>
@@ -99,7 +107,7 @@ App/Config/Database.php
 ```bash
 App/Config/Api.php
 ```
-<p>4. Admin - Configure admin key to register new admin</p>
+<p>4. Admin - Configure admin key to register new admin (You can configure it as you like)</p>
 
 ```bash
 App/Config/Admin.php
@@ -109,13 +117,18 @@ App/Config/Admin.php
 ```bash
 App/Config/Mitrans.php
 ```
+<p>6. Webhook - Create account as admin for use receive notification from midtrans</p>
+
+```bash
+App/Config/Webhook.php
+```
 <h2 id="documentation">📄 Documentation</h2>
-<h3>Admin User</h3>
+<h3>Admin User - Coming soon</h3>
 
 ```bash
 Docs/admin/admin.pdf
 ``` 
-<h3>Freelance User</h3>
+<h3>Freelance User - Coming soon</h3>
 
 ```bash
 Docs/client/freelance.pdf
@@ -137,13 +150,13 @@ https://docs.midtrans.com/
 ```bash
 https://simulator.sandbox.midtrans.com/
 ``` 
-
 <h3>Framework</h3>
 
 ```bash
 https://tailwindcss.com
 ```
-<h2 id="trick">🤫 Trick (To Register as admin)</h2>
+<h2 id="trick">🤫 Trick</h2>
+<h3>Register as Admin</h3>
 <p>Register as new admin from debug mode (app status must be development)</p>
 <p align="center"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGhybjlkM2p1aW1yM2x6Mnd1ajVocHk3OHp5ejBhejRlYWdoMWczNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TdOWU941bxg5z3CpDY/giphy.gif" width="75%" alt="Register as admin from debug mode" /></p>
 <p>Register as new admin from url / method GET (var portal-admin) and value is Admin key (you can see in file <a href="#configuration">Admin.php</a>) For example:</p>
@@ -151,6 +164,17 @@ https://tailwindcss.com
 ```bash
 http://localhost/freelanceku/?portal-admin=adminKey
 ``` 
+
+<p>If you have input the URL above, the page will automatically reload / go to the home page, then click on the register button</p>
+
+<h3>Webhook / HTTP(S) Notification Midtrans</h3>
+<p style="text-align: justify;">If you use webhooks, use port forwarding or local tunneling software to receive notifications from Midtrans. Make sure the software is free from "Visit Site" prompts or pages that are harmful to web browsers. Software suggestions:</p>
+<p align="center">
+<a href="https://serveo.net/">Serveo</a> • <a href="https://localhost.run/">localhost.run</a> • <a href="https://www.cloudflare.com/products/tunnel/">Cloudflare Tunnel</a>
+</p>
+<p style="text-align: justify;">Don't forget to configure your Midtrans account (on the Midtrans right navigation, click integration and click configuration), fill in the gray box image below:</p>
+<p align="center"><img src="https://i.ibb.co/jDqmsTY/webhook.png" width="75%" alt="Webhook Configuration Midtrans" /></p>
+<p>The message of failure to receive notification from Midtrans will be stored in the freelanceku_site table site_webhook database</p>
 <h2 id="feature">🌟 Feature</h2>
 
 - Freelance users share work with up to 3 partners
@@ -161,7 +185,7 @@ http://localhost/freelanceku/?portal-admin=adminKey
 - There is no change in account to become a partner/employer
 - Debug Mode in Development (for Developer)
 - Built in PWA
-- Midtrans Webhook (Coming soon)
+- Midtrans Webhook
 
 <h2>⚠️ License</h2>
 

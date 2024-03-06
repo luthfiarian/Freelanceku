@@ -15,7 +15,6 @@
         $Data5 = $UserAPI->FetchUserDataAPI($Data4->data_username, $Data4->data_apikey); // Fetch Data from API
         $Data6 = $UserDB->FetchPortoUserDB($email);  // Fetch Data Porto from DB
 
-        CallFileApp::RequireOnceData6('Views/Client/Account.php', $Data1, $Data2, $Data3, $Data4, $Data5, $Data6);
         // Add Portofolio
         if(isset($_POST["add-porto"]) && isset($_FILES["file"])){
             $porto_name = $_POST["name"];
@@ -134,6 +133,20 @@
             $PaymentID = $_POST["data_paymentid"];
             $PaymentCode = $_POST["bank"];
             $UserDB->UpdatePayment($Data4->data_email, 1,$PaymentCode,$PaymentID);
+        }
+        // Check if Midtrans send a notification
+        else if((isset($_SESSION["STATUS_TRX_PAY"]) || isset($_SESSION["TRX_DATA"]))){
+            // Fetch data transaction
+            $Transaction = $TrxDB->SearchUserTransactionDB($_SESSION["TRX_DATA"]["id"]);
+            if(mysqli_num_rows($Transaction) == 1){
+                $_SESSION["STATUS_WORK"] = "Pembayaran berhasil " . $_SESSION["TRX_DATA"]["receiver_email"] . " - ({$_SESSION["TRX_DATA"]["id"]}) 🎉 ";
+                unset($_SESSION["STATUS_TRX_PAY"], $_SESSION["TRX_DATA"]);
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "account");
+                exit();
+            }
+        }
+        else{
+            CallFileApp::RequireOnceData6('Views/Client/Account.php', $Data1, $Data2, $Data3, $Data4, $Data5, $Data6);
         }
     }else{
         header("Location: " . PROTOCOL_URL . "://" . BASE_URL);

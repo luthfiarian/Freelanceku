@@ -118,10 +118,9 @@
                     <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
                         <p class="text-base md:text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Panduan Pengguna&nbsp;</p>
                         <div class="w-full">
-                            <button data-modal-target="guide-user" data-modal-toggle="guide-user" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Panduan Pengguna</button>
-                            <button data-modal-target="call-center" data-modal-toggle="call-center" type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Pusat Panggilan</button>
-                            <a href="#"><button type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Kantor Kami</button></a>
-                            <a href="#"><button type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">FAQ</button></a>
+                            <a href="<?php echo BASE_ROOT . "Docs/client/freelance.pdf" ?>"><button type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Panduan Pengguna</button></a>
+                            <a href="<?php echo BASE_URI . "#footer" ?>"><button type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Pusat Panggilan</button></a>
+                            <a href="<?php echo BASE_URI . "#footer" ?>"><button type="button" class="text-sm md:text-base  mt-1 w-full border rounded-lg px-4 py-2 text-left duration-300 ease-in-out hover:shadow-md hover:text-primary hover:bg-secondary">Kantor Kami</button></a>
                         </div>
                     </div>
                 </div>

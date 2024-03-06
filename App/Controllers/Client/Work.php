@@ -155,6 +155,17 @@ use Random\Engine\Secure;
         // Routes to Work Page
         if(($_SERVER["REQUEST_URI"] === BASE_URI."work") || ($_SERVER["REQUEST_URI"] === BASE_URI."work/")){
             unset($_SESSION["WORK_DETAIL"]);
+            // Check if Midtrans send a notification
+            if((isset($_SESSION["STATUS_TRX_PAY"]) || isset($_SESSION["TRX_DATA"]))){
+                // Fetch data transaction
+                $Transaction = $TrxDB->SearchUserTransactionDB($_SESSION["TRX_DATA"]["id"]);
+                if(mysqli_num_rows($Transaction) == 1){
+                    $_SESSION["STATUS_WORK"] = "Pembayaran berhasil {$_SESSION["TRX_DATA"]["receiver_email"]} - ({$_SESSION["TRX_DATA"]["id"]}) 🎉 ";
+                    unset($_SESSION["STATUS_TRX_PAY"], $_SESSION["TRX_DATA"]);
+                    header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work");
+                    exit();
+                }
+            }
             CallFileApp::RequireOnceData4('Views/Client/Work.php', $Data1, $Data2, $Data3, $Data4);
             exit();
         }
@@ -184,7 +195,18 @@ use Random\Engine\Secure;
                             $TrxAPI->AddTransactionAPI($MidtransToken, $_SESSION["WORK_DETAIL"], $Data4->work_name, $Trxid, $Data2->data_email, $EmailPartner, $Data4->work_salary, $AmountComplete, $Data2->data_apikey);
                         }
                     }
-                    // unset($_SESSION["STATUS_TRX_PAY"], $_SESSION["TRX_DATA"]);
+                    // Check if Midtrans send a notification
+                    else if((isset($_SESSION["STATUS_TRX_PAY"]) || isset($_SESSION["TRX_DATA"]))){
+                        // Fetch data transaction
+                        $Transaction = $TrxDB->SearchUserTransactionDB($_SESSION["TRX_DATA"]["id"]);
+                        if(mysqli_num_rows($Transaction) == 1){
+                            $_SESSION["STATUS_WORK"] = "Pembayaran berhasil " . $_SESSION["TRX_DATA"]["receiver_email"] . " - ({$_SESSION["TRX_DATA"]["id"]}) 🎉 ";
+                            unset($_SESSION["STATUS_TRX_PAY"], $_SESSION["TRX_DATA"]);
+                            header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "work/detail");
+                            exit();
+                        }
+                    }
+                    
                     CallFileApp::RequireOnceData6("Views/Client/WorkDetail.php", $Data1, $Data2, $Data3, $Data4, $UserDB, $UserAPI);
                 }else{
                     CallFileApp::RequireOnce("Views/Error/NonGranted.php");

@@ -97,7 +97,7 @@
                         </div>
                         <p class="text-sm font-semibold mt-1">Tentang Kami</p>
                         <h1 class="text-xl font-bold mt-1">Mengapa Harus Bergabung dengan Kami ?</h1>
-                        <p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <p class="mt-5">Siap memulai perjalanan freelance Anda? Bergabunglah dengan 'Freelanceku' sekarang dan temukan peluang tak terbatas!</p>
                     </div>
                     <div class="!hidden md:!contents md:w-2/6 lg:w-1/6">
                         <div class="w-full flow-root self-center">
@@ -129,13 +129,13 @@
                                         <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
                                     </svg>
                                     <blockquote>
-                                        <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a beatae blanditiis modi molestias voluptatibus amet eum alias. Blanditiis ea quaerat modi dolorem tenetur adipisci temporibus nostrum aspernatur debitis magnam."</p>
+                                        <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Freelanceku telah memberi saya akses ke berbagai proyek yang sesuai dengan keahlian saya. Sangat memuaskan!"</p>
                                     </blockquote>
                                     <figcaption class="flex items-center justify-center mt-6 space-x-3 rtl:space-x-reverse">
-                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_ROOT . 'Public/dist/image/cs.png' ?>" alt="profile picture">
+                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_ROOT . 'Public/dist/image/akmad.jpg' ?>" alt="Akmad Pebrian picture">
                                         <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-500-700">
-                                            <cite class="pe-3 font-medium text-gray-900">Michael Gough</cite>
-                                            <cite class="ps-3 text-sm text-gray-500">CEO at Freelanceku</cite>
+                                            <cite class="pe-3 font-medium text-gray-900">Akmad Pebrian</cite>
+                                            <cite class="ps-3 text-sm text-gray-500">CEO at Pesenkopiku</cite>
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -147,13 +147,13 @@
                                         <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
                                     </svg>
                                     <blockquote>
-                                        <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a beatae blanditiis modi molestias voluptatibus amet eum alias. Blanditiis ea quaerat modi dolorem tenetur adipisci temporibus nostrum aspernatur debitis magnam."</p>
+                                        <p class="text-base md:text-xl lg:text-2xl italic font-medium text-gray-900">"Saya sangat bersyukur menemukan 'Freelanceku'. Tempat yang sempurna untuk mengekspresikan kreativitas dan mendapatkan penghasilan."</p>
                                     </blockquote>
                                     <figcaption class="flex items-center justify-center mt-6 space-x-3 rtl:space-x-reverse">
-                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_ROOT . 'Public/dist/image/cs.png' ?>" alt="profile picture">
+                                        <img class="w-6 h-6 rounded-full" src="<?php echo BASE_ROOT . 'Public/dist/image/rappi.jpg' ?>" alt="Rappi Puttera picture">
                                         <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-500-700">
-                                            <cite class="pe-3 font-medium text-gray-900">Michael Gough</cite>
-                                            <cite class="ps-3 text-sm text-gray-500">CEO at Freelanceku</cite>
+                                            <cite class="pe-3 font-medium text-gray-900">Rappi Puttera</cite>
+                                            <cite class="ps-3 text-sm text-gray-500">CEO at Tukangparkirku</cite>
                                         </div>
                                     </figcaption>
                                 </figure>

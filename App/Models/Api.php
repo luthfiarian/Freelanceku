@@ -36,7 +36,6 @@
             curl_setopt($curlInitSignin, CURLOPT_POSTFIELDS, $encodeUserSignin);
             curl_setopt($curlInitSignin, CURLOPT_RETURNTRANSFER, true);
             $execSignin   = curl_exec($curlInitSignin);
-            $_SESSION["Look-Data"] = json_decode($execSignin, true);
             // Status Singnin
             preg_match('/"status":"(.*?)",/', $execSignin, $statussignin);
             // Status Role
@@ -79,9 +78,9 @@
             $execFetchUserData = curl_exec($curlInitFetchUserData);
             curl_close($curlInitFetchUserData);
             $FetchData = json_decode($execFetchUserData);
-            if($FetchData->status == "UNAUTHORIZE"){
+            if($FetchData->status == "UNAUTHORIZE" || empty($FetchData)){
                 $_SESSION["STATUS_SIGNIN_ERR"] = "Terjadi galat, mohon masuk kembali";
-                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "signout");
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL);
                 return exit();
             }else{
                 return $FetchData;
@@ -242,6 +241,7 @@
     class TransactionAPI extends ClientAPI{
 
         public function UpdateTransactionAPI($apikey, $Trxid, $Status){
+            $this->initAPIRoute();
             $UpdateTransaction = array(
                 "new_status"    => $Status
             );
@@ -258,12 +258,13 @@
         }
 
         public function AddTransactionAPI($Token, $Workid, $WorkName, $Trxid, $Email, $EmailPartner, $Amount, $AmountwTax, $apikey){
+            $this->initAPIRoute();
             $DataTransaction = array(
                 "payment_id"    =>  $Trxid,
                 "sender_email"  =>  $Email,
                 "receiver_email"=>  $EmailPartner,
                 "amount"        =>  $Amount,
-                "message"       =>  $WorkName . "-[$Workid]-($Token)",
+                "message"       =>  $WorkName . "-[Work ID: $Workid]-(MidtransToken: $Token)",
                 "status"        =>  "PENDING"
             );
 
@@ -293,6 +294,7 @@
         }
 
         public function AddBillTransactionAPI($Trxid, $Email, $EmailUser, $Amount, $apikey){
+            $this->initAPIRoute();
             $DataTransaction = array(
                 "payment_id"    =>  $Trxid,
                 "sender_email"  =>  $Email,
@@ -314,6 +316,74 @@
         }
     }
 
+    class WebhookAPI extends TransactionAPI{
+        
+        public function WebhookUpdateTrxAPI($Email, $Pass, $Apikey, $Trxid, $Status){
+            $this->initAPIRoute();
+            $Site = new Site;
+            /**
+             * Login Use Account Admin
+             */
+            $Signin = array(
+                "email"     => Security::String($Email),
+                "password"  => Security::String($Pass)
+            );
+            $encodeSigninWebhook = json_encode($Signin);
+            $curlInitSigninWebhook   = curl_init(API_USER_SIGNIN);
+            curl_setopt($curlInitSigninWebhook, CURLOPT_POST, true);
+            curl_setopt($curlInitSigninWebhook, CURLOPT_HEADER, true);
+            curl_setopt($curlInitSigninWebhook, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($curlInitSigninWebhook, CURLOPT_POSTFIELDS, $encodeSigninWebhook);
+            curl_setopt($curlInitSigninWebhook, CURLOPT_RETURNTRANSFER, true);
+            $execSigninWebhook   = curl_exec($curlInitSigninWebhook);
+            // Status Singnin
+            preg_match('/"status":"(.*?)",/', $execSigninWebhook, $statussignin);
+            // Status Role
+            preg_match('/"role":"(.*?)",/', $execSigninWebhook, $statusrole);
+            // Check Account
+            $Message = json_decode($execSigninWebhook, true);
+            $Site->AddMessageWebhook($Trxid, "Message API : {$Message}");
+            if($statussignin[1] === "SUCCESS"){
+                // Fetch Cookie to Access Data from API
+                $logHeader = substr($execSigninWebhook, 0, curl_getinfo($curlInitSigninWebhook, CURLINFO_HEADER_SIZE));
+                preg_match('/Expires=(.*?);/', $logHeader, $exptime);
+                preg_match('/token=(.*?);/', $logHeader, $token);
+                $this->CookieAPI = "token=" . $token[1];
+                // Login must be as Administrator
+                
+                if($statusrole[1] === "r-fa00"){
+                    curl_close($curlInitSigninWebhook);
+
+                    $TrxUpdateWebhook = array(
+                        "new_status"    => $Status
+                    );
+
+                    $curlInitUpdateTrxWebhook   = curl_init(API_USER_TRXLOG);
+                    curl_setopt($curlInitUpdateTrxWebhook, CURLOPT_POST, true);
+                    curl_setopt($curlInitUpdateTrxWebhook, CURLOPT_URL, API_USER_TRXLOG.$Trxid);
+                    curl_setopt($curlInitUpdateTrxWebhook, CURLOPT_HTTPHEADER, array("api-key:" . $Apikey, "Cookie: {$this->CookieAPI}", 'Content-Type: application/json'));
+                    curl_setopt($curlInitUpdateTrxWebhook, CURLOPT_POSTFIELDS, json_encode($TrxUpdateWebhook));
+                    curl_setopt($curlInitUpdateTrxWebhook, CURLOPT_CUSTOMREQUEST, "PATCH");
+                    curl_setopt($curlInitUpdateTrxWebhook, CURLOPT_RETURNTRANSFER, true);
+                    $execUpdateWebhook   = curl_exec($curlInitUpdateTrxWebhook);
+                    return curl_close($curlInitUpdateTrxWebhook);
+                }
+                // Create message from API
+                else{
+                    $Message = json_decode($execSigninWebhook, true);
+                    $Site->AddMessageWebhook($Trxid, "Message API : {$Message}");
+                    return curl_close($curlInitSigninWebhook);
+                }
+            }
+            // Create message from API
+            else{
+                $Message = json_decode($execSigninWebhook, true);
+                $Site->AddMessageWebhook($Trxid, "Message API : {$Message}");
+                return curl_close($curlInitSigninWebhook);
+            }
+        }
+    }
+
     class AdminAPI extends TransactionAPI{
         // Signup Admin
         public function SignupAdminAPI($fname, $lname, $email, $username, $phone, $password, $from){
@@ -331,7 +401,7 @@
                 "country"   =>  NULL,
                 "password"  =>  Security::String($password),
                 "description"=> NULL,
-                "role"      => 'SUFKU_DEV'
+                "role"      =>  API_ADMIN_KEY
             );
             
             // Process of Add Admin to API

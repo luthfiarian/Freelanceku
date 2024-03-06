@@ -102,7 +102,7 @@
                 <div class="w-full my-4 pb-2 pt-4 px-4 rounded-lg relative border">
                     <p class="text-lg font-semibold absolute top-[-14px] z-10 bg-primary">&nbsp;Daftar Pekerjaan Terbaru&nbsp;</p>
                     <?php if(mysqli_num_rows($Data7) == 0): ?>
-                    <p class="w-full py-4 text-center font-semibold text-sm md:text-base">Maaf kata kunci yang anda cari tidak ada 😥</p>
+                    <p class="w-full py-4 text-center font-semibold text-sm md:text-base">Tidak ada pekerjaan terbaru</p>
                     <?php else: ?>
                     <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
                         <?php CallFileApp::RequireOnceData4("Views/Client/Templates/Part/SearchCardWork.php", $Data3, $Data4, $Data6, $Data7) ?>

@@ -79,6 +79,17 @@
             $workid = ltrim($_POST["id"], "work-");
             $UserDB->PartnerRequestDelDB($Data2->data_email, $workid);
         }
+        // Check if Midtrans send a notification
+        else if((isset($_SESSION["STATUS_TRX_PAY"]) || isset($_SESSION["TRX_DATA"]))){
+            // Fetch data transaction
+            $Transaction = $TrxDB->SearchUserTransactionDB($_SESSION["TRX_DATA"]["id"]);
+            if(mysqli_num_rows($Transaction) == 1){
+                $_SESSION["STATUS_WORK"] = "Pembayaran berhasil " . $_SESSION["TRX_DATA"]["receiver_email"] . " - ({$_SESSION["TRX_DATA"]["id"]}) 🎉 ";
+                unset($_SESSION["STATUS_TRX_PAY"], $_SESSION["TRX_DATA"]);
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "partner");
+                exit();
+            }
+        }
         
         CallFileApp::RequireOnceData7('Views/Client/Partner.php', $Data1, $Data2, $Data3, $Data4, $Data5, $Data6, $Data7);
 

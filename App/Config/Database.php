@@ -43,6 +43,7 @@
     define("TAX_SITE_DB", "site_tax");
     define("INCOME_SITE_DB", "site_income");
     define("IDENTITY_SITE_DB", "site_identity");
+    define("WEBHOOK_SITE_DB", "site_webhook");
 
     // Connection to DB User
     $Conn_User = mysqli_connect(HOST_DB_USER, USER_DB_USER, PASS_DB_USER, NAME_DB_USER, PORT_DB_USER);

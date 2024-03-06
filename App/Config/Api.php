@@ -6,6 +6,8 @@
 
     // API BASE URL -> example : https://google.com/
     $Api    = "";
+    // Admin Key from API
+    $AdminKeyAPI = "";
 
     // API Routes
     $Signup     = "auth/register/";
@@ -16,9 +18,11 @@
     $TrxUpd     = "transaction/status/";
     $TrxNew     = "transaction/new";
     $Find       = "user/find";
+
     // API Routes User (Special) - GET, PATCH (UPDATE), DELETE
     $SPECIAL_FUN_USER = "user/"; // add behind it based on the username
 
+    define("API_ADMIN_KEY", $AdminKeyAPI);
     define("API_USER_SIGNUP", $Api.$Signup);
     define("API_USER_SIGNIN", $Api.$Signin);
     define("API_USER_SIGNOUT", $Api.$Signout);
@@ -28,6 +32,5 @@
     define("API_USER_TRXNEW", $Api.$TrxNew);
     define("API_USER_SPECIAL", $Api.$SPECIAL_FUN_USER);
     define("API_USER_SEARCH", $Api.$Find);
-
 
 

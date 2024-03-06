@@ -13,11 +13,15 @@
     *   @param 'Init.php'
     *   @Funct  CallFileApp::RequireOnce
     */
-    if(phpversion() >= 8.0){
+    if((float) phpversion() >= 8.1){
         ob_start("ob_gzhandler");
         CallFileApp::RequireOnce('Init.php');
     }else{
-        echo "<title>Freelance Platform Apps</title>";
-        echo "<p> Sorry, your PHP version is " . phpversion() . ", please update the version to at least 8.0 or 8.0 and above </p>";
-        echo "<a herf='https://www.php.net/downloads.php'>Go to php page download</a>";
+?>
+        <title>Freelance Platform Apps</title>
+        <link rel="shortcut icon" href="Public/dist/image/favicon.png" type="image/x-icon">
+        <p>Sorry, your PHP version is <?php echo phpversion() ?>, please update the version to at least 8.1.25 or 8.1.25 and above</p>
+        <a href="https://www.php.net/downloads.php" target="_blank" rel="noopener noreferrer">Go to php page download</a>
+<?php
     }
+?>

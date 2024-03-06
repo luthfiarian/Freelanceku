@@ -10,6 +10,7 @@
         $Site = new Site; 
         $UserDB = new ClientDB; 
         $UserAPI = new ClientAPI;
+        $TrxDB  = new TransactionDB;
         
         $Data1 = (object) $Site->Seo(); // SEO Website
         $Data2 =  $Site->Bank();        // Paymet of Website
@@ -84,10 +85,22 @@
                 CallFileApp::RequireOnceData5('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5);
             }
         }
+        // check data payment status DB and address in API
         else if(($Data3->data_paymentstatus == 1) && !empty($Data4->data->address->street)){
             $Data6 = $UserDB->FetchPortoUserDB($email);  // Fetch Data Porto from DB
             $Data7 = $UserDB->SearchWorkDefaultDB($Data3->data_email);
             CallFileApp::RequireOnceData7('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5, $Data6, $Data7);
+        }
+        // Check if Midtrans send a notification
+        else if((isset($_SESSION["STATUS_TRX_PAY"]) || isset($_SESSION["TRX_DATA"]))){
+            // Fetch data transaction
+            $Transaction = $TrxDB->SearchUserTransactionDB($_SESSION["TRX_DATA"]["id"]);
+            if(mysqli_num_rows($Transaction) == 1){
+                $_SESSION["STATUS_WORK"] = "Pembayaran berhasil " . $_SESSION["TRX_DATA"]["receiver_email"] . " - ({$_SESSION["TRX_DATA"]["id"]}) 🎉 ";
+                unset($_SESSION["STATUS_TRX_PAY"], $_SESSION["TRX_DATA"]);
+                header("Location: " . PROTOCOL_URL . "://" . BASE_URL . "dashboard");
+                exit();
+            }
         }
         else{
             CallFileApp::RequireOnceData5('Views/Client/Dashboard.php', $Data1, $Data2, $Data3, $Data4, $Data5);

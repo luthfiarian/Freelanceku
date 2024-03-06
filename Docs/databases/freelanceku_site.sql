@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Feb 2024 pada 20.29
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.2.4
+-- Generation Time: Mar 06, 2024 at 09:23 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `site_bank`
+-- Table structure for table `site_bank`
 --
 
 CREATE TABLE `site_bank` (
@@ -34,7 +34,7 @@ CREATE TABLE `site_bank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `site_bank`
+-- Dumping data for table `site_bank`
 --
 
 INSERT INTO `site_bank` (`id`, `bank_name`, `bank_code`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `site_bank` (`id`, `bank_name`, `bank_code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `site_identity`
+-- Table structure for table `site_identity`
 --
 
 CREATE TABLE `site_identity` (
@@ -63,7 +63,7 @@ CREATE TABLE `site_identity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `site_identity`
+-- Dumping data for table `site_identity`
 --
 
 INSERT INTO `site_identity` (`id`, `identity_phone`, `identity_email`, `identity_address`, `identity_maps_embed`, `identity_maps_link`, `identity_ig`, `identity_linkedin`, `identity_x`, `identity_fb`) VALUES
@@ -72,7 +72,7 @@ INSERT INTO `site_identity` (`id`, `identity_phone`, `identity_email`, `identity
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `site_income`
+-- Table structure for table `site_income`
 --
 
 CREATE TABLE `site_income` (
@@ -86,7 +86,7 @@ CREATE TABLE `site_income` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `site_interest`
+-- Table structure for table `site_interest`
 --
 
 CREATE TABLE `site_interest` (
@@ -95,7 +95,7 @@ CREATE TABLE `site_interest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `site_interest`
+-- Dumping data for table `site_interest`
 --
 
 INSERT INTO `site_interest` (`id`, `interest_name`) VALUES
@@ -107,7 +107,7 @@ INSERT INTO `site_interest` (`id`, `interest_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `site_seo`
+-- Table structure for table `site_seo`
 --
 
 CREATE TABLE `site_seo` (
@@ -123,7 +123,7 @@ CREATE TABLE `site_seo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `site_seo`
+-- Dumping data for table `site_seo`
 --
 
 INSERT INTO `site_seo` (`id`, `seo_name`, `seo_type`, `seo_locale`, `seo_des`, `seo_lang`, `seo_host`, `seo_author`, `seo_keyword`) VALUES
@@ -132,7 +132,7 @@ INSERT INTO `site_seo` (`id`, `seo_name`, `seo_type`, `seo_locale`, `seo_des`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `site_tax`
+-- Table structure for table `site_tax`
 --
 
 CREATE TABLE `site_tax` (
@@ -142,91 +142,116 @@ CREATE TABLE `site_tax` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `site_tax`
+-- Dumping data for table `site_tax`
 --
 
 INSERT INTO `site_tax` (`id`, `tax_pay`, `tax_midtrans`) VALUES
 (1, 10, 7000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `site_webhook`
+--
+
+CREATE TABLE `site_webhook` (
+  `id` int(11) NOT NULL,
+  `webhook_trxid` varchar(255) NOT NULL,
+  `webhook_date` varchar(255) NOT NULL,
+  `webhook_message` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `site_bank`
+-- Indexes for table `site_bank`
 --
 ALTER TABLE `site_bank`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `site_identity`
+-- Indexes for table `site_identity`
 --
 ALTER TABLE `site_identity`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `site_income`
+-- Indexes for table `site_income`
 --
 ALTER TABLE `site_income`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `site_interest`
+-- Indexes for table `site_interest`
 --
 ALTER TABLE `site_interest`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `site_seo`
+-- Indexes for table `site_seo`
 --
 ALTER TABLE `site_seo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `site_tax`
+-- Indexes for table `site_tax`
 --
 ALTER TABLE `site_tax`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- Indexes for table `site_webhook`
+--
+ALTER TABLE `site_webhook`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `site_bank`
+-- AUTO_INCREMENT for table `site_bank`
 --
 ALTER TABLE `site_bank`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `site_identity`
+-- AUTO_INCREMENT for table `site_identity`
 --
 ALTER TABLE `site_identity`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `site_income`
+-- AUTO_INCREMENT for table `site_income`
 --
 ALTER TABLE `site_income`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `site_interest`
+-- AUTO_INCREMENT for table `site_interest`
 --
 ALTER TABLE `site_interest`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `site_seo`
+-- AUTO_INCREMENT for table `site_seo`
 --
 ALTER TABLE `site_seo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `site_tax`
+-- AUTO_INCREMENT for table `site_tax`
 --
 ALTER TABLE `site_tax`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `site_webhook`
+--
+ALTER TABLE `site_webhook`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

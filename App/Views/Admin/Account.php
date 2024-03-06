@@ -59,7 +59,7 @@
                         <div class="w-full flex-none md:flex mt-2 py-2 border px-4 rounded-lg">
                             <div class="w-full md:w-1/2 lg:w-fit flex-none md:flex">
                                 <button data-modal-target="edit-account" data-modal-toggle="edit-account"  type="button" class="mt-1 md:mt-0 w-full md:w-fit text-xs md:text-base py-2 px-4 mr-2 rounded-full bg-secondary ease-in-out duration-300 transition hover:bg-third hover:shadow-md">Ubah Akun</button>
-                                <a href="<?php echo PROTOCOL_URL . "://" . BASE_URL . "Docs/admin/#" ?>"><button type="button" class="mt-1 md:mt-0 w-full md:w-fit text-xs md:text-base py-2 px-4 mr-2 rounded-full bg-secondary ease-in-out duration-300 transition hover:bg-third hover:shadow-md">Panduan Admin</button></a>
+                                <a href="<?php echo BASE_ROOT . "Docs/admin/admin.pdf" ?>"><button type="button" class="mt-1 md:mt-0 w-full md:w-fit text-xs md:text-base py-2 px-4 mr-2 rounded-full bg-secondary ease-in-out duration-300 transition hover:bg-third hover:shadow-md">Panduan Admin</button></a>
                             </div>
                             <div class="w-full md:w-1/2 lg:w-fit flex-none md:flex">
                                 <button data-modal-target="delete-account" data-modal-toggle="delete-account" type="button" class="mt-1 md:mt-0 w-full md:w-fit text-xs md:text-base py-2 px-4 mr-2 rounded-full bg-red-500 ease-in-out duration-300 transition hover:bg-red-700 hover:shadow-md">Hapus Akun</button>

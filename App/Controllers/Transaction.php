@@ -31,6 +31,8 @@
                         $IncomeAmount = ($_SESSION["TRX_DATA"]["amount_wtax"] - $Tax->tax_midtrans) / (1 + ($Tax->tax_pay / 100)) * ($Tax->tax_pay / 100);
                         $Site->AddIncome($_SESSION["TRX_DATA"]["id"], $_SESSION["TRX_DATA"]["email"], (int) $IncomeAmount);
                         $UserDB->AddBalanceDB($_SESSION["TRX_DATA"]["email_partner"], $_SESSION["TRX_DATA"]["amount"]);
+                        $_SESSION["STATUS_WORK"] = "Pembayaran berhasil 🎉";
+                        header("Location: " . PROTOCOL_URL . "://" . BASE_URL . $_GET["from"]);
                     }else if($_GET["transaction_status"] === "deny"){
                         $StatusAPI = "FAILED";
                         $StatusDB  = "Ditolak";
@@ -62,36 +64,50 @@
         CallFileApp::RequireOnce("Models/Database.php");
         CallFileApp::RequireOnce("Models/Api.php");
         CallFileApp::RequireOnce("Models/Midtrans.php");
+        CallFileApp::RequireOnce("Config/Webhook.php");
         $Site = new Site;
-        $WebhooksDB = new WebhooksDB;
-        $AdminAPI = new AdminAPI;
+        $WebhookDB = new WebhookDB;
+        $WebhookAPI = new WebhookAPI;
         
         $Tax = (object) $Site->Tax();
 
         $Notification = (object) Midtrans::Notification();
 
-        $TrxData = (object) mysqli_fetch_assoc($WebhooksDB->FetchTransferDB($Notification->order_id));
-        // Check if the data has been input via the GET order_id method above
-        if($TrxData->trf_status === "Berhasil"){
-            $WebhooksDB->UpdateTransferWebhooksDB($Notification->order_id, $Notification->type);
-        }
-        // if not, then the system automatically inputs data and updates data
-        else{
-            $Trxid = $Notification->order_id;
-            $TransferData = (object) mysqli_fetch_assoc($WebhooksDB->FetchAllDataTransferDB("trf_id='$Trxid'"));
-            $IncomeAmount = ($TransferData->trf_amount - $Tax->tax_midtrans) / (1 + ($Tax->tax_pay / 100)) * ($Tax->tax_pay / 100);
-            $TrxAmount = ($TransferData->trf_amount -  $Tax->tax_midtrans) * ($Tax->tax_pay / 100);
-            
-            if($Notification->statusDB === "Berhasil"){
-              $WebhooksDB->AddTransactionDB($Trxid, $TransferData->trf_workid, $TransferData->trf_fromemail, $TransferData->trf_toemail, (int) $TrxAmount);  
-              $WebhooksDB->AddBalanceDB($TransferData->trf_toemail,  (int) $TrxAmount);
-              $Site->AddIncome($Trxid, $TransferData->trf_fromemail, (int) $IncomeAmount);
-            }else{
-
+        // Check the Account of Webhook
+        if(mysqli_num_rows($WebhookDB->CheckAccountWebhookDB(EMAIL_WEBHOOK)) == 1){
+            // Fetch Data from DB
+            $Webhook = (object) mysqli_fetch_assoc($WebhookDB->CheckAccountWebhookDB(EMAIL_WEBHOOK));
+            // Fetch Data Transfer from trf_id
+            $TrfData = (object) mysqli_fetch_assoc($WebhookDB->FetchTransferDB($Notification->order_id));
+            // Fetch Data Work for salary
+            $Work = (object) mysqli_fetch_assoc($WebhookDB->FetchAllDataWorkDB("work_host='{$TrfData->trf_fromemail}'"));
+            // Check if callback Midtrans give value
+            if($TrfData->trf_status === "Berhasil"){
+                // Only change trf_type in DB
+                $WebhookDB->UpdateTypeWebhookDB($Notification->order_id, $Notification->type);
             }
-
-            $WebhooksDB->UpdateTransferDB($Trxid, $Notification->statusDB);
-            // $TrxAPI->UpdateTransactionAPI($Data1->data_apikey, $Trxid, $StatusAPI);
+            // Alternative if callback Midtrans cant give value
+            else{
+                // Check if payment settlement from Midtrans
+                if($Notification->statusDB === "Berhasil"){
+                    $IncomeAmount = (int) $Work->work_salary * ($Tax->tax_pay / 100);
+                    // Add income site
+                    $Site->AddIncome($Notification->order_id, $TrfData->trf_fromemail, $IncomeAmount);
+                    // Add transaction DB User
+                    $WebhookDB->AddTransactionDB($Notification->order_id, $TrfData->trf_workid, $TrfData->trf_fromemail, $TrfData->trf_toemail, $Work->work_salary);
+                    // Add Balance Partner
+                    $WebhookDB->AddBalanceDB($TrfData->trf_toemail, $Work->work_salary);
+                }
+                // If payment not settlement from Midtrans just update Transfer, API status transaction
+                $WebhookDB->UpdateTransferWebhookDB($Notification->order_id, $Notification->statusDB, $Notification->type);
+                $WebhookAPI->WebhookUpdateTrxAPI(EMAIL_WEBHOOK, PASS_WEBHOOK, $Webhook->data_apikey, $Notification->order_id, $Notification->statusAPI);
+            }
+        }
+        // If account not match as admin or not created
+        else{
+            // Send message to DB
+            $Trxid = $Notification->order_id;
+            $Site->AddMessageWebhook($Trxid, "Webhook tidak dikonfigurasi atau akun yang digunakan tidak sesuai");
         }
     }
 

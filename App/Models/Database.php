@@ -36,6 +36,10 @@ use Random\Engine\Secure;
         public function ActionInterest($Action){$this->initDBRoute();  if($Action->status == "update"){ return mysqli_query($this->ConnDB, "UPDATE " . INTEREST_SITE_DB . " SET " . $Action->query); } else if($Action->status == "delete"){ return mysqli_query($this->ConnDB, "DELETE FROM " . INTEREST_SITE_DB . " " . $Action->query); } else if($Action->status == "add"){ return mysqli_query($this->ConnDB, "INSERT INTO " . INTEREST_SITE_DB . " (interest_name) VALUES ({$Action->query}) "); } else { $this->initDBRoute(); return mysqli_query($this->ConnDB, "SELECT * FROM ". INTEREST_SITE_DB); } }
         // Fetch Data Interest Non Route
         public function InterestNonRoute(){$this->initDBNonRoute(); return mysqli_query($this->ConnDB, "SELECT * FROM ". INTEREST_SITE_DB); }
+        // Fetch Data Message Webhook
+        public function Webhook(){ $this->initDBRoute(); return mysqli_query($this->ConnDB, "SELECT * FROM " . WEBHOOK_SITE_DB); }
+        // Add Message Webhook
+        public function AddMessageWebhook($Trxid, $Message){ $this->initDBRoute(); $Date = date("d-m-Y H:i"); return mysqli_query($this->ConnDB, "INSERT INTO " . WEBHOOK_SITE_DB . " (webhook_trxid, webhook_date, webhook_message) VALUES ('$Trxid', '$Date', '$Message')"); }
     }
 
     class MasterDB{
@@ -112,7 +116,7 @@ use Random\Engine\Secure;
         public function GlobalSearchWorkDB($Word){
             $this->initDBRoute();
             $Word = Security::StringDB($this->ConnDB, $Word);
-            return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE work_name LIKE '%$Word%' OR work_field LIKE '%$Word%' AND work_status='0'");
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE (work_name LIKE '%$Word%' OR work_field LIKE '%$Word%') AND work_status='0' ORDER BY id DESC LIMIT 4");
         }
     }
 
@@ -236,7 +240,7 @@ use Random\Engine\Secure;
         public function WorkHistoryDB($email){
             $this->initDBRoute();
             $email = Security::StringDB($this->ConnDB, $email);
-            return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE work_host='$email'");
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . " WHERE work_host='$email' ORDER BY id DESC");
         }       
 
         public function WorkDetailDB($email, $id){
@@ -341,13 +345,12 @@ use Random\Engine\Secure;
         public function PartnerSearchDB($email, $search){
             $this->initDBRoute(); if(isset($_SESSION["SEARCH"])){ unset($_SESSION["SEARCH"]); }
             $email = Security::StringDB($this->ConnDB, $email); $search = Security::StringDB($this->ConnDB, $search);
-            $SearchData = " WHERE work_host LIKE '%$search%' OR work_name LIKE '%$search%' OR work_field LIKE '%$search%' OR work_salary LIKE '%$search%' AND work_status='0'";
+            $SearchData = " WHERE (work_host LIKE '%$search%' OR work_name LIKE '%$search%' OR work_field LIKE '%$search%' OR work_salary LIKE '%$search%') AND work_status='0' ORDER BY id DESC LIMIT 8";
             return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . $SearchData);
         }
 
-        public function SearchWorkDefaultDB($email){
+        public function SearchWorkDefaultDB(){
             $this->initDBRoute();
-            $email = Security::StringDB($this->ConnDB, $email); 
             $SearchData = " ORDER BY id DESC";
             return mysqli_query($this->ConnDB, "SELECT * FROM " . WORK_USER_DB . $SearchData);
         }
@@ -487,6 +490,11 @@ use Random\Engine\Secure;
             return mysqli_query($this->ConnDB, "SELECT * FROM " . TRANSACTION_USER_DB . " WHERE trx_id='$Trxid'");
         }
 
+        public function SearchUserTransactionDB($Trxid){
+            $this->initDBRoute();
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . TRANSACTION_USER_DB . " WHERE trx_id='$Trxid'");
+        }
+
         public function AddTransferDB($Trxid, $Workid, $MidtransToken, $FromEmail, $ToEmail, $AmountwTax){
             $this->initDBRoute(); $ToEmail = Security::StringDB($this->ConnDB, $ToEmail); $date = date('d M Y H:i');
             $Table = " (trf_id, trf_workid, trf_token, trf_fromemail, trf_toemail, trf_status, trf_amount, trf_date) ";
@@ -540,10 +548,19 @@ use Random\Engine\Secure;
         public function FetchAllPayoutBillDB(){ $this->initDBRoute(); return mysqli_query($this->ConnDB, "SELECT bill_amount FROM " . BILL_USER_DB . " WHERE bill_status='Berhasil'"); }
     }
 
-    class WebhooksDB extends AdminDB{
+    class WebhookDB extends AdminDB{
+        public function CheckAccountWebhookDB($email){
+            $this->initDBRoute(); $email = Security::StringDB($this->ConnDB, $email);
+            return mysqli_query($this->ConnDB, "SELECT * FROM " . DATA_USER_DB ." WHERE data_email='$email' AND data_user='Admin'");
+        }
 
-        public function UpdateTransferWebhooksDB($Trxid, $Type){
-            $this->initDBRoute(); $Trxid = Security::StringDB($this->ConnDB, $Trxid); $Type = Security::StringDB($this->ConnDB, $Type);
+        public function UpdateTypeWebhookDB($Trxid, $Type){
+            $this->initDBRoute(); $Type = Security::StringDB($this->ConnDB, $Type);
             return mysqli_query($this->ConnDB, "UPDATE " . TRANSFER_USER_DB . " SET trf_type='$Type' WHERE trf_id='$Trxid'");
+        }
+
+        public function UpdateTransferWebhookDB($Trxid, $Status, $Type){
+            $this->initDBRoute(); $Trxid = Security::StringDB($this->ConnDB, $Trxid); $Type = Security::StringDB($this->ConnDB, $Type);
+            return mysqli_query($this->ConnDB, "UPDATE " . TRANSFER_USER_DB . " SET trf_status='$Status', trf_type='$Type' WHERE trf_id='$Trxid'");
         }
     }

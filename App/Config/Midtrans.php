@@ -4,7 +4,6 @@
      * Midtrans Configuration
      *  @param $ServerKey
      *  @param $ClientKey
-     *  @param $MerchantID
      * 
      */
 
