@@ -162,18 +162,23 @@ https://tailwindcss.com
 <p>Register as new admin from url / method GET (var portal-admin) and value is Admin key (you can see in file <a href="#configuration">Admin.php</a>) For example:</p>
 
 ```bash
-http://localhost/freelanceku/?portal-admin=adminKey
+http://{your_host}/freelanceku/?portal-admin=adminKey
 ``` 
 
 <p>If you have input the URL above, the page will automatically reload / go to the home page, then click on the register button</p>
 
 <h3>Webhook / HTTP(S) Notification Midtrans</h3>
-<p style="text-align: justify;">If you use webhooks, use port forwarding or local tunneling software to receive notifications from Midtrans. Make sure the software is free from "Visit Site" prompts or pages that are harmful to web browsers. Software suggestions:</p>
+<p style="text-align: justify;">If you use webhooks, use port forwarding or local tunneling software to receive notifications from Midtrans (<strong>If you have a website that has integrated domain and SSL, it is highly recommended 👍</strong>). Make sure the software is free from "Visit Site" prompts or pages that are harmful to web browsers. Software suggestions:</p>
 <p align="center">
 <a href="https://serveo.net/">Serveo</a> • <a href="https://localhost.run/">localhost.run</a> • <a href="https://www.cloudflare.com/products/tunnel/">Cloudflare Tunnel</a>
 </p>
 <p style="text-align: justify;">Don't forget to configure your Midtrans account (on the Midtrans right navigation, click integration and click configuration), fill in the gray box image below according to the complete URL of your website:</p>
 <p align="center"><img src="https://i.ibb.co/jDqmsTY/webhook.png" width="75%" alt="Webhook Configuration Midtrans" /></p>
+<p>Example of the URL to be filled in</p>
+
+```bash
+http://{your_host}/freelanceku/transaction/
+```
 <p>The message of failure to receive notification from Midtrans will be stored in the freelanceku_site table site_webhook database</p>
 <h2 id="feature">🌟 Feature</h2>
 
