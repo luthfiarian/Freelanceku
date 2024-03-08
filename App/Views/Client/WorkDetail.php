@@ -44,7 +44,7 @@
                             <table class="table table-auto w-full text-sm md:text-base">
                                 <tr><td colspan="3"><p class="font-semibold"><?php echo $Data4->work_name ?></p></td></tr>
                                 <tr><td>Tanggal Dibuat</td><td>:</td><td><?php echo $Data4->work_startdate ?></td></tr>
-                                <tr><td>Tanggal Selesai</td><td>:</td><td><?php echo $Data4->work_finishdate ?></td></tr>
+                                <tr><td>Tanggal Selesai</td><td>:</td><td><?php echo date("d-m-Y", strtotime($Data4->work_finishdate)) ?></td></tr>
                                 <tr><td>Deskripsi</td><td>:</td><td class="text-justify"><?php echo $Data4->work_des ?></td></tr>
                             </table>
                         </div>
