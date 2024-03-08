@@ -7,8 +7,8 @@
     $Uri    = "/freelanceku/";    // Uri input must be with a slash, start of uri and end of uri (example /freelanceku/)
     $Root   = "/freelanceku/";    // Base of folder root youre save this project
     $Status = 0;                // 0 = Development / 1 = Production
-    $CurentUrl = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $Protocol = (empty($_SERVER['HTTPS']) ? 'http' : 'https');
+    $Protocol = ((isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? 'https' : 'http');
+    $CurentUrl = $Protocol . "://" . $Host . $Uri;
 
     date_default_timezone_set('Asia/Jakarta');
 

@@ -214,6 +214,29 @@
     <!-- PWA Register Service Worker Javascript -->
     <?php CallFileApp::RequireOnce("Views/Templates/Part/RegisSWPWA.php");?>
     <!-- End of PWA Register Service Worker Javascript -->
+
+    <?php
+        // Generator start_url & id in manifest.json
+        // Location manifest.json
+        $manifestPath = "Public/dist/pwa/manifest.json";
+        // Read file manifest.json
+        $manifest = json_decode(file_get_contents($manifestPath), true);
+
+        if (($manifest['start_url'] != CURRENT_URL) || empty($manifest['start_url'])) {
+            // Change value start_url
+            $manifest['start_url'] = CURRENT_URL;
+
+            if(($manifest['id'] != BASE_URI) || empty($manifest['id'])){
+                $manifest['id'] = BASE_URI;
+                // Replace new file manifest.json
+                file_put_contents($manifestPath, json_encode($manifest, JSON_UNESCAPED_SLASHES));
+            }else{
+                // Replace new file manifest.json
+                file_put_contents($manifestPath, json_encode($manifest, JSON_UNESCAPED_SLASHES));
+            }
+        }
+        //  End of Generator start_url & id in manifest.json 
+    ?>
 </body>
 
 </html>

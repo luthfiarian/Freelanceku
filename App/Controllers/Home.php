@@ -24,7 +24,7 @@
     if(!in_array($currentIP, array_column($ipaddresses, 'ip'))){
         $ipaddresses[] = ['ip' => $currentIP]; 
         $visitor++; 
-        file_put_contents("Public/dist/json/visitor.json", json_encode(['visitor' => $visitor, 'ipaddress' => $ipaddresses]));
+        file_put_contents("Public/dist/json/visitor.json", json_encode(['visitor' => $visitor, 'ipaddress' => $ipaddresses], JSON_PRETTY_PRINT));
     }
     // End of Count Visitor
 
