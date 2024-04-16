@@ -123,15 +123,21 @@ App/Config/Mitrans.php
 App/Config/Webhook.php
 ```
 <h2 id="documentation">📄 Documentation</h2>
-<h3>Admin User - Coming soon</h3>
+<h3>Admin User</h3>
 
 ```bash
 Docs/admin/admin.pdf
 ``` 
-<h3>Freelance User - Coming soon</h3>
+<h3>Freelance User</h3>
 
 ```bash
 Docs/client/freelance.pdf
+``` 
+
+<h3>Full Documentation </h3>
+
+```bash
+Docs/freelanceku_full_documentation.pdf
 ``` 
 
 <h3>Documentation API</h3>
