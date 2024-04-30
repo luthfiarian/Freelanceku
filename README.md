@@ -28,7 +28,7 @@ Jump to <br />
 <h2 id="prerequisite">👀 Pre-requisite</h2>
 <p>Make sure you have installed the following list:</p>
     
-    PHP Version 8.1.25 + 
+    PHP Version 8.2.4 - Important
     Node.js
     Composer
 
