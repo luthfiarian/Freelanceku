@@ -4,7 +4,7 @@ Freelanceku
 </h1>
 <p align="center">
 <small><i>The Best Way to Share Work!</i></small><br />
-<small>Freelanceku &copy; 2024</small>
+<small>Freelanceku - 2024</small>
 </p>
 
 <hr />
